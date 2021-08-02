@@ -39,7 +39,7 @@ class RequisitionController extends Controller
         $result = DB::table('requisitions')
         ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
         ->join('branchs','branchs.id','=','requisitions.branch_id')
-        ->join('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
         ->join('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
         ->join('users','users.id','=','requisitions.created_by')
         ->where('requisitions.id',$id)
