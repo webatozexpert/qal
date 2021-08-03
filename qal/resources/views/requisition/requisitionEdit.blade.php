@@ -42,7 +42,7 @@
            <form action="{{ URL('/requisition-update') }}" method="POST" class="forms-sample">
                 {{ csrf_field() }}    <!-- token -->
 
-                <input type="hidden" name="id" value="{{$edit->id}}">
+               
                 
                 <div class="form-group row">
                   <label for="zoneCode" class="col-sm-2 col-form-label">Posting Date</label>
@@ -76,7 +76,7 @@
                       <option value="">Select</option>
                      @foreach($project_budget as $rows)
                      
-                     <option value="{{ $rows->id }}" @if($rows->id==$edit->memo_no) selected @endif>{{ $rows->memo_no }}</option>
+                     <option value="{{ $rows->id }}" @if($rows->memo_no) selected @endif>{{ $rows->memo_no }}</option>
                      @endforeach
                     </select>
                   </div>

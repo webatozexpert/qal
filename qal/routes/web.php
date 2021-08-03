@@ -146,6 +146,12 @@ Route::get('/requisition-delete/{id}', 'requisitionController@delete');
 Route::get('/print/{id}', 'requisitionController@printCopy');
 
 
+Route::get('/purchase-requisition-awaiting-approval/', 'requisitionController@requiPendingList');
+Route::get('/approved/{id}', 'requisitionController@approved');
+Route::get('/aproved/', 'requisitionController@approvedList');
+Route::get('/order/confirm/{id}', 'requisitionController@orderConfirm');
+
+
 
 
 //Purchase Order

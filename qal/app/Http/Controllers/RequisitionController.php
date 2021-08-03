@@ -38,32 +38,36 @@ class RequisitionController extends Controller
 
         $result = DB::table('requisitions')
         ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->join('branchs','branchs.id','=','requisitions.branch_id')
+
+        ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
         ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->join('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->join('users','users.id','=','requisitions.created_by')
+        ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftjoin('users','users.id','=','requisitions.created_by')
         ->where('requisitions.id',$id)
-        ->first();       
+        ->first(); 
+
+        $rid= $id;      
 
         //dd($result);
-         return view('requisition/printcopy', compact('result'));
+         return view('requisition/printcopy', compact('result','rid'));
        
     }
 
 //Requisition View
     
  public function view($id){
+    // dd('Ok');
        $view = DB::table('requisitions')->where('id',$id)->first();
       
-        $result = DB::table('requisitions')
+         $result = DB::table('requisitions')
         ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
         ->join('branchs','branchs.id','=','requisitions.branch_id')
-        ->join('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
         ->join('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
         ->join('users','users.id','=','requisitions.created_by')
         ->orderBy('requisitions.id','DESC')->get();
 
-       // dd($result);
+       //dd($result);
 
         return view('requisition/requisitionView', compact('result','view'));
     }
@@ -219,10 +223,58 @@ class RequisitionController extends Controller
         return Redirect::to('requisition')->with('success','Data Updated successfull');
     }
 
+
+ public function requiPendingList(){
+        //dd('Ok');
+     $result = DB::table('requisitions')
+        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftJoin('users','users.id','=','requisitions.created_by')
+        ->orderBy('requisitions.id','DESC')->get();
+
+        //dd($result);
+       
+        return view('requisition.requisitionpendinglist',compact('result'));
+
+    }
+   public function approved($id){
+        $requisition= Requisition::find($id);
+        $requisition->approved_by = Auth::user()->id;
+        if($requisition->save()){
+            DB::table('requisitions')
+              ->where('id',$id)
+              ->update(['status' => 1]);
+
+        }
+     return redirect()->route('requisitions.pending.list')->with('success','Data Approved successfull');
+    }
+    public function approvedList(){
+         $data['allData'] = Requisition::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
+       
+        return view('backend.requisition.view-approved-list',$data);
+
+    }
+    public function orderConfirm($id){
+        $requisition= Requisition::find($id);
+        $requisition->OrderConfirm_by = Auth::user()->id;
+        if($requisition->save()){
+            DB::table('requisitions')
+              ->where('id',$id)
+              ->update(['status' => 2]);
+
+        }
+     return redirect()->route('requisitions.approved.list')->with('success','Data Approved successfull');
+    }
+
+
+
 //Requisition Delete
 
      public function delete($id){
-        $delete = DB::table('requisitions')->where('id',$id)->delete();
+        DB::table('requisition_items')->where('requisition_id',$id)->delete();
+        DB::table('requisitions')->where('id',$id)->delete();
         
           //return redirect()->route('requisition')->with('success','Data Delete successfull');
          return Redirect::to('requisition')->with('success','Data Delete successfull');

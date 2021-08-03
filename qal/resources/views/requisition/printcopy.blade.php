@@ -71,36 +71,46 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                      @php
+                                      $as=1;
+                                      @endphp
                                     @php
-                                     $result = DB::table('requisition_items')
-                                      ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.id','purchase_general_items.item_unit_id','purchase_item_units.unit')
+                                     $result12 = DB::table('requisition_items')
+                                      ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.item_unit_id','purchase_item_units.unit')
                                      
                                       ->leftJoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
                                      
                                       ->leftJoin('purchase_item_units','purchase_general_items.item_unit_id','=','purchase_item_units.id')
-                                      ->where('requisition_items.requisition_id',$result->id)
+                                      ->where('requisition_items.requisition_id',$rid)
                                       ->orderBy('requisition_items.id','DESC')->get();
+                                      //dd($result);
                                     @endphp
 
-                                    @foreach($result as $results)
+                                    @foreach($result12 as $results)
                                     <tr>
                                     
-                                      <td>{{ $results->id}}
+                                      <td>{{ $as}}
                                       </td>
                                       <td>{{ $results->iname}}</td>
                                       <td>{{ $results->unit}}</td>
                                       <td>{{ $results->quantity}}</td>
                                         
                                     </tr>
+                                      @php
+                                        $as++;
+                                      @endphp
                                     @endforeach
+
+                            
+
                                   </tbody>
-                                    </table>
+                                </table>
                                    
                                 </div>                           
       </div>
     </div>
     <br><br><br><br><br><br>
-   <div>Note: Descrition </div>
+   <div>Note: {{ $result->description}}</div>
     <br>
      <div class="col-md-12">
        <table width="100%" class="text-center">
@@ -115,7 +125,7 @@
           </tr>
          
           <tr>
-           <td><span>Name  :   </span></td> <td><span>Name :   </span></td><br/>
+           <td><span>Name  :{{ $result->created_by}} </span></td> <td><span>Name :   </span></td><br/>
 
           </tr>
         </tbody>
