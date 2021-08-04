@@ -115,6 +115,7 @@ class RequisitionController extends Controller
                 'procuerementType'  => $request->get('procuerementType'),
                 'status'            => $request->get('status',0),
                 'created_by'        => Auth::user()->id
+                
             ]);
 
 
@@ -232,40 +233,87 @@ class RequisitionController extends Controller
         ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
         ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
         ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')->get();
+        ->orderBy('requisitions.id','DESC')
+        ->where('requisitions.status',0)
+        ->get();
 
-        //dd($result);
+       // dd($result);
        
-        return view('requisition.requisitionpendinglist',compact('result'));
+        return view('requisition/requisitionpendinglist',compact('result'));
 
     }
-   public function approved($id){
-        $requisition= Requisition::find($id);
-        $requisition->approved_by = Auth::user()->id;
-        if($requisition->save()){
-            DB::table('requisitions')
-              ->where('id',$id)
-              ->update(['status' => 1]);
+   public function approved1(Request $request){
 
-        }
-     return redirect()->route('requisitions.pending.list')->with('success','Data Approved successfull');
+       $val = $request->get('data');
+       foreach($val as $reqid)
+       {
+          DB::table('requisitions')
+              ->where('id',$reqid)
+              ->update(['status' => 1, 'approved_by' => Auth::user()->id]);
+       }
+
+       return Redirect::to('purchase-requisition-awaiting-approval')->with('success','Data Approved successfull');
     }
     public function approvedList(){
-         $data['allData'] = Requisition::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
+        //dd('Ok');
+         $result = DB::table('requisitions')
+        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftJoin('users','users.id','=','requisitions.created_by')
+        ->orderBy('requisitions.id','DESC')
+       ->where('requisitions.status',1)
+      ->get();
+
+      // dd($result);
+         
        
-        return view('backend.requisition.view-approved-list',$data);
+        return view('requisition.requisitionapprovedlist',compact('result'));
+
 
     }
-    public function orderConfirm($id){
+    public function confirm($id){
         $requisition= Requisition::find($id);
-        $requisition->OrderConfirm_by = Auth::user()->id;
+        $requisition->Confirm_by = Auth::user()->id;
         if($requisition->save()){
             DB::table('requisitions')
               ->where('id',$id)
               ->update(['status' => 2]);
 
         }
-     return redirect()->route('requisitions.approved.list')->with('success','Data Approved successfull');
+     return redirect()->route('requisitions.confirmList')->with('success','Data Approved successfull');
+    }
+ public function confirmList(){
+        //dd('Ok');
+         $result = DB::table('requisitions')
+        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftJoin('users','users.id','=','requisitions.created_by')
+        ->orderBy('requisitions.id','DESC')->get();
+        // ->where('status','2')->get();
+      
+
+        //dd($result);
+         
+       
+        return view('requisition.confirmList',compact('result'));
+
+
+    }
+
+    public function orderConfirm($id){
+        $requisition= Requisition::find($id);
+        $requisition->OrderConfirm_by = Auth::user()->id;
+        if($requisition->save()){
+            DB::table('requisitions')
+              ->where('id',$id)
+              ->update(['status' => 3]);
+
+        }
+     return redirect()->route('requisitions')->with('success','Data Approved successfull');
     }
 
 

@@ -133,7 +133,7 @@ Route::get('/supplier-delete/{id}', 'SupplierController@delete');
 
 
 
-//Requisition
+//Requisition part
 Route::get('/requisition', 'requisitionController@requisition');
 Route::get('/creact-requisition', 'RequisitionController@creact_requisition');
 Route::get('/group-wise-intemname', 'RequisitionController@group_wise_intemname');
@@ -145,15 +145,18 @@ Route::post('/requisition-update', 'requisitionController@update');
 Route::get('/requisition-delete/{id}', 'requisitionController@delete');
 Route::get('/print/{id}', 'requisitionController@printCopy');
 
-
+//Requisition Approoved part
 Route::get('/purchase-requisition-awaiting-approval/', 'requisitionController@requiPendingList');
-Route::get('/approved/{id}', 'requisitionController@approved');
-Route::get('/aproved/', 'requisitionController@approvedList');
+
+Route::get('/approved1', 'requisitionController@approved1');
+Route::get('/purchase-requisition-approved/', 'requisitionController@approvedList');
+Route::get('/confirm/{id}', 'requisitionController@confirm');
+Route::get('/purchase-requisition-confirm', 'requisitionController@confirmList');
 Route::get('/order/confirm/{id}', 'requisitionController@orderConfirm');
 
 
 
 
-//Purchase Order
+//Purchase Order part
 Route::get('/purchase_order/create', 'purchaseOrderController@purchaseorder_create');
 Route::post('purchase-order-submit', 'purchaseOrderController@purchase_order_submit');

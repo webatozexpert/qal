@@ -125,7 +125,7 @@
           </tr>
          
           <tr>
-           <td><span>Name  :{{ $result->created_by}} </span></td> <td><span>Name :   </span></td><br/>
+           <td><span>Name  :{{ $result->created_by}} </span></td> <td><span>Name : {{ $result->approved_by}}  </span></td><br/>
 
           </tr>
         </tbody>

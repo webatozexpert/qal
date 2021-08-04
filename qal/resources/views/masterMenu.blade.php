@@ -44,19 +44,25 @@
                                 <li class="sidebar-item">
                                     <a href="{{ URL('/requisition') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Requisition </span>
+                                        <span class="hide-menu">All Requisition </span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
                                     <a href="{{ URL('/purchase-requisition-awaiting-approval') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Requisition Awaiting Approval</span>
+                                        <span class="hide-menu"> Requisition Pending List</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
                                     <a href="{{ URL('/purchase-requisition-approved') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Requisition Approved List</span>
+                                    </a>
+                                </li> 
+                                 <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-requisition-confirm') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Requisition Confirm List</span>
                                     </a>
                                 </li> 
                             </ul>

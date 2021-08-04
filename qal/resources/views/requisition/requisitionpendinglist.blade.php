@@ -4,19 +4,17 @@
 <div class="page-breadcrumb">
   <div class="row">
     <div class="col-5 align-self-center">
-       <a href="{{ URL('/creact-requisition') }}">
-          <button type="submit" class="btn btn-success mr-2"> <i class="fa fa-check" aria-hidden="true"></i> All Approved</button>
-        </a>
-      
+       
+          <button type="button" class="btn btn-success mr-2" onclick="DeleteBanner()">  All Approved</button>
+       
     </div>
     <div class="col-7 align-self-center">
       <div class="d-flex align-items-center justify-content-end">
-       <h4 class="page-title">Purchase Requisition List</h4>
+       <h4 class="page-title">Requisition Pending List</h4>
       </div>
     </div>
   </div>
 </div>
-
 
 <div class="container-fluid">
 
@@ -54,7 +52,7 @@
                   <tbody>
                   @foreach($result as $results)
                     <tr>
-                      <td><input type="checkbox" name="approve" id="approve" value="{{$results->id}}"></a>
+                      <td><input type="checkbox" name="approved_id[]" id="approved_id" value="{{ $results->id }}"></a>
                       </td>
                       <td>{{ $results->bname }}</td>
                       
@@ -66,7 +64,6 @@
                       <td>{{ $results->item_group }}</td>
                       <td>{{ $results->memo_no}}</td>
                       <td>{{ $results->procuerementType}}</td>
-                     
                      
                     </tr>
                     @endforeach
@@ -82,4 +79,51 @@
   </div>
 </div>
 
+
+
+<script type="text/javascript">
+  function DeleteBanner()
+            {
+                var checkItem=document.getElementsByName("approved_id[]");
+                var j=0;
+                var data= new Array();
+                for(var i=0; i < checkItem.length; i++)
+                {
+                    if(checkItem[i].checked)
+                    {
+                       data[j]=checkItem[i].value;
+                        j++;
+                    }
+                } 
+
+                if(data=="")
+                {
+                    alert("Please select checkbox !");
+                    return false;
+                }
+                else
+                {
+
+                    var val = window.confirm('Are you sure you want to approve these ?');
+
+                    if(val==true)
+                    {
+                        $.ajax({
+                            method: "GET",
+                            url: '{{url("/approved1")}}',
+                            data: {data: data}
+                        })
+
+                        .done(function (response)
+                        {
+                            window.location.reload();
+                        });
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+</script>
 @endsection
