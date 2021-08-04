@@ -47,7 +47,7 @@
                                         <span class="hide-menu">All Requisition </span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item">
+                               {{--  <li class="sidebar-item">
                                     <a href="{{ URL('/purchase-requisition-awaiting-approval') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Requisition Pending List</span>
@@ -64,7 +64,7 @@
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Requisition Confirm List</span>
                                     </a>
-                                </li> 
+                                </li>  --}}
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -220,6 +220,128 @@
                                     <a href="{{ URL('/purchase-requisition-approved') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Requisition Approved List</span>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link">
+                                <i class="mdi mdi-image-filter-tilt-shift"></i>
+                                <span class="hide-menu"> Purchase Order </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase_order/create') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Purchase Order </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-order-awaiting-approval') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Order Awaiting Approval</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-order-approved') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Order Approved List</span>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+                
+                 @if(Auth::user()->type=='OHead')
+                
+                               
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-dns"></i>
+                        <span class="hide-menu">Purchase</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse has-arrow first-level">
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link">
+                                <i class="mdi mdi-image-filter-tilt-shift"></i>
+                                <span class="hide-menu"> Requisition </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-requisition-awaiting-confirm') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Requisition Awaiting Confirm</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-requisition-confirm') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Requisition Confirm List</span>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link">
+                                <i class="mdi mdi-image-filter-tilt-shift"></i>
+                                <span class="hide-menu"> Purchase Order </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase_order/create') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Purchase Order </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-order-awaiting-approval') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Order Awaiting Approval</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-order-approved') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Order Approved List</span>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if(Auth::user()->type=='Management')
+                
+                               
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-dns"></i>
+                        <span class="hide-menu">Purchase</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse has-arrow first-level">
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link">
+                                <i class="mdi mdi-image-filter-tilt-shift"></i>
+                                <span class="hide-menu"> Requisition </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-requisition-awaiting-orderconfirm') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Requisition Awaiting orderConfirm</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ URL('/purchase-requisition-orderconfirm') }}" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Requisition Order Confirm List</span>
                                     </a>
                                 </li> 
                             </ul>

@@ -1,7 +1,5 @@
 <?php
 
-
-
 Auth::routes();
 
 Route::get('/', 'LoginController@index');
@@ -147,15 +145,22 @@ Route::get('/print/{id}', 'requisitionController@printCopy');
 
 //Requisition Approoved part
 Route::get('/purchase-requisition-awaiting-approval/', 'requisitionController@requiPendingList');
-
 Route::get('/approved1', 'requisitionController@approved1');
 Route::get('/purchase-requisition-approved/', 'requisitionController@approvedList');
-Route::get('/confirm/{id}', 'requisitionController@confirm');
+
+
+//Requisition Confirm part
+Route::get('/purchase-requisition-awaiting-confirm/', 'requisitionController@awaitingConfirmList');
+Route::get('/confirm', 'requisitionController@confirm');
 Route::get('/purchase-requisition-confirm', 'requisitionController@confirmList');
-Route::get('/order/confirm/{id}', 'requisitionController@orderConfirm');
+
+//Requisition OrderConfirm part
+Route::get('/purchase-requisition-awaiting-orderconfirm/', 'requisitionController@awaitingorderConfirmList');
+Route::get('/orderConfirm', 'requisitionController@orderConfirm');
+Route::get('/purchase-requisition-orderconfirm', 'requisitionController@orderConfirmList');
 
 
-
+t
 
 //Purchase Order part
 Route::get('/purchase_order/create', 'purchaseOrderController@purchaseorder_create');
