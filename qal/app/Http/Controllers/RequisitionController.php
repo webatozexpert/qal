@@ -344,18 +344,18 @@ public function confirm(Request $request){
        //dd($result);
          
        
-        return view('requisition.awaitingorderConfirmListlist',compact('result'));
+        return view('requisition.awaitingorderConfirmList',compact('result'));
 
 
     }
-    public function confirm(Request $request){
+    public function orderConfirm(Request $request){
 
        $val = $request->get('data');
        foreach($val as $reqid)
        {
           DB::table('requisitions')
               ->where('id',$reqid)
-              ->update(['status' => 3, 'Confirm_by' => Auth::user()->id]);
+              ->update(['status' => 3, 'OrderConfirm_by' => Auth::user()->id]);
        }
 
        return Redirect::to('purchase-requisition-awaiting-orderconfirm')->with('success','Data Confirm successfull');

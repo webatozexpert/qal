@@ -160,8 +160,6 @@ Route::get('/orderConfirm', 'requisitionController@orderConfirm');
 Route::get('/purchase-requisition-orderconfirm', 'requisitionController@orderConfirmList');
 
 
-t
-
 //Purchase Order part
 Route::get('/purchase_order/create', 'purchaseOrderController@purchaseorder_create');
 Route::post('purchase-order-submit', 'purchaseOrderController@purchase_order_submit');
