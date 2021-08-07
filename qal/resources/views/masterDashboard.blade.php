@@ -488,6 +488,39 @@
             });
         }
 
+//Purchase Order 
+
+        function requisitionWiseItemName(id)
+        {
+            //alert(id);
+
+            $.ajax({
+                method: "GET",
+                url: '{{url("/requisition-wise-intemname")}}',
+                data: {'id': id}
+            })
+            .done(function (response)
+            {
+                // alert(response);
+                $("#item_name").html(response);                
+            });
+        }
+
+        // function ItemNameWiseUnit(id)
+        // {
+        //     //alert(id);
+
+        //     $.ajax({
+        //         method: "GET",
+        //         url: '{{url("/intemname-wise-quantity")}}',
+        //         data: {'id': id}
+        //     })
+        //     .done(function (response)
+        //     {
+        //         // alert(response);
+        //         $("#unit").val(response);                
+        //     });
+        // }
 
         function printDiv() {
             var DivID = document.getElementById("section-to-print").innerHTML;

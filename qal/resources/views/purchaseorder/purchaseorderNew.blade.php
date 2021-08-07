@@ -53,6 +53,9 @@
                   <div class="col-sm-4" style="padding-left: 0;">
                     <select name="supplierName" id="supplierName" class="select2 form-control custom-select" style="width: 100%;">
                     <option value="">Enter a supplier name</option>
+                     @foreach($supplier as $rows)
+                     <option value="{{ $rows->id }}">{{ $rows->company_name }}</option>
+                     @endforeach
                      
                     </select>
                   </div>
@@ -90,9 +93,11 @@
                 <div class="form-group row">
                   <label for="requisitionNo" class="col-sm-2 col-form-label">Requisition No</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="requisitionNo" id="requisitionNo" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
+                    <select name="requisition_no" id="requisition_no" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="requisitionWiseItemName(this.value)">
                     <option value="">Requisition No</option>
-                    
+                     @foreach($requisition as $rows)
+                     <option value="{{ $rows->id }}">{{ $rows->requisition_no }}</option>
+                     @endforeach
                     </select>
                   </div>
 
@@ -115,7 +120,7 @@
                   <tbody>
                     <tr>
                       <td style="width: 50%;">
-                        <select name="procuerementType" id="procuerementType" class="select2 form-control custom-select" style="width: 100%;">
+                        <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseQuantity(this.value)">
                         <option value="">Item Description</option>
                         </select>
                       </td>
@@ -202,5 +207,7 @@
     </div>
   </div>
 </div>
+
+
 
 @endsection

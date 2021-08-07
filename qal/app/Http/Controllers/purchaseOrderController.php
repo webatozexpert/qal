@@ -15,22 +15,72 @@ class purchaseOrderController extends Controller
     {
         $this->middleware('auth');
     }
-    public function purchaseorder_create()
+    public function purchaseorder()
     {
-        $allZones = new ZoneController;
-        $allZones = $allZones->allZones();
+        //dd('Ok');
 
-        $result = DB::table('purchase_general_items')
-        ->select('purchase_general_items.*','purchase_item_groups.name as gname','purchase_item_categories.name as sgname','purchase_item_subgroups.name as cname','purchase_item_units.unit')
+        $result = DB::table('requisitions')
+        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftJoin('users','users.id','=','requisitions.created_by')
+        ->orderBy('requisitions.id','DESC')->get();
 
-        ->join('purchase_item_groups','purchase_item_groups.id','=','purchase_general_items.itemgroup_id')
-        ->join('purchase_item_categories','purchase_item_categories.id','=','purchase_general_items.itemsubgroup_id')
-        ->join('purchase_item_subgroups','purchase_item_subgroups.id','=','purchase_general_items.item_category_id')
-        ->join('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
-        ->orderBy('purchase_general_items.id','DESC')->get();
-        
-        return view('purchaseorder/purchaseorderNew', compact('result','allZones'));
+        //dd($result);
+
+       
+        return view('purchaseorder/purchaseorderMaster', compact('result'));
     }
     
+    //Requisition Creact
+
+   public function purchaseorder_create()
+    {
+        //dd('Ok');
+        $supplier = DB::table('suppliers')->where('status',0)->get();
+        
+        $requisition = DB::table('requisitions')->get();
+        $purchase_general_item = DB::table('purchase_general_items')->where('status',0)->get();
+
+       //dd($requisition);
+ 
+        return view('purchaseorder/purchaseorderNew', compact('supplier','requisition','purchase_general_item'));
+    }
+
+
+   
+
+    //Requisition wise intemname
+    public function requisition_wise_intemname(Request $request)
+    {
+        $itemName = DB::table('requisition_items')->where('requisition_id',$request->get('id'))->get();
+        $type     = 1;        
+
+        return view('purchaseorder/requisitionWiseitemName', compact('itemName','type'));
+    }
+    //intemname wise unit
+    public function intemname_wise_quantity(Request $request)
+    {
+        $quantity = DB::table('requisition_items')->where('id',$request->get('id'))->first();
+        $type     = 2; 
+        $unit = DB::table('requisition_items')->where('id',$unitId->item_unit_id)->first();
+        return $unit->unit;
+    }
+    
+   // //Requisition wise intemname
+   //  public function itemName()
+   //  {
+   //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
+   //      return $resulta;
+   //  }
+
+    // //intemname wise unit
+    // public function quantity()
+    // {
+    //     $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
+    //     return $result;
+    // }
+
 
 }

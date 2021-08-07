@@ -74,7 +74,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase_order/create') }}" class="sidebar-link">
+                                    <a href="{{ URL('/purchase_order') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Purchase Order </span>
                                     </a>
