@@ -32,26 +32,39 @@ class RequisitionController extends Controller
    
  //PDF
 
-    function printCopy($id) 
-    {
-       // dd('Ok');
+    // function requisitionPrint($id) 
+    // {
+    //    // dd('Ok');
 
-        $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+    //     $result = DB::table('requisitions')
+    //     ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
 
-        ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftjoin('users','users.id','=','requisitions.created_by')
-        ->where('requisitions.id',$id)
-        ->first(); 
+    //     ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
+    //     ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+    //     ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+    //     ->leftjoin('users','users.id','=','requisitions.created_by')
+    //     ->where('requisitions.id',$id)
+    //     ->first(); 
 
-        $rid= $id;      
+    //     $rid= $id;      
 
-        //dd($result);
-         return view('requisition/printcopy', compact('result','rid'));
+    //     //dd($result);
+    //      return view('requisition/requisitionPrint', compact('result','rid'));
        
-    }
+    // }
+
+
+
+function requisitionPrint($id) {
+    
+    $data = DB::table('requisition_items')->find($id);
+    $data = DB::table('requisitions')->get();
+    
+  
+    $pdf = PDF::loadView('requisition.requisitionPrint', $data);
+    $pdf->SetProtection(['copy', 'print'], '', 'pass');
+    return $pdf->stream('document.pdf');
+}
 
 //Requisition View
     

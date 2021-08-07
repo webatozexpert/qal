@@ -141,7 +141,7 @@ Route::get('/requisition-view/{id}', 'requisitionController@view');
 Route::get('/requisition-edit/{id}', 'requisitionController@edit');
 Route::post('/requisition-update', 'requisitionController@update');
 Route::get('/requisition-delete/{id}', 'requisitionController@delete');
-Route::get('/print/{id}', 'requisitionController@printCopy');
+Route::get('/requisition-print/{id}', 'requisitionController@requisitionPrint');
 
 //Requisition Approoved part
 Route::get('/purchase-requisition-awaiting-approval/', 'requisitionController@requiPendingList');
