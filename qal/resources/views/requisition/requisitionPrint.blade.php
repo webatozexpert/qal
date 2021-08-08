@@ -354,10 +354,25 @@ footer {
                     </tr>
                     <tr>
                       <td>Name :{{ $requisitions->created_by }}</td>
-                      <td>Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif</td>
+                      <td>Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif 
+                       
+                        <p>
+                        @if($data->status=='1')
+                       <span >Incharge</span>
+                       @elseif($data->status=='2')
+                       <span Incharge -> General Manager>Incharge -> General Manager</span>
+                       @elseif($data->status=='3')
+                       <span style="font-size:10px;">Incharge -> General Manager -> Managing Director</span>
+
+                       @endif
+                      </p>
+
+                    </td>
                       
                     </tr>
+ 
                   </thead>
+
                 </table>
 
               </div>
