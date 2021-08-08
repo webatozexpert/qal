@@ -68,12 +68,12 @@ class purchaseOrderController extends Controller
         return $unit->unit;
     }
     
-   // //Requisition wise intemname
-   //  public function itemName()
-   //  {
-   //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
-   //      return $resulta;
-   //  }
+   //Requisition wise intemname
+    public function itemName()
+    {
+        $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
+        return $resulta;
+    }
 
     // //intemname wise unit
     // public function quantity()

@@ -11,6 +11,7 @@
       @font-face {
   font-family: SourceSansPro;
   src: url(SourceSansPro-Regular.ttf);
+  front-color: #000000;
 }
 
 .clearfix:after {
@@ -29,7 +30,7 @@ body {
   width: 21cm;  
   height: 29.7cm; 
   margin: 0 auto; 
-  color: #555555;
+  color: #000000;
   background: #FFFFFF; 
   font-family: Arial, sans-serif; 
   font-size: 14px; 
@@ -68,7 +69,7 @@ header {
 }*/
 
 #client .to {
-  color: #777777;
+  color: #ffffff;
 }
 
 h2.name {
@@ -121,7 +122,7 @@ table td {
 }
 
 table td h3{
-  color: #57B223;
+  color: #000000;
   font-size: 1.2em;
   font-weight: normal;
   margin: 0 0 0.2em 0;
@@ -138,7 +139,7 @@ table .no {
 }
 */
 table .unit {
-  background: #DDDDDD;
+  background: #ffffff;
 }
 
 table .qty {
@@ -195,7 +196,7 @@ table tfoot td {
 }
 */
 footer {
-  color: #777777;
+  color: #000000;
   width: 100%;
   height: 30px;
   position: absolute;
@@ -241,15 +242,15 @@ footer {
                        
                         <tr>
                           <td>Branch Name</td>
-                          <td style=''>:{{ $requisitions->bname }} </td>
+                          <td style=''>: {{ $requisitions->bname }} </td>
                         </tr>
                         <tr>
                           <td>Item Group</td>
-                          <td style=''>:{{ $requisitions->item_group }} </td>
+                          <td style='width: 270px'>: {{ $requisitions->item_group }} </td>
                         </tr>
                         <tr>
                           <td>Budget Name</td>
-                          <td style=''>:{{ $requisitions->memo_no }} </td>
+                          <td style=''>: {{ $requisitions->memo_no }} </td>
                         </tr>
                       </table>
                     </td>
@@ -258,11 +259,11 @@ footer {
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
                         <tr>
                           <td style='width: 150px'>Date</td>
-                          <td style='width: 150px'>:{{ $requisitions->postingDate }} </td>
+                          <td style='width: 150px'>: {{ $requisitions->postingDate }} </td>
                         </tr>
                         <tr>
                           <td style='width: 150px'>Required Date</td>
-                          <td style='width: 150px'>:{{ $requisitions->requiredDate }} </td>
+                          <td style='width: 150px'>: {{ $requisitions->requiredDate }} </td>
                         </tr>
                         <tr>
                           <td>Priority</td>
@@ -270,7 +271,7 @@ footer {
                         </tr>
                         <tr>
                           <td style='width: 150px'>Procurement Type</td>
-                          <td style='width: 50px'>:{{ $requisitions->procuerementType }} </td>
+                          <td style='width: 50px'>: {{ $requisitions->procuerementType }} </td>
                         </tr>
                       </table>
                     </td>
@@ -307,9 +308,9 @@ footer {
                   <tbody>
                     <tr class="card" style="text-align: center;">
                       <td class='text-center'>{{ $serialNo }}</td>
-                      <td>{{ $results->iname}}</td>
-                      <td>{{ $results->unit}}</td>
-                        <td>{{ $results->quantity}}</td>
+                      <td> {{ $results->iname}}</td>
+                      <td> {{ $results->unit}}</td>
+                        <td> {{ $results->quantity}}</td>
                     </tr>
                     
                   </tbody>
@@ -334,10 +335,10 @@ footer {
                 @php 
                 $data = DB::table('requisitions')
                 ->select('requisitions.*','users.name as OrderConfirm_by')
-                ->join('users','users.id','=','requisitions.OrderConfirm_by')
-                ->where('requisitions.id',$requisitions->id)
+                ->leftjoin('users','users.id','=','requisitions.OrderConfirm_by')
+                ->where('requisitions.id',$rid)
                 ->first(); 
-
+               //dd($data);
                 @endphp
                 <table class='table' style='border-bottom: 0px;'>
                   <thead>
