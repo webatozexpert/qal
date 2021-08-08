@@ -593,8 +593,8 @@
     
     </script>
 
-    <script>
-    function addMore()
+  <script>
+    function addMore1()
             {
                 //alert("new row working");
                 $(document).ready(function(){
@@ -628,7 +628,7 @@
         });
     }
 
-    // Listen for click on toggle checkbox
+// Listen for click on toggle checkbox
 $('#select-all').click(function(event) {   
     if(this.checked) {
         // Iterate each checkbox
@@ -642,8 +642,52 @@ $('#select-all').click(function(event) {
     }
 });
 
-    </script>
+ </script>
 
+ <script>
+    function addMore2()
+            {
+                //alert("new row working");
+                $(document).ready(function(){
+                //alert("In");
+                var item_name         = $('#item_name').val();
+                var quantity              = $('#quantity').val();
+                var rate = $('#rate').val();
+                var amount = $('#amount').val();
+                var branch = $('#branch').val();
+
+                strCountField = '#prof_count';      
+                intFields = $(strCountField).val();
+                intFields = Number(intFields);    
+                newField = intFields + 1;
+                    
+                strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
+                <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
+            <td><input type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+item_name+'" readonly="" /></td>\
+            <td><input type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" /></td>\
+            <td><input type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" /></td>\
+             <td><input type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" /></td>\
+            <td><input type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" /></td>\
+             <td ><img src="{{ URL('resources/assets/images/close.png')}}" width="20" height="20" border="0" id="prof_' + newField + '"  value="prof_' + newField + '" onClick="del(this)" ></td>\
+            </tr>\
+            <div class="nopass"><!-- clears floats --></div>\
+            ';
+
+                $("#prof_" + intFields).after(strNewField);    
+                $("#prof_" + newField).slideDown("medium");
+                $(strCountField).val(newField);             
+                $('#item_name').val('');
+                $('#quantity').val('');
+                $('#rate').val('');
+                 $('#amount').val('');
+                  $('#branch').val('');
+                //alert(strNewField);
+        });
+    }
+
+  
+
+    </script>
     
 </body>
 

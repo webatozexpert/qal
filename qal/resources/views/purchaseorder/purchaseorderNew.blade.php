@@ -137,12 +137,17 @@
                         <input type="text" class="form-control" id="branch" name="branch" autocomplete="off">
                       </td>
                       <td>
-                        <button type="button" class="btn btn-success" style="padding: 0px !important;" onclick="addMoreItems()"> ADD</button>
+                        <button type="button" id="addRow" class="btn btn-success" style="padding: 0px !important;" onclick="addMore2()" value="Add" > ADD</button>
                       </td>
                     </tr>
+                      <input type="hidden" id="prof_count" value="1">
                   </tbody>
                 </table>
-
+                 <table>
+                    <tr>
+                      <td id="prof_1"></td>
+                    </tr>
+                </table>
                  <br><br><br><br>
                  <p>Terms and Conditions :</p>
                 <div class="form-group row">
@@ -207,7 +212,5 @@
     </div>
   </div>
 </div>
-
-
-
+ 
 @endsection

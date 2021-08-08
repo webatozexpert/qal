@@ -124,7 +124,7 @@
                 {{-- <p>&nbsp;</p> --}}
                 <p>&nbsp;</p>
 
-                <table id="tblRequisition" style="background-color: #F2F4F5;" width="100%">
+                <table {{-- id="tblRequisition" --}} style="background-color: #F2F4F5;" width="100%">
                   <thead>
                     <tr>
                       <th style="padding: 10px 10px 0 10px;">Name of Item</th>
@@ -148,7 +148,7 @@
                         <input type="text" class="form-control" id="required_quantity" name="required_quantity" autocomplete="off">
                       </td>
                       <td>
-                        <button type="button" id="addRow" class="btn btn-success" style="padding: 0px !important;" onclick="addMore()" value="Add" > ADD</button>
+                        <button type="button" id="addRow" class="btn btn-success" style="padding: 0px !important;" onclick="addMore1()" value="Add" > ADD</button>
                       </td>
                     </tr>
                     <input type="hidden" id="prof_count" value="1">
@@ -175,7 +175,7 @@
 </div>
 
 
-    <script type="text/javascript">
+   {{--  <script type="text/javascript">
         $(function () {
             //Build an array containing Customer records.
             var requisitions = new Array();
@@ -186,12 +186,12 @@
             // }
         });
 
-        function Add() {
-            AddRow($("#item_name").val(), $("#unit").val(),$("#required_quantity").val());
-            $("#item_name").val("");
-             $("#unit").val("");
-            $("#required_quantity").val("");
-        };
+        // function Add() {
+        //     AddRow($("#item_name").val(), $("#unit").val(),$("#required_quantity").val());
+        //     $("#item_name").val("");
+        //      $("#unit").val("");
+        //     $("#required_quantity").val("");
+        // };
 
         function AddRow(item_name, unit,required_quantity) {
             //Get the reference of the Table's TBODY element.
@@ -234,5 +234,5 @@
                 table.deleteRow(row[0].rowIndex);
             }
         };
-    </script>
+    </script> --}}
 @endsection

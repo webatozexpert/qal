@@ -355,7 +355,7 @@ footer {
                     <tr>
                       <td>Name :{{ $requisitions->created_by }}</td>
                       <td>Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif 
-                       
+                       <br/> <br/>
                         <p>
                         @if($data->status=='1')
                        <span >Incharge</span>
