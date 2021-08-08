@@ -56,12 +56,25 @@ class RequisitionController extends Controller
 
 
 function requisitionPrint($id) {
-    
-    $data = DB::table('requisition_items')->find($id);
-    $data = DB::table('requisitions')->get();
-    
+   // $data['requisitions'] = DB::table('requisitions')->find($id);
+   //$data = DB::table('requisitions')->find($id);
+    // $data = DB::table('requisitions')->first();
+    // dd($data);
+
+        $requisitions  = DB::table('requisitions')
+        ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+
+        ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
+        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftjoin('users','users.id','=','requisitions.created_by')
+        ->where('requisitions.id',$id)
+        ->first(); 
+
+       $rid= $id;      
+//dd($data);
   
-    $pdf = PDF::loadView('requisition.requisitionPrint', $data);
+    $pdf = PDF::loadView('requisition.requisitionPrint', compact('requisitions','rid'));
     $pdf->SetProtection(['copy', 'print'], '', 'pass');
     return $pdf->stream('document.pdf');
 }

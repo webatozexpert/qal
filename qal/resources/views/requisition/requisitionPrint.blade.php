@@ -215,7 +215,7 @@ footer {
       </div>
       <div id="company">
         <h2 class="name">Purchase Requisition</h2>
-        <div>Branch Name : </div>
+        <div>Branch Name :{{ $requisitions->bname }} </div>
       </div>
       </div>
     </header>
@@ -236,20 +236,20 @@ footer {
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
                         <tr>
                           <td style='width: 150px'>Requisition No</td>
-                          <td style='width: 150px'>: </td>
+                          <td style='width: 150px'>: {{ $requisitions->requisition_no }}</td>
                         </tr>
                        
                         <tr>
                           <td>Branch Name</td>
-                          <td style=''>: </td>
+                          <td style=''>:{{ $requisitions->bname }} </td>
                         </tr>
                         <tr>
                           <td>Item Group</td>
-                          <td style=''>: </td>
+                          <td style=''>:{{ $requisitions->item_group }} </td>
                         </tr>
                         <tr>
                           <td>Budget Name</td>
-                          <td style=''>: </td>
+                          <td style=''>:{{ $requisitions->memo_no }} </td>
                         </tr>
                       </table>
                     </td>
@@ -258,27 +258,40 @@ footer {
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
                         <tr>
                           <td style='width: 150px'>Date</td>
-                          <td style='width: 150px'>: </td>
+                          <td style='width: 150px'>:{{ $requisitions->postingDate }} </td>
                         </tr>
                         <tr>
                           <td style='width: 150px'>Required Date</td>
-                          <td style='width: 150px'>: </td>
+                          <td style='width: 150px'>:{{ $requisitions->requiredDate }} </td>
                         </tr>
                         <tr>
                           <td>Priority</td>
-                          <td style=''>: </td>
+                          <td style=''>: {{ $requisitions->priority }}</td>
                         </tr>
                         <tr>
                           <td style='width: 150px'>Procurement Type</td>
-                          <td style='width: 50px'>: </td>
+                          <td style='width: 50px'>:{{ $requisitions->procuerementType }} </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
                 </table>
 
+                  @php
+                  $serialNo=1;
+                  @endphp
 
-                <table class='table table-bordered' cellspacing="0">
+             @php
+             $result = DB::table('requisition_items')
+              ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.id','purchase_general_items.item_unit_id','purchase_item_units.unit')
+             
+              ->leftJoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
+             
+              ->leftJoin('purchase_item_units','purchase_general_items.item_unit_id','=','purchase_item_units.id')
+              ->where('requisition_items.requisition_id',$rid)
+              ->orderBy('requisition_items.id','DESC')->get();
+            @endphp
+                <table class='table table-bordered' cellspacing="0" cellpadding="0">
                   <thead >
                     <tr class="card-header">
                       <td class='text-center' style='vertical-align: middle;'>Sl#</td>
@@ -288,43 +301,44 @@ footer {
                       
                     </tr>
                   </thead>
+
+                  @foreach($result as $results)
+
                   <tbody>
                     <tr class="card" style="text-align: center;">
-                      <td class='text-center'>1</td>
-                      <td>Hybrid Monosex Telapia Fry</td>
-                      <td>Pcs</td>
-                        <td>900</td>
+                      <td class='text-center'>{{ $serialNo }}</td>
+                      <td>{{ $results->iname}}</td>
+                      <td>{{ $results->unit}}</td>
+                        <td>{{ $results->quantity}}</td>
                     </tr>
-                    <tr class="card" style="text-align: center;">
-                      <td class='text-center'>2</td>
-                      <td>Hybrid Monosex Telapia Fry</td>
-                      <td>Kg</td>
-                        <td>100</td>
-                    </tr>
-                    <tr class="card" style="text-align: center;">
-                      <td class='text-center'>3</td>
-                      <td>Hybrid Monosex Telapia Fry</td>
-                      <td>job</td>
-                        <td>500</td>
-                    </tr>
-                    <tr class="card" style="text-align: center;">
-                      <td class='text-center'>4</td>
-                      <td>Hybrid Monosex Telapia Fry</td>
-                      <td>coil</td>
-                        <td>2</td>
-                    </tr>
+                    
                   </tbody>
+
+                  @php
+                    $serialNo++;
+                  @endphp
+
+                  @endforeach
+
                 </table>
                 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
                  <table class='table' style='border-bottom: 0px;'>
                   <thead>
                     <tr>
-                      <td style="text-align: left;">Note :</td>
+                      <td style="text-align: left;">Note :{{ $requisitions->description }}</td>
                      
                     
                   </thead>
                 </table>
                 <p>&nbsp;</p>
+                @php 
+                $data = DB::table('requisitions')
+                ->select('requisitions.*','users.name as OrderConfirm_by')
+                ->join('users','users.id','=','requisitions.OrderConfirm_by')
+                ->where('requisitions.id',$requisitions->id)
+                ->first(); 
+
+                @endphp
                 <table class='table' style='border-bottom: 0px;'>
                   <thead>
                     <tr>
@@ -338,8 +352,8 @@ footer {
                       
                     </tr>
                     <tr>
-                      <td>Name :</td>
-                      <td>Name :</td>
+                      <td>Name :{{ $requisitions->created_by }}</td>
+                      <td>Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif</td>
                       
                     </tr>
                   </thead>

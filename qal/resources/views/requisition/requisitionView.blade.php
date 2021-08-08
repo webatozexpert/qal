@@ -71,6 +71,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                      @php
+                                      $serialNo=1;
+                                      @endphp
                                     @php
                                      $result = DB::table('requisition_items')
                                       ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.id','purchase_general_items.item_unit_id','purchase_item_units.unit')
@@ -85,13 +88,16 @@
                                     @foreach($result as $results)
                                     <tr>
                                     
-                                      <td>{{ $results->id}}
-                                      </td>
+                                      <td>{{ $serialNo }}erere</td>
                                       <td>{{ $results->iname}}</td>
                                       <td>{{ $results->unit}}</td>
                                       <td>{{ $results->quantity}}</td>
                                         
                                     </tr>
+                                     @php
+                                        $serialNo++;
+                                      @endphp
+
                                     @endforeach
                                   </tbody>
                                     </table>
