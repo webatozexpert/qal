@@ -37,26 +37,19 @@
               <div class="table-responsive">
                 <table id="zero_config" class="table table-hover table-striped table-bordered">
                   <thead>
-                 <tr>
-                    <th style="width:05%;">Branch</th>
-                    <th style="width:13%;">Requisition No</th>
-                    <th style="width:15%;">Posting Date</th>
-                    <th style="width:15%;">Required Date</th>
-                    <th style="width:10%;">Prepared By</th>
-                    <th style="width:10%;">Item Group</th>
-                    <th style="width:10%;">Memo No</th>
-                    <th style="width:15%;">Procuerement Type</th>
-                     <th style="width:02%;">Status</th>
-                    <th style="width:02%;">Edit</th>
-                    <th style="width:04%;">Delete</th>
-                  
-                   {{--  <th style="width:03%;">View</th> --}}
-				        </tr>
+                    <tr>
+                      <th style="width:05%;" >Detals</th>
+                      <th style="width:15%;" >P.O No</th>
+                      <th style="width:10%;" >P.O Date</th>
+                      <th style="width:20%;" >Supplier Name</th>
+                      <th style="width:15%;" >Lc Number</th>
+                      <th style="width:10%;" >Prepared By</th>
+                      <th style="width:05%;" >Print</th>
+                       <th style="width:10%;" >Status</th>
+                    </tr>
                   </thead>
                   <tbody>
-                 
-                  </tbody>
-                </table>
+               </table>
               </div>
             </div>
           </div>

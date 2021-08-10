@@ -72,15 +72,7 @@
                   </div>
 
 
-                  <label for="note" class="col-sm-2 col-form-label">Note</label>
-                  <div class="col-sm-4" style="padding-left: 0;">
-                    <input type="text" class="form-control" id="note" name="note" placeholder="Narration" autocomplete="off">
-                  </div>
-
-                </div>
-
-                <div class="form-group row">
-                  <label for="currency" class="col-sm-2 col-form-label">Currency</label>
+                 <label for="currency" class="col-sm-2 col-form-label">Currency</label>
                   <div class="col-sm-4" style="padding-left: 0;">
                     <select name="currency" id="currency" class="select2 form-control custom-select" style="width: 100%;" required="">
                     <option value="">Currency</option>
@@ -90,8 +82,8 @@
 
                 </div>
 
-                <div class="form-group row">
-                  <label for="requisitionNo" class="col-sm-2 col-form-label">Requisition No</label>
+                 <div class="form-group row">
+                 <label for="requisitionNo" class="col-sm-2 col-form-label">Requisition No</label>
                   <div class="col-sm-4" style="padding-left: 0;">
                     <select name="requisition_no" id="requisition_no" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="requisitionWiseItemName(this.value)">
                     <option value="">Requisition No</option>
@@ -99,6 +91,12 @@
                      <option value="{{ $rows->id }}">{{ $rows->requisition_no }}</option>
                      @endforeach
                     </select>
+                  </div>
+
+
+                  <label for="note" class="col-sm-2 col-form-label">Note</label>
+                  <div class="col-sm-4" style="padding-left: 0;">
+                    <input type="text" class="form-control" id="note" name="note" placeholder="Narration" autocomplete="off">
                   </div>
 
                 </div>

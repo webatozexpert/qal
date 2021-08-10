@@ -70,9 +70,8 @@ function requisitionPrint($id) {
         ->leftjoin('users','users.id','=','requisitions.created_by')
         ->where('requisitions.id',$id)
         ->first(); 
-
        $rid= $id;      
-//dd($data);
+     //dd($data);
   
     $pdf = PDF::loadView('requisition.requisitionPrint', compact('requisitions','rid'));
     $pdf->SetProtection(['copy', 'print'], '', 'pass');
@@ -315,7 +314,7 @@ function requisitionPrint($id) {
        //dd($result);
          
        
-        return view('requisition.awaitingConfirmListlist',compact('result'));
+        return view('requisition.awaitingConfirmList',compact('result'));
 
 
     }

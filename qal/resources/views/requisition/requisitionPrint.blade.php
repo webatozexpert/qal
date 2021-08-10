@@ -246,7 +246,7 @@ footer {
                         </tr>
                         <tr>
                           <td>Item Group</td>
-                          <td style='width: 270px'>: {{ $requisitions->item_group }} </td>
+                          <td style='width: 270px;'>: {{ $requisitions->item_group }} </td>
                         </tr>
                         <tr>
                           <td>Budget Name</td>
@@ -284,7 +284,7 @@ footer {
 
              @php
              $result = DB::table('requisition_items')
-              ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.id','purchase_general_items.item_unit_id','purchase_item_units.unit')
+              ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.id','purchase_general_items.item_unit_id','purchase_item_units.unit','purchase_general_items.id','purchase_general_items.item_code')
              
               ->leftJoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
              
@@ -308,7 +308,7 @@ footer {
                   <tbody>
                     <tr class="card" style="text-align: center;">
                       <td class='text-center'>{{ $serialNo }}</td>
-                      <td> {{ $results->iname}}</td>
+                      <td> {{ $results->iname}} - {{ $results->item_code }}</td>
                       <td> {{ $results->unit}}</td>
                         <td> {{ $results->quantity}}</td>
                     </tr>
@@ -354,30 +354,26 @@ footer {
                     </tr>
                     <tr>
                       <td>Name :{{ $requisitions->created_by }}</td>
-                      <td>Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif 
-                       <br/> <br/>
-                        <p>
-                        @if($data->status=='1')
-                       <span >Incharge</span>
-                       @elseif($data->status=='2')
-                       <span Incharge -> General Manager>Incharge -> General Manager</span>
-                       @elseif($data->status=='3')
-                       <span style="font-size:10px;">Incharge -> General Manager -> Managing Director</span>
-
-                       @endif
-                      </p>
-
-                    </td>
                       
-                    </tr>
- 
-                  </thead>
-
-                </table>
-
+                     <td>
+                       @if ($data->status=='1')
+                           Name : {{ $data->approved_by }} 
+                         <br/> <br/>
+                         <span >Incharge</span>
+                       @elseif ($data->status=='2')
+                         Name : @if($data!=Null){{ $data->Confirm_by }} @endif 
+                         <br/><br/>
+                         <span style="font-size:10px;">Incharge -> General Manager </span>
+                       @elseif ($data->status=='3')
+                        Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif 
+                        <br/><br/>
+                        <span style="font-size:10px;">Incharge -> General Manager -> Managing Director</span>
+                       @endif  
+                    </td>
+                  </tr>
+                </thead>
+              </table>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -387,7 +383,7 @@ footer {
   </div>
 </main>
     <footer>
-      Printed From QAL 07-08-2021                                 Page 1 of 1
+      Printed From QAL {{ $requisitions->requiredDate }}                      Page 1 of 1
     </footer>
   </body>
 

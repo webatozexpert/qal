@@ -38,17 +38,17 @@
                 <table id="zero_config" class="table table-hover table-striped table-bordered">
                   <thead>
                  <tr>
-                    <th style="width:05%;">Branch</th>
-                    <th style="width:13%;">Requisition No</th>
-                    <th style="width:15%;">Posting Date</th>
-                    <th style="width:15%;">Required Date</th>
-                    <th style="width:10%;">Prepared By</th>
-                    <th style="width:10%;">Item Group</th>
-                    <th style="width:10%;">Memo No</th>
-                    <th style="width:15%;">Procuerement Type</th>
-                     <th style="width:02%;">Status</th>
-                    <th style="width:02%;">Edit</th>
-                    <th style="width:04%;">Delete</th>
+                    <th style="width:10%">Branch</th>
+                    <th style="width:15%">Requisition No</th>
+                    <th style="width:15%">Posting Date</th>
+                    <th style="width:15%">Required Date</th>
+                    <th style="width:10%">Prepared By</th>
+                    <th style="width:10%">Item Group</th>
+                    <th style="width:15%">Memo No</th>
+                    
+                     <th style="width:07%">Status</th>
+                    <th style="width:02%">Action</th>
+                   
                   
                    {{--  <th style="width:03%;">View</th> --}}
 				        </tr>
@@ -65,28 +65,30 @@
                       <td>{{ $results->created_by }}</td>
                       <td>{{ $results->item_group }}</td>
                       <td>{{ $results->memo_no}}</td>
-                      <td>{{ $results->procuerementType}}</td>
+                  
                      <td>
                                                 
                         @if($results->status=='0')
-                       <span style="background: #FB0A18;padding: 5px; color: #fff">Pending</span>
+                       <span >Pending</span>
                        
                        @elseif($results->status=='1')
-                       <span style="background: #10B7F5;padding: 5px; color: #fff">Approved</span>
+                       <span >Approved</span>
                        @elseif($results->status=='2')
-                       <span style="background: green;padding: 5px; color: #fff">Confirm</span>
+                       <span >Confirm</span>
                        @elseif($results->status=='3')
-                       <span style="background: green;padding: 5px; color: #fff">Order Confirm</span>
+                       <span >Order Confirm</span>
 
                        @endif
                     </td>
-                      <td><a href="{{ URL('/requisition-edit/'.$results->id) }}" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                      </td>
-                      <td><a href="{{ URL('/requisition-delete/'.$results->id) }}" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                      </td>
 
-                      {{-- <td><a href="{{ URL('/requisition-view/'.$results->id) }}" title="view"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                      </td> --}}
+                     <td><a href="{{ URL('/requisition-print/'.$results->id) }}"  target="_blank" title="print" class="btn btn-primary btn-sm"> <i class="fa fa-print" ></i>Preview</a>
+                     &nbsp;
+                   
+                      <a href="{{ URL('/requisition-edit/'.$results->id) }}" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+                     
+                      <a href="{{ URL('/requisition-delete/'.$results->id) }}" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      </td>
+                     
                     </tr>
                     @endforeach
                   </tbody>
