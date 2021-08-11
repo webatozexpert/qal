@@ -50,7 +50,7 @@ class purchaseOrderController extends Controller
 
  public function purchase_order_submit(Request $request){
       
-            //dd($request->all());
+            dd($request->all());
 
             $exiting = DB::table('purchases')->orderBy('id','DESC')->first();
             if(!empty($exiting))
@@ -63,20 +63,27 @@ class purchaseOrderController extends Controller
             }
     
             // Requisitions Main data insert
-            $pra_last_id = DB::table('purchases')->insertGetId([
-                'order_no'    => $order_no,
-                'postingDate'       => date('Y-m-d', strtotime($request->get('postingDate'))),
-                'requiredDate'      => date('Y-m-d', strtotime($request->get('requiredDate'))),
-                'branch_id'         => $request->get('branch_id'),
-                'memo_no'           => $request->get('memo_no'),
-                'description'       => $request->get('description'),
-                'item_group'        => $request->get('item_group'),
-                'Currency'          => $request->get('Currency'),
-                'procuerementType'  => $request->get('procuerementType'),
-                'status'            => $request->get('status',0),
-                'created_by'        => Auth::user()->id
-                
-            ]);
+                $pra_last_id = DB::table('purchases')->insertGetId([
+                'order_no'        => $order_no,
+                'Date'            => date('Y-m-d', strtotime($request->get('postingDate'))),
+
+                'supplierName'    => $request->get('supplierName'),
+                'procuerementType'=> $request->get('procuerementType'),
+                'currency'        => $request->get('currency'),
+                'requisition_no'  => $request->get('requisition_no'),
+                'note'            => $request->get('note'),
+                'deliveryto'      => $request->get('deliveryto'),
+                'payment_perm'    => $request->get('payment_perm'),
+                'sample'          => $request->get('sample'),
+                'acceptance'      => $request->get('acceptance'),
+                'delivery_within' => $request->get('delivery_within'),
+                'support_warranty'=> $request->get('support_warranty'),
+                'date_of_validity'=> $request->get('date_of_validity'),
+                'special_instructions'=> $request->get('special_instructions'),
+                'status'          => $request->get('status',0),
+                'created_by'      => Auth::user()->id
+
+                ]);
 
 
             /////////////////// Multiple ///////////////////

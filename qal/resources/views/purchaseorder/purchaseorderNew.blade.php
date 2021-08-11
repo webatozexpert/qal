@@ -75,8 +75,8 @@
                  <label for="currency" class="col-sm-2 col-form-label">Currency</label>
                   <div class="col-sm-4" style="padding-left: 0;">
                     <select name="currency" id="currency" class="select2 form-control custom-select" style="width: 100%;" required="">
-                    <option value="">Currency</option>
-                     
+                    <option value="currency">Currency</option>
+                     <option value="BDT">BDT</option>
                     </select>
                   </div>
 
