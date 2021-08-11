@@ -33,7 +33,7 @@ class purchaseOrderController extends Controller
         return view('purchaseorder/purchaseorderMaster', compact('result'));
     }
     
-    //Requisition Creact
+    //Purpose Order Creact
 
    public function purchaseorder_create()
     {
@@ -48,6 +48,55 @@ class purchaseOrderController extends Controller
         return view('purchaseorder/purchaseorderNew', compact('supplier','requisition','purchase_general_item'));
     }
 
+ public function purchase_order_submit(Request $request){
+      
+            //dd($request->all());
+
+            $exiting = DB::table('purchases')->orderBy('id','DESC')->first();
+            if(!empty($exiting))
+            {
+                $order_no = "PR#".date('ym').str_pad($exiting->id+1, 4, "0", STR_PAD_LEFT);
+            }
+            else
+            {
+                $order_no = "PR#".date('ym').str_pad(1, 4, "0", STR_PAD_LEFT);;
+            }
+    
+            // Requisitions Main data insert
+            $pra_last_id = DB::table('purchases')->insertGetId([
+                'order_no'    => $order_no,
+                'postingDate'       => date('Y-m-d', strtotime($request->get('postingDate'))),
+                'requiredDate'      => date('Y-m-d', strtotime($request->get('requiredDate'))),
+                'branch_id'         => $request->get('branch_id'),
+                'memo_no'           => $request->get('memo_no'),
+                'description'       => $request->get('description'),
+                'item_group'        => $request->get('item_group'),
+                'Currency'          => $request->get('Currency'),
+                'procuerementType'  => $request->get('procuerementType'),
+                'status'            => $request->get('status',0),
+                'created_by'        => Auth::user()->id
+                
+            ]);
+
+
+            /////////////////// Multiple ///////////////////
+
+            $reqItem=count($request->get('required_quantity1'));
+
+            for($i=0;$i<$reqItem;$i++)
+            {
+                if(($request->get('required_quantity1')[$i]!='' && $request->get('required_quantity1')[$i]>0))
+                {
+                    DB::table('requisition_items')->insert([
+                        'requisition_id'    => $req_last_id,
+                        'item_id'           => $request->get('item_name1')[$i],
+                        'quantity'          => $request->get('required_quantity1')[$i]
+                    ]);                        
+                }
+            }
+    
+        return Redirect::to('purchase_order')->with('success','Data Added successfull');
+    }
 
    
 
@@ -59,28 +108,30 @@ class purchaseOrderController extends Controller
 
         return view('purchaseorder/requisitionWiseitemName', compact('itemName','type'));
     }
-    //intemname wise unit
+    //intemname wise Quantity
     public function intemname_wise_quantity(Request $request)
     {
         $quantity = DB::table('requisition_items')->where('id',$request->get('id'))->first();
         $type     = 2; 
-        $unit = DB::table('requisition_items')->where('id',$unitId->item_unit_id)->first();
-        return $unit->unit;
+       
+       
+       //dd($quantity);
+        return $quantity->quantity;
     }
     
-   //Requisition wise intemname
-    public function itemName()
-    {
-        $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
-        return $resulta;
-    }
+   // //Requisition wise intemname
+   //  public function itemName()
+   //  {
+   //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
+   //      return $resulta;
+   //  }
 
-    // //intemname wise unit
-    // public function quantity()
-    // {
-    //     $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
-    //     return $result;
-    // }
+   //  //intemname wise quantity
+   //  public function quantity()
+   //  {
+   //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
+   //      return $result;
+   //  }
 
 public function prochaseorderConfirmList(){
      //dd('Ok');

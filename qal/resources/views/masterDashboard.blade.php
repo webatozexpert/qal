@@ -506,21 +506,21 @@
             });
         }
 
-        // function ItemNameWiseUnit(id)
-        // {
-        //     //alert(id);
+        function ItemNameWiseQuantity(id)
+        {
+            //alert(id);
 
-        //     $.ajax({
-        //         method: "GET",
-        //         url: '{{url("/intemname-wise-quantity")}}',
-        //         data: {'id': id}
-        //     })
-        //     .done(function (response)
-        //     {
-        //         // alert(response);
-        //         $("#unit").val(response);                
-        //     });
-        // }
+            $.ajax({
+                method: "GET",
+                url: '{{url("/intemname-wise-quantity")}}',
+                data: {'id': id}
+            })
+            .done(function (response)
+            {
+                 //alert(response);
+                $("#quantity").val(response);                
+            });
+        }
 
         function printDiv() {
             var DivID = document.getElementById("section-to-print").innerHTML;

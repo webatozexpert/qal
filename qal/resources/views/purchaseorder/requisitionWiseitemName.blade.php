@@ -8,7 +8,7 @@
   </select>
 
 @elseif($type==2)
-{{ $unit->quantity }}
+{{ $quantity->quantity }}
 <!-- <select name="unit" id="unit" class="select2 form-control custom-select" style="width: 100%;" required="">
     <option value="">Select</option>
     @foreach($unit as $rows)
