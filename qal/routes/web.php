@@ -169,3 +169,4 @@ Route::get('/requisition-wise-intemname', 'purchaseOrderController@requisition_w
 Route::get('/intemname-wise-quantity', 'purchaseOrderController@intemname_wise_quantity');
 
 Route::post('purchase-order-submit', 'purchaseOrderController@purchase_order_submit');
+Route::get('/purchase-prochase-orderconfirm', 'purchaseOrderController@prochaseorderConfirmList');

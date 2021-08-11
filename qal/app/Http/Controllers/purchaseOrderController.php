@@ -82,5 +82,12 @@ class purchaseOrderController extends Controller
     //     return $result;
     // }
 
+public function prochaseorderConfirmList(){
+     //dd('Ok');
 
+
+
+     return view('purchaseorder/orderConfirmList');
+
+   }
 }

@@ -3,14 +3,10 @@
 
 <div class="page-breadcrumb">
   <div class="row">
-    <div class="col-5 align-self-center">
-      <h4 class="page-title">Purchase  Order List</h4>
-    </div>
+    
     <div class="col-7 align-self-center">
       <div class="d-flex align-items-center justify-content-end">
-        <a href="{{ URL('/purchase_order/create') }}">
-          <button type="submit" class="btn btn-success mr-2"> <i class="fa fa-user-plus" aria-hidden="true"></i> Create Purchase Order</button>
-        </a>
+       <h4 class="page-title"> Purchase Order Approved List</h4>
       </div>
     </div>
   </div>

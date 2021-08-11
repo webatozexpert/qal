@@ -79,18 +79,18 @@
                                         <span class="hide-menu">All Purchase Order </span>
                                     </a>
                                 </li>
-                               {{--  <li class="sidebar-item">
+                                {{-- <li class="sidebar-item">
                                     <a href="{{ URL('/purchase-order-awaiting-approval') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Awaiting Approval</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase-order-approved') }}" class="sidebar-link">
+                                    <a href="{{ URL('/purchase-prochase-orderconfirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Approved List</span>
                                     </a>
-                                </li>  --}}
+                                </li> 
                             </ul>
                         </li>
                     </ul>
