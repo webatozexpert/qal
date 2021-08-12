@@ -332,14 +332,7 @@ footer {
                   </thead>
                 </table>
                 <p>&nbsp;</p>
-                @php 
-                $data = DB::table('requisitions')
-                ->select('requisitions.*','users.name as OrderConfirm_by')
-                ->leftjoin('users','users.id','=','requisitions.OrderConfirm_by')
-                ->where('requisitions.id',$rid)
-                ->first(); 
-               //dd($data);
-                @endphp
+                
                 <table class='table' style='border-bottom: 0px;'>
                   <thead>
                     <tr>
@@ -355,21 +348,65 @@ footer {
                     <tr>
                       <td>Name :{{ $requisitions->created_by }}</td>
                       
+                      @php 
+                      $data = DB::table('requisitions')
+                      ->where('id',$rid)
+                      ->first(); 
+
+                      //dd($data);
+
+                      $Aname = '';
+                      if($data->status=='1')
+                      {
+                          $auth = DB::table('requisitions')
+                          ->select('requisitions.*','users.name as username')
+                          ->leftjoin('users','users.id','=','requisitions.approved_by')
+                          ->where('requisitions.id',$rid)
+                          ->first(); 
+
+                          $Aname = $auth->username;
+                      }
+                      else if($data->status=='2')
+                      {
+                        $auth = DB::table('requisitions')
+                          ->select('requisitions.*','users.name as username')
+                          ->leftjoin('users','users.id','=','requisitions.Confirm_by')
+                          ->where('requisitions.id',$rid)
+                          ->first(); 
+
+                          $Aname = $auth->username;
+                      }
+                      else if($data->status=='3')
+                      {
+                        $auth = DB::table('requisitions')
+                          ->select('requisitions.*','users.name as username')
+                          ->leftjoin('users','users.id','=','requisitions.OrderConfirm_by')
+                          ->where('requisitions.id',$rid)
+                          ->first(); 
+
+                          $Aname = $auth->username;
+                      }
+                     //dd($Aname);
+                      @endphp
+ 
                      <td>
-                       @if ($data->status=='1')
-                           Name : {{ $data->approved_by }} 
+                       @if($data->status=='1')
+                           Name : {{ $Aname }} 
                          <br/> <br/>
                          <span >Incharge</span>
-                       @elseif ($data->status=='2')
-                         Name : @if($data!=Null){{ $data->Confirm_by }} @endif 
+                       @elseif($data->status=='2')
+                         Name : {{ $Aname }}
                          <br/><br/>
                          <span style="font-size:10px;">Incharge -> General Manager </span>
-                       @elseif ($data->status=='3')
-                        Name : @if($data!=Null){{ $data->OrderConfirm_by }} @endif 
+                       @elseif($data->status=='3')
+                        Name : {{ $Aname }} 
                         <br/><br/>
                         <span style="font-size:10px;">Incharge -> General Manager -> Managing Director</span>
                        @endif  
                     </td>
+
+
+
                   </tr>
                 </thead>
               </table>
