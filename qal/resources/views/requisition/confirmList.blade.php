@@ -56,7 +56,7 @@
                       
                       <td>{{ $results->bname }}</td>
                       
-                     <td><a href="{{ URL('/requisition-print/'.$results->id) }}" title="print">{{ $results->requisition_no }}</a>
+                   <td><a href="{{ URL('/requisition-print/'.$results->id) }}" target="_blank" title="print">{{ $results->requisition_no }}</a>
                       </td>
                       <td>{{ $results->postingDate}}</td>
                       <td>{{ $results->requiredDate}}</td>
