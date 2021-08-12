@@ -19,9 +19,6 @@ class ProductController extends Controller
 
     public function page_index()
     {
-        $allZones = new ZoneController;
-        $allZones = $allZones->allZones();
-
         $result = DB::table('purchase_general_items')
         ->select('purchase_general_items.*','purchase_item_groups.name as itemgroup','purchase_item_subgroups.name as itemsubgroup','purchase_item_categories.name as itemCategory','purchase_item_units.unit')
         ->join('purchase_item_groups','purchase_item_groups.id','=','purchase_general_items.itemgroup_id')
@@ -30,7 +27,7 @@ class ProductController extends Controller
         ->join('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
         ->orderBy('purchase_general_items.id','DESC')->get();
         
-        return view('product/productMaster', compact('result','allZones'));
+        return view('product/productMaster', compact('result'));
     }
 
     public function new()

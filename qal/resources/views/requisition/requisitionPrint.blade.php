@@ -390,18 +390,20 @@ footer {
                       @endphp
  
                      <td>
-                       @if($data->status=='1')
-                           Name : {{ $Aname }} 
+                      @if($data->status=='0')
+                          Name :  
+                      @elseif($data->status=='1')
+                          Name : {{ $Aname }} 
                          <br/> <br/>
                          <span >Incharge</span>
                        @elseif($data->status=='2')
-                         Name : {{ $Aname }}
-                         <br/><br/>
-                         <span style="font-size:10px;">Incharge -> General Manager </span>
+                          Name : {{ $Aname }}
+                          <br/><br/>
+                          <span style="font-size:10px;">Incharge -> General Manager </span>
                        @elseif($data->status=='3')
-                        Name : {{ $Aname }} 
-                        <br/><br/>
-                        <span style="font-size:10px;">Incharge -> General Manager -> Managing Director</span>
+                          Name : {{ $Aname }} 
+                         <br/><br/>
+                         <span style="font-size:10px;">Incharge -> General Manager -> Managing Director</span>
                        @endif  
                     </td>
 
