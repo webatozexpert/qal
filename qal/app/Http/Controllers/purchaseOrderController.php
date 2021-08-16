@@ -50,7 +50,7 @@ class purchaseOrderController extends Controller
 
  public function purchase_order_submit(Request $request){
       
-            dd($request->all());
+           // dd($request->all());
 
             $exiting = DB::table('purchases')->orderBy('id','DESC')->first();
             if(!empty($exiting))
@@ -67,18 +67,18 @@ class purchaseOrderController extends Controller
                 'order_no'        => $order_no,
                 'Date'            => date('Y-m-d', strtotime($request->get('postingDate'))),
 
-                'supplierName'    => $request->get('supplierName'),
-                'procuerementType'=> $request->get('procuerementType'),
+                'supplier_name'    => $request->get('supplier_name'),
+                'procuerement _type'=> $request->get('procuerement _type'),
                 'currency'        => $request->get('currency'),
                 'requisition_no'  => $request->get('requisition_no'),
                 'note'            => $request->get('note'),
-                'deliveryto'      => $request->get('deliveryto'),
-                'payment_perm'    => $request->get('payment_perm'),
+                'delivery_to'      => $request->get('delivery_to'),
+                'payment_term'    => $request->get('payment_term'),
                 'sample'          => $request->get('sample'),
                 'acceptance'      => $request->get('acceptance'),
                 'delivery_within' => $request->get('delivery_within'),
-                'support_warranty'=> $request->get('support_warranty'),
-                'date_of_validity'=> $request->get('date_of_validity'),
+                'support_and_warranty'=> $request->get('support_and_warranty'),
+                'date_fo_validity'=> $request->get('date_fo_validity'),
                 'special_instructions'=> $request->get('special_instructions'),
                 'status'          => $request->get('status',0),
                 'created_by'      => Auth::user()->id
@@ -130,7 +130,7 @@ class purchaseOrderController extends Controller
    //  public function itemName()
    //  {
    //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
-   //      return $resulta;
+   //      return $result;
    //  }
 
    //  //intemname wise quantity

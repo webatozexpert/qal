@@ -45,13 +45,13 @@
                 <div class="form-group row">
                   <label for="zoneCode" class="col-sm-2 col-form-label"> Date</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <input type="text" class="form-control" id="fromDate" name="Date" autocomplete="off" value="{{ date('d-m-Y') }}" required="">
+                    <input type="text" class="form-control" id="fromDate" name="date" autocomplete="off" value="{{ date('d-m-Y') }}" required="">
                   </div>
 
 
                   <label for="supplierName" class="col-sm-2 col-form-label">Supplier Name</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="supplierName" id="supplierName" class="select2 form-control custom-select" style="width: 100%;">
+                    <select name="supplier_name" id="supplier_name" class="select2 form-control custom-select" style="width: 100%;">
                     <option value="">Enter a supplier name</option>
                      @foreach($supplier as $rows)
                      <option value="{{ $rows->id }}">{{ $rows->company_name }}</option>
@@ -64,7 +64,7 @@
                 <div class="form-group row">
                   <label for="procuerementType" class="col-sm-2 col-form-label">Procuerement Type</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="procuerementType" id="procuerementType" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
+                    <select name="procuerement _type" id="procuerement _type" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
                       <option value="By Workorder">By Workorder</option>
                       <option value="By L/C">By L/C</option>
                       <option value="Direct Purchase">Direct Purchase</option>
@@ -151,13 +151,13 @@
                 <div class="form-group row">
                 <label for="deliveryto" class="col-sm-2 col-form-label">Delivery to</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="deliveryto" name="deliveryto" placeholder="Delivery to" autocomplete="off" required="">
+                <input type="text" class="form-control" id="delivery_to" name="delivery_to" placeholder="Delivery to" autocomplete="off" required="">
               </div>
 
 
                   <label for="zoneName" class="col-sm-2 col-form-label">Payment Term</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="paymentPerm" name="payment_perm" placeholder="Payment Term" autocomplete="off" required="">
+                <input type="text" class="form-control" id="paymentPerm" name="payment_term" placeholder="Payment Term" autocomplete="off" required="">
               </div>
                 </div>
                 <div class="form-group row">
@@ -177,11 +177,11 @@
                 <div class="form-group row">
                 <label for="weliveryWithin" class="col-sm-2 col-form-label">Delivery Within</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="weliveryWithin" name="delivery_within" placeholder="Day..." autocomplete="off" required="">
+                <input type="text" class="form-control" id="delivery_within" name="delivery_within" placeholder="Day..." autocomplete="off" required="">
               </div>
                   <label for="zoneName" class="col-sm-2 col-form-label">Support and Warranty</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="addreSupportWarrantyss" name="support_warranty" placeholder="Support and Warranty" autocomplete="off" required="">
+                <input type="text" class="form-control" id="support_and_warranty" name="support_and_warranty" placeholder="Support and Warranty" autocomplete="off" required="">
               </div>
 
                 </div>
@@ -189,12 +189,12 @@
                 <div class="form-group row">
                 <label for="dateOfvalidity" class="col-sm-2 col-form-label"> Date fo Validity</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <input type="text" class="form-control" id="toDate" name="date_of_validity" autocomplete="off" value="{{ date('d-m-Y') }}" required="">
+                    <input type="text" class="form-control" id="toDate" name="date_fo_validity" autocomplete="off" value="{{ date('d-m-Y') }}" required="">
                   </div>
 
                   <label for="zoneName" class="col-sm-2 col-form-label">Special Instructions</label>
                    <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="specialInstructions" name="special_instructions" placeholder="Special Instructions" autocomplete="off" required="">
+                <input type="text" class="form-control" id="special_instructions" name="special_instructions" placeholder="Special Instructions" autocomplete="off" required="">
               </div>
                 </div>
                 <br>
