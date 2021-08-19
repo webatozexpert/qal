@@ -685,6 +685,14 @@ $('#select-all').click(function(event) {
         });
     }
 
+    function makeAmount(){
+        //alert('In');
+        var qty         = $("#quantity").val();
+        var amount      = $("#rate").val();
+        var totalAmount = (qty * amount);
+        $("#amount").val(totalAmount);
+    }
+
   
 
     </script>

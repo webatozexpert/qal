@@ -110,7 +110,10 @@ class purchaseOrderController extends Controller
     //Requisition wise intemname
     public function requisition_wise_intemname(Request $request)
     {
-        $itemName = DB::table('requisition_items')->where('requisition_id',$request->get('id'))->get();
+        $itemName = DB::table('requisition_items')
+        ->select('requisition_items.*','purchase_general_items.item_name')
+        ->leftJoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
+        ->where('requisition_items.requisition_id',$request->get('id'))->get();
         $type     = 1;        
 
         return view('purchaseorder/requisitionWiseitemName', compact('itemName','type'));

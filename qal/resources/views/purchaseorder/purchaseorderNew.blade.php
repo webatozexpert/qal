@@ -126,10 +126,10 @@
                         <input type="text" class="form-control" id="quantity" name="quantity" autocomplete="off" >
                       </td>
                       <td style="width: 10%;">
-                        <input type="text" class="form-control" id="rate" name="rate" autocomplete="off" >
+                        <input type="text" class="form-control" id="rate" name="rate" autocomplete="off" onkeyup="makeAmount()">
                       </td>
                       <td style="width: 10%;">
-                        <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" >
+                        <input type="text" class="form-control" id="amount" name="amount" autocomplete="off">
                       </td>
                       <td style="width: 20%;">
                         <input type="text" class="form-control" id="branch" name="branch" autocomplete="off">
