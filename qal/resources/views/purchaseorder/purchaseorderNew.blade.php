@@ -45,7 +45,7 @@
                 <div class="form-group row">
                   <label for="zoneCode" class="col-sm-2 col-form-label"> Date</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <input type="text" class="form-control" id="fromDate" name="date" autocomplete="off" value="{{ date('d-m-Y') }}" required="">
+                   <input type="text" class="form-control" id="fromDate" name="postingDate" autocomplete="off" value="{{ date('d-m-Y') }}" required="">
                   </div>
 
 
@@ -132,7 +132,13 @@
                         <input type="text" class="form-control" id="amount" name="amount" autocomplete="off">
                       </td>
                       <td style="width: 20%;">
-                        <input type="text" class="form-control" id="branch" name="branch" autocomplete="off">
+                       
+                         <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseGroup(this.value)">
+                           @foreach($branch as $rows)
+                            <option value="{{ $rows->id }}" @if($rows->name=='Head Office') selected="" @endif>{{ $rows->name }}</option>
+                           @endforeach
+                       
+                        </select>
                       </td>
                       <td>
                         <button type="button" id="addRow" class="btn btn-success" style="padding: 0px !important;" onclick="addMore2()" value="Add" > ADD</button>
@@ -141,7 +147,7 @@
                       <input type="hidden" id="prof_count" value="1">
                   </tbody>
                 </table>
-                 <table>
+                 <table id="tblRequisition">
                     <tr>
                       <td id="prof_1"></td>
                     </tr>

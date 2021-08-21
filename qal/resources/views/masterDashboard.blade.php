@@ -651,7 +651,7 @@ $('#select-all').click(function(event) {
                 $(document).ready(function(){
                 //alert("In");
                 var item_name         = $('#item_name').val();
-                var quantity              = $('#quantity').val();
+                var quantity          = $('#quantity').val();
                 var rate = $('#rate').val();
                 var amount = $('#amount').val();
                 var branch = $('#branch').val();
@@ -668,7 +668,7 @@ $('#select-all').click(function(event) {
             <td><input type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" /></td>\
              <td><input type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" /></td>\
             <td><input type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" /></td>\
-             <td ><img src="{{ URL('resources/assets/images/close.png')}}" width="20" height="20" border="0" id="prof_' + newField + '"  value="prof_' + newField + '" onClick="del(this)" ></td>\
+             <td><input type="button" value="Remove" onclick="Remove(this);"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\
             ';
@@ -685,15 +685,39 @@ $('#select-all').click(function(event) {
         });
     }
 
+        //  function Remove(button) {
+        //     //Determine the reference of the Row using the Button.
+        //     var row = $(button).closest("TR");
+        //     var name = $("TD", row).eq(0).html();
+        //     if (confirm("Do you want to delete: " + name)) {
+
+        //         //Get the reference of the Table.
+        //         var table = $("#tblRequisition")[0];
+
+        //         //Delete the Table row using it's Index.
+        //         table.deleteRow(row[0].rowIndex);
+        //     }
+        // };
+
     function makeAmount(){
-        //alert('In');
+        //alert('InputRate');
         var qty         = $("#quantity").val();
         var amount      = $("#rate").val();
         var totalAmount = (qty * amount);
         $("#amount").val(totalAmount);
     }
+    
+    //   function total(){
+        
+    //     var total=0;
+    //     $('.amount').each(function(i,e){
+    //         var amount=$(this).val()-0;
+    //         total +=amount;
+    //     });
+    //    $('.total').html(total);
+    // }
 
-  
+
 
     </script>
     
