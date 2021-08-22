@@ -81,16 +81,14 @@
                 </div>
 
                 <div class="form-group row">
-                <label for="zoneCode" class="col-sm-2 col-form-label">Item Group</label>
+                 <label for="zoneCode" class="col-sm-2 col-form-label">Procuerement Type</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="item_group" id="item_group" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="groupWiseItemName(this.value)">
-                      {{-- <option value="">Select</option> --}}
-                      @foreach($item_group as $rows)
-                        <option value="{{ $rows->id }}" @if($rows->name=='ASSETS') selected="" @endif>{{ $rows->name }}</option>
-                      @endforeach
+                    <select name="procuerementType" id="procuerementType" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
+                      <option value="By Workorder">By Workorder</option>
+                      <option value="By L/C">By L/C</option>
+                      <option value="Direct Purchase">Direct Purchase</option>
                     </select>
                   </div>
-
 
                   <label for="zoneCode" class="col-sm-2 col-form-label">Priority</label>
                   <div class="col-sm-4" style="padding-left: 0;">
@@ -104,14 +102,16 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="zoneCode" class="col-sm-2 col-form-label">Procuerement Type</label>
+                   <label for="zoneCode" class="col-sm-2 col-form-label">Item Group</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="procuerementType" id="procuerementType" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
-                      <option value="By Workorder">By Workorder</option>
-                      <option value="By L/C">By L/C</option>
-                      <option value="Direct Purchase">Direct Purchase</option>
+                    <select name="item_group" id="item_group" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="groupWiseItemName(this.value)">
+                      {{-- <option value="">Select</option> --}}
+                      @foreach($item_group as $rows)
+                        <option value="{{ $rows->id }}" @if($rows->name=='ASSETS') selected="" @endif>{{ $rows->name }}</option>
+                      @endforeach
                     </select>
                   </div>
+                 
 
 
                   <label for="zoneCode" class="col-sm-2 col-form-label">Note</label>
@@ -148,7 +148,7 @@
                         <input type="text" class="form-control" id="required_quantity" name="required_quantity" autocomplete="off">
                       </td>
                       <td>
-                        <button type="button" id="addRow" class="btn btn-success" style="padding: 0px !important;" onclick="addMore1()" value="Add" > ADD</button>
+                        <button type="button" id="addRow" class="btn btn-success" style="padding: 01px 13px 01px 13px !important;" onclick="addMore1()" value="Add" > ADD</button>
                       </td>
                     </tr>
                     <input type="hidden" id="prof_count" value="1">

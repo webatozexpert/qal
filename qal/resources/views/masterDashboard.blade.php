@@ -612,10 +612,10 @@
                     
                 strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
                 <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
-            <td><input type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'"/></td>\
-            <td><input type="text" id="unit' + newField + '" name="unit1[]" maxlength="10" value="'+unit+'" readonly="" class="form-control"/></td>\
-            <td><input type="text" id="required_quantity' + newField + '" name="required_quantity1[]" maxlength="10" value="'+required_quantity+'" readonly="" class="form-control"/></td>\
-            <td ><img src="{{ URL('resources/assets/images/close.png')}}" width="20" height="20" border="0" id="prof_' + newField + '"  value="prof_' + newField + '" onClick="del('+ newField +')" style="cursor: pointer;" tile="Delete"></td>\
+            <td><input style="width: 610px;" type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'"/></td>\
+            <td><input style="width: 200px;" type="text" id="unit' + newField + '" name="unit1[]" maxlength="10" value="'+unit+'" readonly="" class="form-control"/></td>\
+            <td><input style="width:200px;" type="text" id="required_quantity' + newField + '" name="required_quantity1[]" maxlength="10" value="'+required_quantity+'" readonly="" class="form-control"/></td>\
+            <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\
             ';
@@ -676,12 +676,12 @@ $('#select-all').click(function(event) {
                     
                 strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
                 <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
-            <td><input type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'" readonly="" /></td>\
-            <td><input type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" class="form-control"/></td>\
-            <td><input type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
-             <td><input type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\
-            <td><input type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" class="form-control"/></td>\
-             <td><input type="button" value="Remove" onclick="Remove(this);"></td>\
+            <td><input style="width: 525px;"  type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'" readonly="" /></td>\
+            <td><input style="width: 108px;"  type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" class="form-control"/></td>\
+            <td><input style="width: 105px;"  type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
+             <td><input style="width: 108px;"  type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\
+            <td><input style="width: 150px;"  type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" class="form-control"/></td>\
+             <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\
             ';
@@ -698,20 +698,16 @@ $('#select-all').click(function(event) {
         });
     }
 
-        //  function Remove(button) {
-        //     //Determine the reference of the Row using the Button.
-        //     var row = $(button).closest("TR");
-        //     var name = $("TD", row).eq(0).html();
-        //     if (confirm("Do you want to delete: " + name)) {
-
-        //         //Get the reference of the Table.
-        //         var table = $("#tblRequisition")[0];
-
-        //         //Delete the Table row using it's Index.
-        //         table.deleteRow(row[0].rowIndex);
-        //     }
-        // };
-
+        function del(id)
+{
+    //alert(id);
+     $('#item_name'+id).val('');
+    $('#quantity'+id).val('');
+    $('#rate'+id).val('');
+    $('#amount'+id).val('');
+    $('#branch'+id).val('');
+    $("#prof_" + id).hide();
+}
     function makeAmount(){
         //alert('InputRate');
         var qty         = $("#quantity").val();

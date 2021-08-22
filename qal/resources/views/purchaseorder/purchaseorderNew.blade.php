@@ -132,7 +132,7 @@
                       <td style="width: 10%;">
                         <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" readonly="">
                       </td>
-                      <td style="width: 20%;">
+                      <td style="width: 16%;">
                        
                          <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseGroup(this.value)">
                            @foreach($branch as $rows)
@@ -142,7 +142,7 @@
                         </select>
                       </td>
                       <td>
-                        <button type="button" id="addRow" class="btn btn-success" style="padding: 0px !important;" onclick="addMore2()" value="Add" > ADD</button>
+                        <button type="button" id="addRow" class="btn btn-success" style="padding: 01px 10px 01px 10px !important;" onclick="addMore2()" value="Add" > ADD</button>
                       </td>
                     </tr>
                       <input type="hidden" id="prof_count" value="1">
