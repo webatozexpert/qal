@@ -154,7 +154,7 @@ function requisitionPrint($id) {
                 {
                     DB::table('requisition_items')->insert([
                         'requisition_id'    => $req_last_id,
-                        'item_id'           => $request->get('item_name1')[$i],
+                        'item_id'           => $request->get('item_id1')[$i],
                         'quantity'          => $request->get('required_quantity1')[$i]
                     ]);                        
                 }
@@ -432,7 +432,8 @@ public function orderConfirmList(){
     //intemname wise unit
     public function intemname_wise_unit(Request $request)
     {
-        $unitId = DB::table('purchase_general_items')->where('id',$request->get('id'))->first();
+        $id = explode('_',$request->get('id'));
+        $unitId = DB::table('purchase_general_items')->where('id',$id[1])->first();
         $type     = 2; 
         $unit = DB::table('purchase_item_units')->where('id',$unitId->item_unit_id)->first();
         return $unit->unit;

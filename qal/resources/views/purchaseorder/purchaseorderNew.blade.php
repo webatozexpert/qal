@@ -51,7 +51,7 @@
 
                   <label for="supplierName" class="col-sm-2 col-form-label">Supplier Name</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="supplier_name" id="supplier_name" class="select2 form-control custom-select" style="width: 100%;">
+                    <select name="supplier_name" id="supplier_name" class="select2 form-control custom-select" style="width: 100%;" required="">
                     <option value="">Enter a supplier name</option>
                      @foreach($supplier as $rows)
                      <option value="{{ $rows->id }}">{{ $rows->company_name }}</option>
@@ -64,7 +64,7 @@
                 <div class="form-group row">
                   <label for="procuerementType" class="col-sm-2 col-form-label">Procuerement Type</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="procuerement _type" id="procuerement _type" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
+                    <select name="procuerement_type" id="procuerement_type" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="subgroupWiseCategory(this.value)">
                       <option value="By Workorder">By Workorder</option>
                       <option value="By L/C">By L/C</option>
                       <option value="Direct Purchase">Direct Purchase</option>
@@ -75,8 +75,9 @@
                  <label for="currency" class="col-sm-2 col-form-label">Currency</label>
                   <div class="col-sm-4" style="padding-left: 0;">
                     <select name="currency" id="currency" class="select2 form-control custom-select" style="width: 100%;" required="">
-                    <option value="currency">Currency</option>
+                    {{-- <option value="">Currency</option> --}}
                      <option value="BDT">BDT</option>
+                     <option value="Dollar">Dollar</option>
                     </select>
                   </div>
 
@@ -96,7 +97,7 @@
 
                   <label for="note" class="col-sm-2 col-form-label">Note</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <input type="text" class="form-control" id="note" name="note" placeholder="Narration" autocomplete="off">
+                    <input type="text" class="form-control" id="note" name="note" placeholder="Narration" autocomplete="off" required="">
                   </div>
 
                 </div>
@@ -123,13 +124,13 @@
                         </select>
                       </td>
                       <td style="width: 10%;">
-                        <input type="text" class="form-control" id="quantity" name="quantity" autocomplete="off" >
+                        <input type="text" class="form-control" id="quantity" name="quantity" autocomplete="off" readonly="">
                       </td>
                       <td style="width: 10%;">
                         <input type="text" class="form-control" id="rate" name="rate" autocomplete="off" onkeyup="makeAmount()">
                       </td>
                       <td style="width: 10%;">
-                        <input type="text" class="form-control" id="amount" name="amount" autocomplete="off">
+                        <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" readonly="">
                       </td>
                       <td style="width: 20%;">
                        
@@ -169,13 +170,13 @@
                 <div class="form-group row">
                 <label for="sample" class="col-sm-2 col-form-label">Sample</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="sample" name="sample" placeholder="Sample" autocomplete="off" required="">
+                <input type="text" class="form-control" id="sample" name="sample" placeholder="Sample" autocomplete="off" >
               </div>
 
 
                   <label for="zoneName" class="col-sm-2 col-form-label">Acceptance</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="acceptance" name="acceptance" placeholder="Acceptance" autocomplete="off" required="">
+                <input type="text" class="form-control" id="acceptance" name="acceptance" placeholder="Acceptance" autocomplete="off" >
               </div>
 
                 </div>
@@ -183,11 +184,11 @@
                 <div class="form-group row">
                 <label for="weliveryWithin" class="col-sm-2 col-form-label">Delivery Within</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="delivery_within" name="delivery_within" placeholder="Day..." autocomplete="off" required="">
+                <input type="text" class="form-control" id="delivery_within" name="delivery_within" placeholder="Day..." autocomplete="off" >
               </div>
                   <label for="zoneName" class="col-sm-2 col-form-label">Support and Warranty</label>
               <div class="col-sm-4" style="padding-left: 0;">
-                <input type="text" class="form-control" id="support_and_warranty" name="support_and_warranty" placeholder="Support and Warranty" autocomplete="off" required="">
+                <input type="text" class="form-control" id="support_and_warranty" name="support_and_warranty" placeholder="Support and Warranty" autocomplete="off" >
               </div>
 
                 </div>

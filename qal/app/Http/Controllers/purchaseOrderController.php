@@ -52,7 +52,7 @@ class purchaseOrderController extends Controller
 
  public function purchase_order_submit(Request $request){
       
-           // dd($request->all());
+            //dd($request->all());
 
             $exiting = DB::table('purchases')->orderBy('id','DESC')->first();
             if(!empty($exiting))
@@ -65,49 +65,50 @@ class purchaseOrderController extends Controller
             }
     
             // Requisitions Main data insert
-                $po_last_id = DB::table('purchases')->insertGetId([
-                'order_no'        => $order_no,
-                'postingDate'     => date('Y-m-d', strtotime($request->get('postingDate'))),
+            $po_last_id = DB::table('purchases')->insertGetId([
+            'order_no'        => $order_no,
+            'postingDate'     => date('Y-m-d', strtotime($request->get('postingDate'))),
 
-                'supplier_name'    => $request->get('supplier_name'),
-                'procuerement _type'=> $request->get('procuerement _type'),
-                'currency'        => $request->get('currency'),
-                'requisition_no'  => $request->get('requisition_no'),
-                'note'            => $request->get('note'),
-                'delivery_to'      => $request->get('delivery_to'),
-                'payment_term'    => $request->get('payment_term'),
-                'sample'          => $request->get('sample'),
-                'acceptance'      => $request->get('acceptance'),
-                'delivery_within' => $request->get('delivery_within'),
-                'support_and_warranty'=> $request->get('support_and_warranty'),
-                'date_fo_validity'=> $request->get('date_fo_validity'),
-                'special_instructions'=> $request->get('special_instructions'),
-                'status'          => $request->get('status',0),
-                'created_by'      => Auth::user()->id
+            'supplier_name'    => $request->get('supplier_name'),
+            'procuerement_type'=> $request->get('procuerement_type'),
+            'currency'        => $request->get('currency'),
+            'requisition_no'  => $request->get('requisition_no'),
+            'note'            => $request->get('note'),
+            'delivery_to'      => $request->get('delivery_to'),
+            'payment_term'    => $request->get('payment_term'),
+            'sample'          => $request->get('sample'),
+            'acceptance'      => $request->get('acceptance'),
+            'delivery_within' => $request->get('delivery_within'),
+            'support_and_warranty'=> $request->get('support_and_warranty'),
+            'date_fo_validity'=> date('Y-m-d', strtotime($request->get('date_fo_validity'))),
+            'special_instructions'=> $request->get('special_instructions'),
+            'status'          => $request->get('status',0),
+            'created_by'      => Auth::user()->id,
+            'created_at'      => date('Y-m-d H:i:s') // 24 hours
 
-                ]);
+            ]);
 
 
-            // /////////////////// Multiple ///////////////////
+            /////////////////// Multiple ///////////////////
 
-            // $poItem=count($request->get('purchase_items1'));
+            $poItem=count($request->get('item_name1'));
 
-            //  for($i=0;$i<$poItem;$i++)
-            //  {
-            //     if(($request->get('purchase_items1')[$i] , ($request->get('purchase_items1')[$i] ,($request->get('purchase_items1')[$i],($request->get('purchase_items1')[$i] && $request->get('purchase_items1')[$i]>0))
-            //     {
-            //     DB::table('purchase_items')->insert([
-            //             'purchase_id'     => $po_last_id,
-            //             'item_id'         => $request->get('item_name1')[$i],
-            //             'quantity'        => $request->get('purchase_items1')[$i]
-            //             'rate'            => $request->get('purchase_items1')[$i]
-            //             'amount'          => $request->get('purchase_items1')[$i]
-            //             'branch'          => $request->get('purchase_items1')[$i]
-            //         ]);                        
-            //  }
-            //  }
+            for($i=0;$i<$poItem;$i++)
+            {
+                if($request->get('item_name1')[$i] && $request->get('quantity1')[$i]>0  && $request->get('rate1')[$i]>0)
+                {
+                    DB::table('purchase_items')->insert([
+                    'purchase_id'     => $po_last_id,
+                    'item_id'         => $request->get('item_id1')[$i],
+                    'quantity'        => $request->get('quantity1')[$i],
+                    'rate'            => $request->get('rate1')[$i],
+                    'amount'          => $request->get('amount1')[$i],
+                    'branch'          => $request->get('branch1')[$i]
+                    ]);                        
+                }
+            }
     
-        return Redirect::to('purchase_order')->with('success','Data Added successfull');
+        return Redirect::to('purchase_order')->with('success','Data Added Successfull');
     }
 
    
@@ -116,23 +117,21 @@ class purchaseOrderController extends Controller
     public function requisition_wise_intemname(Request $request)
     {
         $itemName = DB::table('requisition_items')
-        ->select('requisition_items.*','purchase_general_items.item_name')
+        ->select('requisition_items.*','purchase_general_items.item_name','purchase_general_items.item_code')
         ->leftJoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
         ->where('requisition_items.requisition_id',$request->get('id'))->get();
         $type     = 1;        
 
         return view('purchaseorder/requisitionWiseitemName', compact('itemName','type'));
     }
+
     //intemname wise Quantity
     public function intemname_wise_quantity(Request $request)
     {
+        $id = explode('_',$request->get('id'));
+        //$productId = DB::table('purchase_general_items')->where('item_id',$id[1])->first();
+        $quantity = DB::table('requisition_items')->where('id',$id[1])->first();
 
-        $productId = DB::table('purchase_general_items')->where('item_name',$request->get('id'))->first();
-        $quantity = DB::table('requisition_items')->where('item_id',$productId->id)->first();
-        $type     = 2; 
-       
-       
-       //dd($quantity);
         return $quantity->quantity;
     }
     

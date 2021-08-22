@@ -3,7 +3,7 @@
 <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" required="">
     <option value="">Select</option>
     @foreach($itemName as $rows)
-    <option value="{{ $rows->id }}">{{ $rows->item_name }}</option>
+    <option value="{{ $rows->item_name.'_'.$rows->id }}">{{ $rows->item_name.' | '.$rows->item_code }}</option>
     @endforeach
   </select>
 
