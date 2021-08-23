@@ -54,7 +54,7 @@ class RequisitionController extends Controller
     // }
 
 
-
+//Requisition Print
 function requisitionPrint($id) {
    // $data['requisitions'] = DB::table('requisitions')->find($id);
    //$data = DB::table('requisitions')->find($id);

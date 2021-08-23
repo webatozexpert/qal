@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use DB;
 use Auth;
+use PDF;
 
 class purchaseOrderController extends Controller
 {
@@ -19,15 +20,15 @@ class purchaseOrderController extends Controller
     {
         //dd('Ok');
 
-        $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')->get();
+        $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')->get();
 
-        //dd($result);
+       // dd($result);
 
        
         return view('purchaseorder/purchaseorderMaster', compact('result'));
@@ -57,11 +58,11 @@ class purchaseOrderController extends Controller
             $exiting = DB::table('purchases')->orderBy('id','DESC')->first();
             if(!empty($exiting))
             {
-                $order_no = "PR#".date('ym').str_pad($exiting->id+1, 4, "0", STR_PAD_LEFT);
+                $order_no = "PO#".date('ym').str_pad($exiting->id+1, 4, "0", STR_PAD_LEFT);
             }
             else
             {
-                $order_no = "PR#".date('ym').str_pad(1, 4, "0", STR_PAD_LEFT);;
+                $order_no = "PO#".date('ym').str_pad(1, 4, "0", STR_PAD_LEFT);;
             }
     
             // Requisitions Main data insert
@@ -157,4 +158,37 @@ public function prochaseorderConfirmList(){
      return view('purchaseorder/orderConfirmList');
 
    }
+
+//Purchase Order Print
+function purchaseOrderPrint($id) {
+   // $data['requisitions'] = DB::table('requisitions')->find($id);
+   //$data = DB::table('requisitions')->find($id);
+    // $data = DB::table('requisitions')->first();
+    // dd($data);
+
+        $purchases  = DB::table('purchases')
+        ->select('purchases.*','users.name as created_by')
+
+       
+        ->leftjoin('users','users.id','=','purchases.created_by')
+        ->where('purchases.id',$id)
+        ->first(); 
+       $poid= $id;      
+     //dd($data);
+  
+    $pdf = PDF::loadView('purchaseorder.purchaseOrderPrint', compact('purchases','poid'));
+    $pdf->SetProtection(['copy', 'print'], '', 'pass');
+    return $pdf->stream('document.pdf');
+}
+
+//purchase Delete
+
+     public function delete($id){
+        DB::table('purchase_items')->where('purchase_id',$id)->delete();
+        DB::table('purchases')->where('id',$id)->delete();
+        
+          //return redirect()->route('purchase')->with('success','Data Delete successfull');
+         return Redirect::to('purchase_order')->with('success','Data Delete successfull');
+    }
+
 }

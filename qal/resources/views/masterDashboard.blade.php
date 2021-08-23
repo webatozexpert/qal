@@ -693,7 +693,7 @@ $('#select-all').click(function(event) {
                 $('#quantity').val('');
                 $('#rate').val('');
                  $('#amount').val('');
-                  $('#branch').val('');
+                  // $('#branch').val('');
                 //alert(strNewField);
         });
     }
