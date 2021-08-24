@@ -172,3 +172,11 @@ Route::post('purchase-order-submit', 'purchaseOrderController@purchase_order_sub
 Route::get('/purchase-prochase-orderconfirm', 'purchaseOrderController@prochaseorderConfirmList');
 Route::get('/purchase-delete/{id}', 'purchaseOrderController@delete');
 Route::get('/purchaseOrder-print/{id}', 'purchaseOrderController@purchaseOrderPrint');
+
+
+
+///////////////////// QIL SECTION ////////////////////////
+
+Route::get('/qil/entry', 'EntryController@index');
+Route::post('/qil/order-entry-submit', 'EntryController@order_entry_submit');
+Route::post('/qil/query-entry-submit', 'EntryController@query_entry_submit');

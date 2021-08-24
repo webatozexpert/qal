@@ -12,7 +12,7 @@
                     </a>
                 </li>
 
-              @if(Auth::user()->type=='User' || Auth::user()->type=='Admin')
+              @if((Auth::user()->type=='User' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
                 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark" href="{{ URL('/order') }}" aria-expanded="false">
@@ -170,7 +170,7 @@
                 </li>  
                 
               @endif
-              @if(Auth::user()->type=='Factory' || Auth::user()->type=='Admin')
+              @if((Auth::user()->type=='Factory' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark" href="{{ URL('/factory/gate-pass') }}" aria-expanded="false">
                         <i class="mdi mdi-image-filter-tilt-shift"></i>
@@ -193,9 +193,7 @@
                 </li>
               @endif
 
-              @if(Auth::user()->type=='DHead')
-                
-                               
+              @if((Auth::user()->type=='DHead' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
 
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
@@ -252,11 +250,10 @@
                         </li>
                     </ul>
                 </li>
-                @endif
+
+              @endif
                 
-                 @if(Auth::user()->type=='OHead')
-                
-                               
+              @if((Auth::user()->type=='OHead' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
 
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
@@ -313,11 +310,10 @@
                         </li>
                     </ul>
                 </li>
-                @endif
 
-                @if(Auth::user()->type=='Management')
-                
-                               
+              @endif
+
+              @if((Auth::user()->type=='Management' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
 
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
@@ -374,7 +370,29 @@
                         </li>
                     </ul>
                 </li>
-                @endif
+
+              @endif
+
+
+              {{-- //////////// QIL MENU SECTION //////////// --}}
+
+              @if((Auth::user()->type=='User' && Auth::user()->user_group=='QIL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QIL'))
+                
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ URL('/qil/entry') }}" aria-expanded="false">
+                        <i class="mdi mdi-image-filter-tilt-shift"></i>
+                        <span class="hide-menu">Entry</span>
+                    </a>
+                </li> 
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ URL('/qil/history') }}" aria-expanded="false">
+                        <i class="mdi mdi-image-filter-tilt-shift"></i>
+                        <span class="hide-menu">History</span>
+                    </a>
+                </li>  
+                
+              @endif
+
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ URL('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" aria-expanded="false">

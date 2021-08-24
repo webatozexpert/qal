@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FactoryController;
 
+use Auth;
 class DashboardController extends Controller
 {
 	public function __construct()
@@ -35,6 +36,15 @@ class DashboardController extends Controller
     	$totalZones     = $allZones;
     	$totalCustomers = $allCustomer;
 
-        return view('middleDashboard', compact('totalZones','totalCustomers','allOrder','allGetPass','allChallan','allInvoice'));
+        if((Auth::user()->type=='User' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
+        {
+            return view('middleDashboard', compact('totalZones','totalCustomers','allOrder','allGetPass','allChallan','allInvoice'));
+        }
+        elseif((Auth::user()->type=='User' && Auth::user()->user_group=='QIL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QIL'))
+        {
+            return view('middleDashboardQIL');
+        }
+
+        
     }
 }
