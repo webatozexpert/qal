@@ -676,7 +676,7 @@ $('#select-all').click(function(event) {
                     
                 strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
                 <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
-            <td><input style="width: 525px;"  type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'" readonly="" /></td>\
+            <td><input style="width: 525px;"  type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[2]+'" readonly="" /></td>\
             <td><input style="width: 108px;"  type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" class="form-control"/></td>\
             <td><input style="width: 105px;"  type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
              <td><input style="width: 108px;"  type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\

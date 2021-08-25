@@ -167,12 +167,16 @@ function purchaseOrderPrint($id) {
     // dd($data);
 
         $purchases  = DB::table('purchases')
-        ->select('purchases.*','users.name as created_by')
+        ->select('purchases.*','users.name as created_by','suppliers.company_name','suppliers.address','requisitions.requisition_no','requisitions.requiredDate','requisitions.memo_no')
 
-       
         ->leftjoin('users','users.id','=','purchases.created_by')
+        ->leftjoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftjoin('requisitions','requisitions.id','=','purchases.requisition_no')
+
+        //dd($purchases);
         ->where('purchases.id',$id)
         ->first(); 
+        
        $poid= $id;      
      //dd($data);
   

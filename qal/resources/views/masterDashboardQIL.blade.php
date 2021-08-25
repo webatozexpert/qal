@@ -74,15 +74,9 @@
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
-                        <a href="{{ URL('/')}}" class="logo"> 
-                            <!-- Logo icon -->
-                            {{-- <img src="{{URL::asset('resources/assets/images/fav.png')}}" width="30" height="30" />
-                            <br /> --}}
-                            <b class="logo-icon" style="font-size: 15px; color: #FFF; text-align: center; width: 70px;">
-                                {{-- <img src="{{URL::asset('resources/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
-                                <img src="{{URL::asset('resources/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" /> --}}
-                                {{-- <img src="{{URL::asset('resources/assets/images/fav.png')}}" width="30" height="30" /> <br /> --}}
-                                Quality Aquabreeds Limited
+                        <a href="{{ URL('/')}}" class="logo">
+                            <b class="logo-icon" style="font-size: 25px; color: #FFF; text-align: center !important; width: 70px;">
+                                QIAL
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->

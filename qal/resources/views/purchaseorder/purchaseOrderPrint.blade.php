@@ -242,15 +242,15 @@ footer {
                        
                         <tr>
                           <td>Supplier Name</td>
-                          <td style=''>: {{ $purchases->supplier_name }} </td>
+                          <td style=''>: {{ $purchases->company_name }} </td>
                         </tr>
                         <tr>
                           <td>Address</td>
-                          <td style='width: 270px;'>:  </td>
+                          <td style='width: 270px;'>:  {{ $purchases->address }}</td>
                         </tr>
                         <tr>
                           <td>Budget Name</td>
-                          <td style=''>:  </td>
+                          <td style=''>:{{ $purchases->memo_no }}  </td>
                         </tr>
                       </table>
                     </td>
@@ -261,16 +261,16 @@ footer {
                           <td style='width: 150px'>Date</td>
                           <td style='width: 150px'>: {{ $purchases->postingDate }} </td>
                         </tr>
-                        <tr>
-                          <td style='width: 150px'>Required Date</td>
-                          <td style='width: 150px'>: </td>
-                        </tr>
+                        
                         <tr>
                           <td>Requisition No
                          </td>
-                          <td style=''>: </td>
+                          <td style=''>:{{ $purchases->requisition_no }} </td>
                         </tr>
-                       
+                       <tr>
+                          <td style='width: 150px'>Required Date</td>
+                          <td style='width: 150px'>:{{ $purchases->requiredDate }} </td>
+                        </tr>
                       </table>
                     </td>
                   </tr>
@@ -280,19 +280,26 @@ footer {
                   $serialNo=1;
                   @endphp
 
-            @php
+           
+          @php
              $result = DB::table('purchase_items')
-             ->select('purchase_items.*','requisitions.id','requisitions.requisition_no as item_id',)
+              ->select('purchase_items.*','purchase_general_items.id','purchase_general_items.item_name','branchs.name')
              
-               ->leftJoin('requisitions','requisitions.id','=','purchase_items.item_id')
-              
-              ->orderBy('purchase_items.id','DESC')->get();
+              ->leftJoin('purchase_general_items','purchase_general_items.id','=','purchase_items.item_id')
+              ->leftJoin('branchs','branchs.id','=','purchase_items.branch')
+             
+              ->where('purchase_items.purchase_id',$poid)
+              ->orderBy('purchase_items.id','DESC')
+              ->get();
+
+          //dd($result);
             @endphp
+
                 <table class='table table-bordered' cellspacing="0" cellpadding="0">
                   <thead >
                     <tr class="card-header">
                       <td class='text-center' style='vertical-align: middle;'>Sl#</td>
-                      <td class='text-center' style='vertical-align: middle;'>Devivery Location</td>
+                      <td class='text-center' style='vertical-align: middle;'>Delivery Location</td>
                       <td class='text-center' style='vertical-align: middle;'>Item Name </td>
                       <td class='text-center' style='vertical-align: middle;'>Quantity</td>
                       <td class='text-center' style='vertical-align: middle;'>Rate BDT</td>
@@ -305,7 +312,11 @@ footer {
                   <tbody>
                     <tr class="card" style="text-align: center;">
                       <td class='text-center'>{{ $serialNo }}</td>
-                      <td> {{ $results->item_id}}</td>
+                      <td> {{ $results->name}}</td>
+                      <td> {{ $results->item_name}}</td>
+                      <td> {{ $results->quantity}}</td>
+                      <td> {{ $results->rate}}</td>
+                      <td> {{ $results->amount}}</td>
                     </tr>
                     
                   </tbody>
@@ -316,7 +327,7 @@ footer {
 
                   @endforeach
                 </table>
-                <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+               <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
                  <table class='table' style='border-bottom: 0px;'>
                   <thead>
                     <tr>
@@ -328,10 +339,18 @@ footer {
                  <table class='table' style='border-bottom: 0px;'>
                   <thead>
                     <tr>
-                      <td style="text-align: left;">Note :{{ $purchases->note }} </td>
-                     
+                      <td style="text-align: left;">Delivery Within : {{ $purchases->delivery_within }}   Days</td>
+                     </tr>
+                     <tr>
+                       <td style="text-align: left;">Terms of Payment:  {{ $purchases->payment_term }} </td>
+                    
+                     </tr>
+                     <tr>
+                        <td style="text-align: left;">Special Instructions : {{ $purchases->special_instructions }} </td>
+                     </tr>
                   </thead>
                 </table>
+                 <p>&nbsp;</p> <p>&nbsp;</p>
                   <table>
 
                   	<tr>

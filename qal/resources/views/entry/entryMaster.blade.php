@@ -31,7 +31,7 @@
             <div class="form-group row">
               <label for="zoneCode" class="col-sm-3 col-form-label">Comment</label>
               <div class="col-sm-9" style="padding-left: 0;">
-                <textarea name="comment" id="comment" placeholder="Comment here.." class="form-control" rows="8" onkeypress="hover(this.id)"></textarea>
+                <textarea name="comment" id="comment" placeholder="Comment here.." class="form-control" rows="11" onkeypress="hover(this.id)"></textarea>
               </div>
             </div>
             <div class="form-group row">
