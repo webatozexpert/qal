@@ -385,7 +385,7 @@
                     </a>
                 </li> 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark" href="{{ URL('/qil/history') }}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ URL('/qil/order/history') }}" aria-expanded="false">
                         <i class="mdi mdi-image-filter-tilt-shift"></i>
                         <span class="hide-menu">History</span>
                     </a>

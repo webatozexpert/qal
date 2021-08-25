@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use DB;
-
+use PDF;
 class EntryController extends Controller
 {
 	public function __construct()
@@ -64,6 +64,7 @@ class EntryController extends Controller
             ]
         );
 
+        $this->orderSummaryDayWise($request->get('queryLead'));
         return 0;
     }
 
@@ -71,91 +72,86 @@ class EntryController extends Controller
     {
         $today  = date('Y-m-d');
         $result = DB::table("order_query_history")
-            // ->where('type', 'Order')
+            ->where('lead', $lead)
             ->whereBetween('added_date', [$today, $today])
             ->get();
 
-        $new   =0;
-        $old   =0;
-        $query =0;
-        $leadType ='';
+        //dd($result);
+
+        $newP    =0;
+        $oldP    =0;
+        $queryP  =0;
+
         foreach($result as $data)
         {
-            if($data->lead=='Phone' && $data->type=='Order')
+            if($data->type=='Order')
             {
-                $leadType = $data->lead;
-                if($data->lead=='Phone' && $data->customer_type=='New')
+                if($data->customer_type=='New')
                 {
-                    $new ++;
+                    $newP++;
                 }
-                elseif($data->lead=='Phone' && $data->customer_type=='Old')
+                elseif($data->customer_type=='Old')
                 {                    
-                    $old ++;
+                    $oldP++;
                 }
             }
-
-            if($data->lead=='Message' && $data->type=='Order')
+            elseif($data->type=='Query')
             {
-                $leadType = $data->lead;
-                if($data->lead=='Message' && $data->customer_type=='New')
-                {
-                    $new ++;
-                }
-                elseif($data->lead=='Message' && $data->customer_type=='Old')
-                {                    
-                    $old ++;
-                }
-            }
-
-            if($data->lead=='Facebook' && $data->type=='Order')
-            {
-                $leadType = $data->lead;
-                if($data->lead=='Facebook' && $data->customer_type=='New')
-                {
-                    $new ++;
-                }
-                elseif($data->lead=='Facebook' && $data->customer_type=='Old')
-                {                    
-                    $old ++;
-                }
-            }
-
-            if($data->lead=='Phone' && $data->type=='Query')
-            {
-                $leadType = $data->lead;
-                if($data->lead=='Phone')
-                {
-                    $query ++;
-                }
-            }
-
-            if($data->lead=='Message' && $data->type=='Query')
-            {
-                $leadType = $data->lead;
-                if($data->lead=='Message')
-                {
-                    $query ++;
-                }
-            }
-
-            if($data->lead=='Facebook' && $data->type=='Query')
-            {
-                $leadType = $data->lead;
-                if($data->lead=='Facebook')
-                {
-                    $query ++;
-                }
+                $queryP++;
             }
         }
 
-        DB::table('order_summary')->insert(
-            [
-                'lead'          => $lead,
-                'new'           => $new,
-                'old'           => $old,
-                'query'         => $query,
-                'date'          => date('Y-m-d')
-            ]
-        );
+        // Single data query execution
+        $exiting = DB::table('order_summary')
+                    ->where('date',date('Y-m-d'))
+                    ->where('lead',$lead)
+                    ->first();
+
+        //dd($queryP);
+
+        if($exiting!=Null)
+        {
+            DB::table('order_summary')->where('date',date('Y-m-d'))
+                    ->where('lead',$lead)->update(
+                [
+                    'total_new'           => $newP,
+                    'total_old'           => $oldP,
+                    'total_queries'       => $queryP
+                ]
+            );
+        }
+        else
+        {
+            DB::table('order_summary')->insert(
+                [
+                    'lead'           => $lead,
+                    'total_new'      => $newP,
+                    'total_old'      => $oldP,
+                    'total_queries'  => $queryP,
+                    'date'           => date('Y-m-d')
+                ]
+            );
+        }               
     }
+    public function qil_history()
+    {
+
+        return view('entry/history');
+    }
+    
+     public function daily_statement(Request $request)
+    {
+        // $fromDate = date('Y-m-d', strtotime($request->get('fromDate')));
+        // $toDate   = date('Y-m-d', strtotime($request->get('toDate')));
+        // $agentid  = $request->get('agentid');
+        
+        $results = DB::table('order_summary')
+        ->orderBy('order_summary.id','DESC')->get(); 
+
+        //dd($results);
+         return view('entry/view', compact('results'));
+    }
+
+
+    
 }
