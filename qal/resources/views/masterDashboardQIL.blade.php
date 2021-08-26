@@ -360,8 +360,47 @@
         });
     }
 
+    function orderSearch()
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var fromDate  = $("#fromDate").val();
+        var toDate    = $("#toDate").val();    
+        
+        $.ajax({
+            method: "POST",
+            url: '{{url("/qil/order-statement")}}',
+            data: {'fromDate': fromDate, 'toDate': toDate}
+        })
+        .done(function (response)
+        {
+            $("#resultHere").html(response);
+
+            alertify.set('notifier','position', 'bottom-right');
+            alertify.success('Search Results');             
+        });
+    }
+
     function hover(id) {
         document.getElementById(id).style.borderColor = "";
+    }
+
+    function printDiv() {
+
+        var divContents = document.getElementById("printableAreaM").innerHTML;
+        var a = window.open('', '', 'height=500, width=500');
+        a.document.write('<html><head><title></title>');
+        // a.document.write('<link rel="stylesheet" href="{{ URL::asset('resources/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" type="text/css" />');
+        a.document.write('<link rel="stylesheet" href="{{URL::asset('resources/print.css')}}" type="text/css" />');
+        a.document.write('</head><body >');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
     }
  </script>
 

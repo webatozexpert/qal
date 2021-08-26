@@ -139,17 +139,18 @@ class EntryController extends Controller
         return view('entry/history');
     }
     
-     public function daily_statement(Request $request)
+     public function order_statement(Request $request)
     {
-        // $fromDate = date('Y-m-d', strtotime($request->get('fromDate')));
-        // $toDate   = date('Y-m-d', strtotime($request->get('toDate')));
-        // $agentid  = $request->get('agentid');
+        $fromDate = date('Y-m-d', strtotime($request->get('fromDate')));
+        $toDate   = date('Y-m-d', strtotime($request->get('toDate')));
         
         $results = DB::table('order_summary')
-        ->orderBy('order_summary.id','DESC')->get(); 
+        ->orderBy('order_summary.id','DESC')
+        ->whereBetween('date', [$fromDate, $toDate])
+        ->get(); 
 
         //dd($results);
-         return view('entry/view', compact('results'));
+         return view('entry/view', compact('results','fromDate','toDate'));
     }
 
 

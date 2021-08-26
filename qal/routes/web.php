@@ -181,4 +181,4 @@ Route::get('/qil/entry', 'EntryController@index');
 Route::post('/qil/order-entry-submit', 'EntryController@order_entry_submit');
 Route::post('/qil/query-entry-submit', 'EntryController@query_entry_submit');
 Route::get('/qil/order/history', 'EntryController@qil_history');
-Route::post('/qil/daily-statement', 'EntryController@daily_statement');
+Route::post('/qil/order-statement', 'EntryController@order_statement');
