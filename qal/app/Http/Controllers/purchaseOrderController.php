@@ -150,14 +150,7 @@ class purchaseOrderController extends Controller
    //      return $result;
    //  }
 
-public function prochaseorderConfirmList(){
-     //dd('Ok');
 
-
-
-     return view('purchaseorder/orderConfirmList');
-
-   }
 
 //Purchase Order Print
 function purchaseOrderPrint($id) {
@@ -185,6 +178,165 @@ function purchaseOrderPrint($id) {
     return $pdf->stream('document.pdf');
 }
 
+
+
+public function orderPendingList(){
+        //dd('Ok');
+  
+        $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')
+        ->where('purchases.status',0)
+        ->get();
+
+       // dd($result);
+      
+       
+        return view('purchaseorder/orderpendinglist',compact('result'));
+
+    }
+    
+    public function approved2(Request $request){
+
+       $val = $request->get('data');
+       foreach($val as $reqid)
+       {
+          DB::table('purchases')
+              ->where('id',$reqid)
+              ->update(['status' => 1, 'approved_by' => Auth::user()->id]);
+       }
+
+       return Redirect::to('purchase-order-awaiting-approval')->with('success','Data Approved successfull');
+    }
+
+ public function approvedList(){
+        //dd('Ok');
+         $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')
+       
+       ->where('requisitions.status',1)
+      ->get();
+
+      // dd($result);
+         
+       
+        return view('purchaseorder.orderapprovedlist',compact('result'));
+    }
+
+   public function awaitingConfirmList(){
+        //dd('Ok');
+         $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')
+       
+       ->where('requisitions.status',1)
+      ->get();
+
+      // dd($result);
+         
+       
+        return view('purchaseorder.awaitingConfirmList',compact('result'));
+
+
+    }
+
+    public function confirm(Request $request){
+    //dd($request);
+
+       $val = $request->get('data');
+       foreach($val as $reqid)
+       {
+          DB::table('purchases')
+              ->where('id',$reqid)
+              ->update(['status' => 2, 'Confirm_by' => Auth::user()->id]);
+       }
+
+       return Redirect::to('purchase-order-awaiting-confirm')->with('success','Data Confirm successfull');
+    }
+
+public function confirmList(){
+        //dd('Ok');
+         $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')
+       
+        ->where('purchases.status',2)
+        ->get();
+
+        //dd($result);
+         
+       
+        return view('purchaseorder.confirmList',compact('result'));
+
+
+    }
+     public function awaitingorderConfirmList(){
+        //dd('Ok');
+         $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')
+       
+        ->where('purchases.status',2)
+        ->get();
+
+        //dd($result);
+         
+        return view('purchaseorder.awaitingorderConfirmList',compact('result'));
+
+
+    }
+      public function orderConfirm(Request $request){
+
+       $val = $request->get('data');
+       foreach($val as $reqid)
+       {
+          DB::table('purchases')
+              ->where('id',$reqid)
+              ->update(['status' => 3, 'OrderConfirm_by' => Auth::user()->id]);
+       }
+
+       return Redirect::to('purchase-order-awaiting-orderconfirm')->with('success','Data Confirm successfull');
+    }
+
+    public function prochaseorderConfirmList(){
+     //dd('Ok');
+         $result = DB::table('purchases')
+        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
+        
+       
+        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftJoin('users','users.id','=','purchases.created_by')
+        ->orderBy('purchases.id','DESC')
+       
+        ->where('purchases.status',3)
+        ->get();
+
+        //dd($result);
+
+     return view('purchaseorder/orderConfirmList');
+
+   }
 //purchase Delete
 
      public function delete($id){
