@@ -136,37 +136,19 @@ class purchaseOrderController extends Controller
         return $quantity->quantity;
     }
     
-   // //Requisition wise intemname
-   //  public function itemName()
-   //  {
-   //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
-   //      return $result;
-   //  }
-
-   //  //intemname wise quantity
-   //  public function quantity()
-   //  {
-   //      $result = DB::table('requisition_items')->orderBy('id', 'DESC')->get();
-   //      return $result;
-   //  }
-
-
 
 //Purchase Order Print
 function purchaseOrderPrint($id) {
-   // $data['requisitions'] = DB::table('requisitions')->find($id);
-   //$data = DB::table('requisitions')->find($id);
-    // $data = DB::table('requisitions')->first();
-    // dd($data);
 
         $purchases  = DB::table('purchases')
-        ->select('purchases.*','users.name as created_by','suppliers.company_name','suppliers.address','requisitions.requisition_no','requisitions.requiredDate','requisitions.memo_no')
+        ->select('purchases.*','users.name as created_by','suppliers.company_name','suppliers.address','requisitions.requisition_no','requisitions.requiredDate','project_budgets.memo_no')
 
         ->leftjoin('users','users.id','=','purchases.created_by')
         ->leftjoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftjoin('requisitions','requisitions.id','=','purchases.requisition_no')
+       
+        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
 
-        //dd($purchases);
         ->where('purchases.id',$id)
         ->first(); 
         
@@ -179,13 +161,11 @@ function purchaseOrderPrint($id) {
 }
 
 
-
 public function orderPendingList(){
         //dd('Ok');
   
         $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
-        
        
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
@@ -195,7 +175,6 @@ public function orderPendingList(){
 
        // dd($result);
       
-       
         return view('purchaseorder/orderpendinglist',compact('result'));
 
     }
@@ -218,7 +197,6 @@ public function orderPendingList(){
          $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
         
-       
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')
@@ -227,7 +205,6 @@ public function orderPendingList(){
       ->get();
 
       // dd($result);
-         
        
         return view('purchaseorder.orderapprovedlist',compact('result'));
     }
@@ -237,7 +214,6 @@ public function orderPendingList(){
          $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
         
-       
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')
@@ -246,10 +222,8 @@ public function orderPendingList(){
       ->get();
 
       //dd($result);
-         
        
         return view('purchaseorder.awaitingConfirmList',compact('result'));
-
 
     }
 
@@ -272,7 +246,6 @@ public function confirmList(){
          $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
         
-       
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')
@@ -281,17 +254,13 @@ public function confirmList(){
         ->get();
 
         //dd($result);
-         
-       
+
         return view('purchaseorder.confirmList',compact('result'));
-
-
     }
      public function awaitingorderConfirmList(){
         //dd('Ok');
          $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
-        
        
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
@@ -303,7 +272,6 @@ public function confirmList(){
         //dd($result);
          
         return view('purchaseorder.awaitingorderConfirmList',compact('result'));
-
 
     }
       public function orderConfirm(Request $request){
@@ -324,7 +292,6 @@ public function confirmList(){
          $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
         
-       
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')

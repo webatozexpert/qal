@@ -144,20 +144,20 @@ Route::get('/requisition-delete/{id}', 'requisitionController@delete');
 Route::get('/requisition-print/{id}', 'requisitionController@requisitionPrint');
 
 //Requisition Approoved part
-Route::get('/purchase-requisition-awaiting-approval/', 'requisitionController@requiPendingList');
+Route::get('/requisition-awaiting-approval/', 'requisitionController@requiPendingList');
 Route::get('/approved1','requisitionController@approved1');
-Route::get('/purchase-requisition-approved/', 'requisitionController@approvedList');
+Route::get('/requisition-approved/', 'requisitionController@approvedList');
 
 
 //Requisition Confirm part
-Route::get('/purchase-requisition-awaiting-confirm/', 'requisitionController@awaitingConfirmList');
+Route::get('/requisition-awaiting-confirm/', 'requisitionController@awaitingConfirmList');
 Route::get('/confirm1','requisitionController@confirm');
-Route::get('/purchase-requisition-confirm', 'requisitionController@confirmList');
+Route::get('/requisition-confirm', 'requisitionController@confirmList');
 
 //Requisition OrderConfirm part
-Route::get('/purchase-requisition-awaiting-orderconfirm/', 'requisitionController@awaitingorderConfirmList');
+Route::get('/requisition-awaiting-orderconfirm/', 'requisitionController@awaitingorderConfirmList');
 Route::get('/orderConfirm','requisitionController@orderConfirm');
-Route::get('/purchase-requisition-orderconfirm', 'requisitionController@orderConfirmList');
+Route::get('/requisition-orderconfirm', 'requisitionController@orderConfirmList');
 
 //Purchase Requisition part End
 
@@ -169,26 +169,26 @@ Route::get('/requisition-wise-intemname', 'purchaseOrderController@requisition_w
 
 Route::get('/intemname-wise-quantity', 'purchaseOrderController@intemname_wise_quantity');
 
-Route::post('purchase-order-submit', 'purchaseOrderController@purchase_order_submit');
-Route::get('/purchase-delete/{id}', 'purchaseOrderController@delete');
+Route::post('order-submit', 'purchaseOrderController@purchase_order_submit');
+Route::get('/delete/{id}', 'purchaseOrderController@delete');
 Route::get('/purchaseOrder-print/{id}', 'purchaseOrderController@purchaseOrderPrint');
 
 
 //prochase Approoved part
-Route::get('/purchase-order-awaiting-approval/', 'purchaseOrderController@orderPendingList');
+Route::get('/order-awaiting-approval/', 'purchaseOrderController@orderPendingList');
 Route::get('/approved2','purchaseOrderController@approved2');
-Route::get('/purchase-order-approved/', 'purchaseOrderController@approvedList');
+Route::get('/order-approved/', 'purchaseOrderController@approvedList');
 
 
 //prochase Confirm part
-Route::get('/purchase-order-awaiting-confirm/', 'purchaseOrderController@awaitingConfirmList');
+Route::get('/order-awaiting-confirm/', 'purchaseOrderController@awaitingConfirmList');
 Route::get('/confirm2','purchaseOrderController@confirm');
-Route::get('/purchase-order-confirm', 'purchaseOrderController@confirmList');
+Route::get('/order-confirm', 'purchaseOrderController@confirmList');
 
 //prochase OrderConfirm part
-Route::get('/purchase-order-awaiting-orderconfirm/', 'purchaseOrderController@awaitingorderConfirmList');
+Route::get('/order-awaiting-orderconfirm/', 'purchaseOrderController@awaitingorderConfirmList');
 Route::get('/orderConfirm2','purchaseOrderController@orderConfirm');
-Route::get('/purchase-order-orderconfirm', 'purchaseOrderController@prochaseorderConfirmList');
+Route::get('/order-orderconfirm', 'purchaseOrderController@prochaseorderConfirmList');
 
 
 //Purchase Order part End
