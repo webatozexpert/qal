@@ -322,6 +322,8 @@ function requisitionPrint($id) {
 public function confirm(Request $request){
 
        $val = $request->get('data');
+
+       //dd($request->all());
        foreach($val as $reqid)
        {
           DB::table('requisitions')

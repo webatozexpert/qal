@@ -223,7 +223,7 @@ public function orderPendingList(){
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')
        
-       ->where('requisitions.status',1)
+       ->where('purchases.status',1)
       ->get();
 
       // dd($result);
@@ -242,10 +242,10 @@ public function orderPendingList(){
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')
        
-       ->where('requisitions.status',1)
+       ->where('purchases.status',1)
       ->get();
 
-      // dd($result);
+      //dd($result);
          
        
         return view('purchaseorder.awaitingConfirmList',compact('result'));
@@ -332,9 +332,9 @@ public function confirmList(){
         ->where('purchases.status',3)
         ->get();
 
-        //dd($result);
+       // dd($result);
 
-     return view('purchaseorder/orderConfirmList');
+     return view('purchaseorder/orderConfirmList',compact('result'));
 
    }
 //purchase Delete

@@ -5,12 +5,12 @@
   <div class="row">
     <div class="col-5 align-self-center">
        
-          <button type="button" class="btn btn-success mr-2" onclick="Approved()">  All Approved</button>
+          <button type="button" class="btn btn-success mr-2" onclick="DeleteBanner()">  All OrderConfirm</button>
        
     </div>
     <div class="col-7 align-self-center">
       <div class="d-flex align-items-center justify-content-end">
-       <h4 class="page-title">Order Pending List</h4>
+       <h4 class="page-title">Orderconfirm Pending List</h4>
       </div>
     </div>
   </div>
@@ -45,10 +45,10 @@
                       <th style="width:10%;" >Prepared By</th>
                      
                       
-				        </tr>
+				    </tr>
                   </thead>
                   <tbody>
-                  @foreach($result as $results)
+                   @foreach($result as $results)
                     <tr>
                       <td><input type="checkbox" name="approved_id[]" id="approved_id" value="{{ $results->id }}"></a>
                       </td>
@@ -76,7 +76,7 @@
 
 
 <script type="text/javascript">
-  function Approved()
+  function DeleteBanner()
             {
                 var checkItem=document.getElementsByName("approved_id[]");
                 var j=0;
@@ -104,7 +104,7 @@
                     {
                         $.ajax({
                             method: "GET",
-                            url: '{{url("/confirm2")}}',
+                            url: '{{url("/orderConfirm2")}}',
                             data: {data: data}
                         })
 

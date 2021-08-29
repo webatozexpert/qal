@@ -92,7 +92,7 @@
                                     </a>
                                 </li> 
                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/confirm') }}" class="sidebar-link">
+                                    <a href="{{ URL('/confirm2') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order confirm List</span>
                                     </a>
@@ -234,12 +234,7 @@
                                 <span class="hide-menu"> Purchase Order </span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase_order/create') }}" class="sidebar-link">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Purchase Order </span>
-                                    </a>
-                                </li>
+                                
                                 <li class="sidebar-item">
                                     <a href="{{ URL('/purchase-order-awaiting-approval/') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
@@ -252,12 +247,12 @@
                                         <span class="hide-menu"> Order Approved List</span>
                                     </a>
                                 </li>
-                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/confirm') }}" class="sidebar-link">
+                                {{--  <li class="sidebar-item">
+                                    <a href="{{ URL('/confirm2') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Confirm List</span>
                                     </a>
-                                </li>  
+                                </li>   --}}
                             </ul>
                         </li>
                     </ul>
@@ -300,20 +295,15 @@
                                 <span class="hide-menu"> Purchase Order </span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                               
                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase_order/create') }}" class="sidebar-link">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Purchase Order </span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase-order-awaiting-approval') }}" class="sidebar-link">
+                                    <a href="{{ URL('/purchase-order-awaiting-confirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Awaiting Approval</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase-order-approved') }}" class="sidebar-link">
+                                    <a href="{{ URL('/purchase-order-confirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Approved List</span>
                                     </a>
@@ -360,20 +350,15 @@
                                 <span class="hide-menu"> Purchase Order </span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                              
                                 <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase_order/create') }}" class="sidebar-link">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Purchase Order </span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="{{ URL('/purchase-order-awaiting-approval') }}" class="sidebar-link">
+                                    <a href="{{ URL('/purchase-order-awaiting-orderconfirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Awaiting Approval</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                             <a href="{{ URL('/purchase-order-approved') }}" class="sidebar-link">
+                             <a href="{{ URL('/purchase-order-orderconfirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Approved List</span>
                                     </a>

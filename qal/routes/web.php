@@ -151,7 +151,7 @@ Route::get('/purchase-requisition-approved/', 'requisitionController@approvedLis
 
 //Requisition Confirm part
 Route::get('/purchase-requisition-awaiting-confirm/', 'requisitionController@awaitingConfirmList');
-Route::get('/confirm','requisitionController@confirm');
+Route::get('/confirm1','requisitionController@confirm');
 Route::get('/purchase-requisition-confirm', 'requisitionController@confirmList');
 
 //Requisition OrderConfirm part
@@ -182,12 +182,12 @@ Route::get('/purchase-order-approved/', 'purchaseOrderController@approvedList');
 
 //prochase Confirm part
 Route::get('/purchase-order-awaiting-confirm/', 'purchaseOrderController@awaitingConfirmList');
-Route::get('/confirm','purchaseOrderController@confirm');
+Route::get('/confirm2','purchaseOrderController@confirm');
 Route::get('/purchase-order-confirm', 'purchaseOrderController@confirmList');
 
 //prochase OrderConfirm part
 Route::get('/purchase-order-awaiting-orderconfirm/', 'purchaseOrderController@awaitingorderConfirmList');
-Route::get('/orderConfirm','purchaseOrderController@orderConfirm');
+Route::get('/orderConfirm2','purchaseOrderController@orderConfirm');
 Route::get('/purchase-order-orderconfirm', 'purchaseOrderController@prochaseorderConfirmList');
 
 

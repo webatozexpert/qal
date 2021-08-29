@@ -11,7 +11,7 @@
     </div>
     <div class="col-7 align-self-center">
       <div class="d-flex align-items-center justify-content-end">
-       <h4 class="page-title"> Requisition Approved List</h4>
+       <h4 class="page-title"> Confirm Approved List</h4>
       </div>
     </div>
   </div>
