@@ -351,6 +351,59 @@ footer {
                   </thead>
                 </table>
                  <p>&nbsp;</p> <p>&nbsp;</p>
+
+
+                 @php 
+                      $data = DB::table('purchases')
+                      ->where('id',$poid)
+                      ->first(); 
+
+                      //dd($data);
+
+                      $Aname = '';
+                      $Aname1 = '';
+                      $Aname2 = '';
+                      if($data->status=='1')
+                      {
+                          $auth = DB::table('purchases')
+                          ->select('purchases.*','users.name as username')
+                          ->leftjoin('users','users.id','=','purchases.approved_by')
+                          ->where('purchases.id',$poid)
+                          ->first(); 
+
+                          $Aname = $auth->username;
+                      }
+                      else if($data->status=='2')
+                      {
+                        $auth = DB::table('purchases')
+                          ->select('purchases.*','users.name as username')
+                          ->leftjoin('users','users.id','=','purchases.Confirm_by')
+                          ->where('purchases.id',$poid)
+                          ->first(); 
+
+                          $Aname1 = $auth->username;
+                      }
+                      else if($data->status=='3')
+                      {
+                        $auth = DB::table('purchases')
+                          ->select('purchases.*','users.name as username')
+                          ->leftjoin('users','users.id','=','purchases.Confirm_by')
+                          ->where('purchases.id',$poid)
+                          ->first(); 
+
+                          $Aname1 = $auth->username;
+
+                        $auth = DB::table('purchases')
+                          ->select('purchases.*','users.name as username')
+                          ->leftjoin('users','users.id','=','purchases.OrderConfirm_by')
+                          ->where('purchases.id',$poid)
+                          ->first(); 
+
+                          $Aname2 = $auth->username;
+                      }
+                     //dd($Aname);
+                      @endphp
+ 
                   <table>
 
                   	<tr>
@@ -359,9 +412,11 @@ footer {
                   		</td>
 
                   		<td>
+                        {{ $Aname1 }}
                   		  <hr> Checked By 
                   		</td>
                   		<td>
+                        {{ $Aname2 }}
                   		  <hr> Authorized By
                   		</td>
                   	</tr>
