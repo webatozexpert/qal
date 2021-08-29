@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2021 at 04:18 AM
+-- Generation Time: Aug 29, 2021 at 03:09 PM
 -- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- PHP Version: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,10 +27,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `banks`
 --
 
-CREATE TABLE IF NOT EXISTS `banks` (
+CREATE TABLE `banks` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -48,14 +47,13 @@ INSERT INTO `banks` (`id`, `name`) VALUES
 -- Table structure for table `branchs`
 --
 
-CREATE TABLE IF NOT EXISTS `branchs` (
+CREATE TABLE `branchs` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `contact_no` varchar(16) DEFAULT NULL,
   `branch_type` int(1) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -73,11 +71,10 @@ INSERT INTO `branchs` (`id`, `name`, `address`, `contact_no`, `branch_type`, `st
 -- Table structure for table `branch_types`
 --
 
-CREATE TABLE IF NOT EXISTS `branch_types` (
+CREATE TABLE `branch_types` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -98,7 +95,7 @@ INSERT INTO `branch_types` (`id`, `name`, `status`) VALUES
 -- Table structure for table `challans`
 --
 
-CREATE TABLE IF NOT EXISTS `challans` (
+CREATE TABLE `challans` (
   `id` int(11) NOT NULL,
   `challan_no` varchar(255) DEFAULT NULL,
   `do_id` varchar(255) DEFAULT NULL,
@@ -111,8 +108,7 @@ CREATE TABLE IF NOT EXISTS `challans` (
   `pungas_comp_per_box` int(11) DEFAULT NULL,
   `pungas_comp_no_box` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `userid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `userid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -125,10 +121,34 @@ INSERT INTO `challans` (`id`, `challan_no`, `do_id`, `tilapia_per_box`, `tilapia
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `city_names`
+--
+
+CREATE TABLE `city_names` (
+  `id` int(11) NOT NULL,
+  `city_name` varchar(191) NOT NULL,
+  `status` tinytext NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `city_names`
+--
+
+INSERT INTO `city_names` (`id`, `city_name`, `status`) VALUES
+(2, 'Bogura', '0'),
+(3, 'Khulna', '0'),
+(4, 'Pabna', '0'),
+(5, 'Dhaka', '0'),
+(6, 'Pabna', '0'),
+(7, 'Sirajgong', '0');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
-CREATE TABLE IF NOT EXISTS `customers` (
+CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `zoneid` int(11) NOT NULL,
   `regionid` int(11) NOT NULL,
@@ -140,8 +160,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `delivery_point` varchar(255) NOT NULL,
   `carriage_charge` double(10,2) NOT NULL,
   `userid` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -223,7 +242,7 @@ INSERT INTO `customers` (`id`, `zoneid`, `regionid`, `code`, `name`, `proprietor
 -- Table structure for table `delivery_orders`
 --
 
-CREATE TABLE IF NOT EXISTS `delivery_orders` (
+CREATE TABLE `delivery_orders` (
   `id` int(11) NOT NULL,
   `auto_no` varchar(11) NOT NULL DEFAULT '0000',
   `delivery_order_no` varchar(40) NOT NULL,
@@ -247,8 +266,7 @@ CREATE TABLE IF NOT EXISTS `delivery_orders` (
   `userid` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -265,14 +283,13 @@ INSERT INTO `delivery_orders` (`id`, `auto_no`, `delivery_order_no`, `zoneid`, `
 -- Table structure for table `failed_jobs`
 --
 
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
+CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -281,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Table structure for table `gate_pass`
 --
 
-CREATE TABLE IF NOT EXISTS `gate_pass` (
+CREATE TABLE `gate_pass` (
   `id` int(11) NOT NULL,
   `gp_no` varchar(255) DEFAULT NULL,
   `doid` varchar(255) NOT NULL,
@@ -291,8 +308,7 @@ CREATE TABLE IF NOT EXISTS `gate_pass` (
   `particulars_items` varchar(255) DEFAULT NULL,
   `items_qty` int(11) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -308,7 +324,7 @@ INSERT INTO `gate_pass` (`id`, `gp_no`, `doid`, `agentid`, `date`, `following_it
 -- Table structure for table `invoices`
 --
 
-CREATE TABLE IF NOT EXISTS `invoices` (
+CREATE TABLE `invoices` (
   `id` int(11) NOT NULL,
   `invoice_no` varchar(255) DEFAULT NULL,
   `challan_id` varchar(255) NOT NULL,
@@ -316,8 +332,7 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `userid` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -333,11 +348,10 @@ INSERT INTO `invoices` (`id`, `invoice_no`, `challan_id`, `date`, `userid`, `cre
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE IF NOT EXISTS `migrations` (
+CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -355,7 +369,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `money_receipts`
 --
 
-CREATE TABLE IF NOT EXISTS `money_receipts` (
+CREATE TABLE `money_receipts` (
   `id` int(11) NOT NULL,
   `serial_no` varchar(40) NOT NULL,
   `custid` int(11) NOT NULL,
@@ -364,8 +378,7 @@ CREATE TABLE IF NOT EXISTS `money_receipts` (
   `note` varchar(255) NOT NULL,
   `added_date` date DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `userid` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `userid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -378,14 +391,102 @@ INSERT INTO `money_receipts` (`id`, `serial_no`, `custid`, `amount`, `bank_id`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order_query_history`
+--
+
+CREATE TABLE `order_query_history` (
+  `id` int(11) NOT NULL,
+  `type` enum('Order','Query') NOT NULL,
+  `customer_id` varchar(45) DEFAULT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `customer_mobile` int(11) DEFAULT NULL,
+  `customer_address` text DEFAULT NULL,
+  `customer_comment` text DEFAULT NULL,
+  `lead` varchar(45) NOT NULL,
+  `customer_type` enum('Old','New') NOT NULL,
+  `added_date` date NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_query_history`
+--
+
+INSERT INTO `order_query_history` (`id`, `type`, `customer_id`, `customer_name`, `customer_mobile`, `customer_address`, `customer_comment`, `lead`, `customer_type`, `added_date`, `created_at`) VALUES
+(1, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:32:00'),
+(2, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:32:13'),
+(3, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:36:47'),
+(4, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:37:48'),
+(5, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:38:31'),
+(6, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:41:44'),
+(7, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:43:26'),
+(8, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:46:21'),
+(9, 'Order', '12345', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:46:59'),
+(10, 'Order', '111', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:47:13'),
+(11, 'Order', '111', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:47:21'),
+(12, 'Order', '111', NULL, NULL, NULL, NULL, 'Message', 'Old', '2021-08-25', '2021-08-25 06:47:39'),
+(13, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:55:44'),
+(14, 'Order', '112233', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-08-25', '2021-08-25 06:57:06'),
+(15, 'Order', '12345', NULL, NULL, NULL, NULL, 'Facebook', 'Old', '2021-08-25', '2021-08-25 06:57:12'),
+(16, 'Order', '7654321', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:57:18'),
+(17, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:35:45'),
+(18, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:36:05'),
+(19, 'Order', '123', NULL, NULL, NULL, NULL, 'Message', 'Old', '2021-08-25', '2021-08-25 09:37:35'),
+(20, 'Order', '123', NULL, NULL, NULL, NULL, 'Facebook', 'Old', '2021-08-25', '2021-08-25 09:38:28'),
+(21, 'Order', '123', NULL, NULL, NULL, NULL, 'Facebook', 'Old', '2021-08-25', '2021-08-25 09:39:10'),
+(22, 'Query', NULL, 'sagor', 1913848150, 'bogura', 'food', 'Facebook', 'Old', '2021-08-25', '2021-08-25 09:41:36'),
+(23, 'Query', NULL, 'Masud', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:48:20'),
+(24, 'Query', NULL, 'Test', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:51:26'),
+(25, 'Query', NULL, 'Test2', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:52:18'),
+(26, 'Query', NULL, 'Test5', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:53:17'),
+(27, 'Query', NULL, 'Test5', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:53:43'),
+(28, 'Query', NULL, 'ertfghj', NULL, NULL, NULL, 'Message', 'Old', '2021-08-25', '2021-08-25 09:56:51'),
+(29, 'Order', '555', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-08-26', '2021-08-26 07:26:26'),
+(30, 'Query', NULL, 'Test', NULL, NULL, NULL, 'Message', 'Old', '2021-08-26', '2021-08-26 07:26:39'),
+(31, 'Order', 'A-100', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-29', '2021-08-29 07:14:27'),
+(32, 'Order', 'A-100', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-29', '2021-08-29 07:14:51'),
+(33, 'Order', 'C-21', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-08-29', '2021-08-29 09:24:56'),
+(34, 'Query', NULL, 'C-21', NULL, NULL, 'Boneless', 'Message', 'Old', '2021-08-29', '2021-08-29 09:27:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_summary`
+--
+
+CREATE TABLE `order_summary` (
+  `id` int(11) NOT NULL,
+  `lead` varchar(45) NOT NULL,
+  `total_new` int(11) DEFAULT NULL,
+  `total_old` int(11) DEFAULT NULL,
+  `total_queries` int(11) DEFAULT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_summary`
+--
+
+INSERT INTO `order_summary` (`id`, `lead`, `total_new`, `total_old`, `total_queries`, `date`) VALUES
+(1, 'Phone', 5, 10, 5, '2021-08-25'),
+(2, 'Message', 0, 2, 1, '2021-08-25'),
+(3, 'Facebook', 1, 3, 0, '2021-08-25'),
+(4, 'Facebook', 1, 0, 0, '2021-08-26'),
+(5, 'Message', 0, 0, 1, '2021-08-26'),
+(6, 'Phone', 1, 1, 0, '2021-08-29'),
+(7, 'Facebook', 1, 0, 0, '2021-08-29'),
+(8, 'Message', 0, 0, 1, '2021-08-29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE IF NOT EXISTS `password_resets` (
+CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`(191))
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -394,20 +495,27 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Table structure for table `projects`
 --
 
-CREATE TABLE IF NOT EXISTS `projects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `projects` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `status` enum('Active','Inactive') DEFAULT 'Active',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `status` tinyint(11) NOT NULL DEFAULT 0 COMMENT '0 = Active and 1 = Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `projects`
 --
 
 INSERT INTO `projects` (`id`, `name`, `status`) VALUES
-(1, '14 & 15 th Plant, Shrimp Feed, Nandigram', ''),
-(3, 'VC/2016/010 [14-15th Shrimp Plant]', '');
+(5, '14 & 15 th Plant, Shrimp Feed, Nandigram', 1),
+(6, 'BMRE FOR LAYER PLANTS', 0),
+(7, 'Cattle & Goat Farming', 0),
+(8, '22th Yearly Seminar 2017', 1),
+(9, 'BMRE For 5/6 Plants', 0),
+(10, 'Mofiz Godown Repair & Maintenances', 0),
+(12, 'Godown Floor Mate', 0),
+(13, 'BMRE 2017', 0),
+(14, 'Land Acquisition for Sherpur Plant', 0),
+(15, 'Rented Premises Development', 1);
 
 -- --------------------------------------------------------
 
@@ -415,24 +523,68 @@ INSERT INTO `projects` (`id`, `name`, `status`) VALUES
 -- Table structure for table `project_budgets`
 --
 
-CREATE TABLE IF NOT EXISTS `project_budgets` (
-  `id` int(1) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `project_budgets` (
+  `id` int(1) NOT NULL,
   `projectid` int(11) NOT NULL,
   `memo_no` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `project_amount` int(11) NOT NULL,
-  `status` tinyint(11) NOT NULL DEFAULT 0 COMMENT '0=Active,1=Inactive,',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `status` tinyint(11) NOT NULL DEFAULT 0 COMMENT '0 = Active and 1 = Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `project_budgets`
 --
 
 INSERT INTO `project_budgets` (`id`, `projectid`, `memo_no`, `date`, `project_amount`, `status`) VALUES
-(3, 1, 'VC/2016/009 [Layer Plants]', '2021-07-09', 52000, 0),
-(4, 3, 'VC/2016/011 [UPS BP & GP]', '2021-07-09', 4500000, 0),
-(5, 1, 'VC/2016/010 [14-15th Shrimp Plant]', '2021-07-09', 25800000, 0);
+(6, 14, 'VC/2017/014[Land Acquisition]', '2021-08-02', 500000000, 1),
+(7, 13, 'VC Ref. July 29', '2021-07-26', 5600000, 0),
+(9, 5, 'VC/2016/010 [14-15th Shrimp Plant]', '2021-08-02', 7500000, 0),
+(10, 6, 'VC/2016/009 [Layer Plants]', '2021-07-26', 90000000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` int(11) NOT NULL,
+  `order_no` varchar(40) NOT NULL,
+  `postingDate` date NOT NULL,
+  `supplier_name` varchar(191) NOT NULL,
+  `procuerement_type` varchar(255) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `currency` varchar(11) DEFAULT NULL,
+  `requisition_no` int(11) NOT NULL,
+  `delivery_to` varchar(255) DEFAULT NULL,
+  `payment_term` varchar(11) DEFAULT NULL,
+  `sample` varchar(11) DEFAULT NULL,
+  `acceptance` varchar(11) DEFAULT NULL,
+  `delivery_within` varchar(11) DEFAULT NULL,
+  `support_and_warranty` varchar(11) DEFAULT NULL,
+  `date_fo_validity` date DEFAULT NULL,
+  `special_instructions` varchar(255) DEFAULT NULL,
+  `status` tinyint(11) NOT NULL DEFAULT 0 COMMENT '0=Pending,1=Approved,2=Confirm,3=Order Confirm,',
+  `created_by` varchar(11) NOT NULL,
+  `updated_by` varchar(11) DEFAULT NULL,
+  `approved_by` varchar(11) DEFAULT NULL,
+  `confirm_by` varchar(11) DEFAULT NULL,
+  `orderConfirm_by` varchar(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `order_no`, `postingDate`, `supplier_name`, `procuerement_type`, `note`, `currency`, `requisition_no`, `delivery_to`, `payment_term`, `sample`, `acceptance`, `delivery_within`, `support_and_warranty`, `date_fo_validity`, `special_instructions`, `status`, `created_by`, `updated_by`, `approved_by`, `confirm_by`, `orderConfirm_by`, `created_at`) VALUES
+(3, 'PO#21080001', '2021-08-25', '5', 'By Workorder', 'Test', 'BDT', 28, 'Spot delivery', 'By Cash', NULL, NULL, NULL, NULL, '2021-08-25', 'Advance', 3, '5', NULL, '11', '5', '9', '2021-08-25 04:58:18'),
+(4, 'PO#21080004', '2021-08-27', '5', 'By Workorder', 'Test', 'BDT', 19, 'Spot Delivery', 'By Cash', NULL, NULL, NULL, NULL, '2021-08-27', 'Payment Advance 100%', 3, '5', NULL, '11', '5', '9', '2021-08-27 16:03:53'),
+(5, 'PO#21080005', '2021-08-28', '6', 'By Workorder', 'tttttt', 'BDT', 20, 'xcxv', 'xcvxc', NULL, NULL, NULL, NULL, '2021-08-28', 'pppp', 3, '5', NULL, '5', '5', '9', '2021-08-28 13:24:56'),
+(6, 'PO#21080006', '2021-08-29', '5', 'By Workorder', 'Test', 'BDT', 22, 'gfgf', 'dfgfd', NULL, NULL, NULL, NULL, '2021-08-29', 'dfg', 3, '5', NULL, '7', '8', '9', '2021-08-29 05:08:22'),
+(7, 'PO#21080007', '2021-08-29', '7', 'By Workorder', 'tttttt', 'BDT', 21, 'fffff', 'fffff', NULL, NULL, NULL, NULL, '2021-08-29', 'ffffffffffffff', 3, '5', NULL, '7', '8', '9', '2021-08-29 06:09:43'),
+(8, 'PO#21080008', '2021-08-29', '6', 'By Workorder', 'gggg', 'BDT', 18, 'fbfcggb', 'fdgfdg', NULL, NULL, NULL, NULL, '2021-08-29', 'dfgfdg', 3, '5', NULL, '7', '8', '9', '2021-08-29 06:35:47');
 
 -- --------------------------------------------------------
 
@@ -440,8 +592,8 @@ INSERT INTO `project_budgets` (`id`, `projectid`, `memo_no`, `date`, `project_am
 -- Table structure for table `purchase_general_items`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_general_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `purchase_general_items` (
+  `id` int(11) NOT NULL,
   `itemgroup_id` int(11) DEFAULT NULL,
   `itemsubgroup_id` int(11) DEFAULT NULL,
   `item_category_id` int(11) DEFAULT NULL,
@@ -454,19 +606,21 @@ CREATE TABLE IF NOT EXISTS `purchase_general_items` (
   `where_kg` varchar(10) DEFAULT NULL,
   `inventory_type` varchar(11) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchase_general_items`
 --
 
 INSERT INTO `purchase_general_items` (`id`, `itemgroup_id`, `itemsubgroup_id`, `item_category_id`, `item_unit_id`, `item_alternative_unit_id`, `item_name`, `item_description`, `item_code`, `where_unit`, `where_kg`, `inventory_type`, `userid`, `status`) VALUES
-(12, 12, 12, 12, 2, NULL, 'Computer', 'Tset', 'As2021', 'Pcs', NULL, NULL, 5, 0),
-(13, 13, 13, 13, 2, NULL, 'Stand Fan', 'test test', 'AS2021', 'pse', NULL, '3', 5, 0),
-(14, 15, 9, 10, 2, 2, '2 Pin Socket', 'Electrical', 'AS080236', 'pcs', NULL, '5', 5, 0),
-(15, 16, 10, 11, 2, 2, '2 Pin Socket (Ceramics)', 'Electrical', 'CN080242', 'pcs', NULL, '5', 5, 0);
+(17, 15, 12, 12, 2, 2, 'Computer Printer', 'Electrical', 'AS140001', 'Pcs', NULL, '5', 5, 0),
+(19, 16, 14, 14, 3, 3, 'Printer Servicing', 'Maintenances & Repair', 'MT120001', 'Job', NULL, '3', 5, 0),
+(20, 17, 16, 15, 2, 2, 'Honda Motorcycle', 'Market Promotional Item', 'ME280001', 'Pcs', NULL, '3', 5, 0),
+(21, 17, 17, 17, 2, 2, 'Frozen food delivery trucks', 'Frozen food delivery trucks', 'MT160001', 'Pcs', NULL, '3', 5, 0),
+(22, 18, 18, 18, 4, 4, 'Soybean Oil', 'Raw Materials', 'RM210001', 'litre', NULL, '1', 5, 0),
+(23, 23, 23, 23, 1, NULL, 'Maize', 'Factory Purpose', 'RM21008', 'KG', NULL, NULL, 5, 0),
+(24, 17, 19, 20, 2, 2, 'Umbrella', 'Customer Gif Purpose', 'MT20003', 'Pcs', NULL, '3', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -474,12 +628,32 @@ INSERT INTO `purchase_general_items` (`id`, `itemgroup_id`, `itemsubgroup_id`, `
 -- Table structure for table `purchase_items`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_items` (
+CREATE TABLE `purchase_items` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `purchase_id` int(11) NOT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `rate` int(11) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `branch` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `purchase_items`
+--
+
+INSERT INTO `purchase_items` (`id`, `purchase_id`, `item_id`, `quantity`, `rate`, `amount`, `branch`) VALUES
+(1, 1, 35, 4, 150000, 600000, 1),
+(2, 1, 36, 3, 500000, 1500000, 1),
+(3, 2, 24, 6, 500, 3000, 1),
+(4, 3, 22, 70000, 150, 10500000, 1),
+(5, 3, 24, 400, 250, 100000, 1),
+(6, 4, 21, 4, 666, 2664, 1),
+(7, 4, 20, 3, 888, 2664, 1),
+(8, 5, 22, 50000, 555, 27750000, 1),
+(9, 6, 19, 6, 555, 3330, 1),
+(10, 7, 21, 12, 44, 528, 1),
+(11, 8, 19, 2, 555, 1110, 1);
 
 -- --------------------------------------------------------
 
@@ -487,23 +661,27 @@ CREATE TABLE IF NOT EXISTS `purchase_items` (
 -- Table structure for table `purchase_item_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_item_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `purchase_item_categories` (
+  `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `subgroup_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchase_item_categories`
 --
 
 INSERT INTO `purchase_item_categories` (`id`, `group_id`, `subgroup_id`, `name`, `status`) VALUES
-(9, 15, 8, 'AS08 Electrical Items', 0),
-(10, 15, 9, 'Electrical Items', 0),
-(11, 16, 10, 'CN08 Electrical Items', 0);
+(12, 15, 12, 'Printer', 0),
+(14, 16, 14, 'Printer', 0),
+(15, 17, 16, 'Motorcycle', 0),
+(16, 17, 16, 'Car', 0),
+(17, 17, 17, 'Car', 0),
+(18, 18, 18, 'Oil', 0),
+(19, 18, 18, 'Maize', 0),
+(20, 17, 19, 'Gif Item', 0);
 
 -- --------------------------------------------------------
 
@@ -511,13 +689,12 @@ INSERT INTO `purchase_item_categories` (`id`, `group_id`, `subgroup_id`, `name`,
 -- Table structure for table `purchase_item_groups`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_item_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `purchase_item_groups` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `authorized_group` varchar(255) NOT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchase_item_groups`
@@ -535,22 +712,24 @@ INSERT INTO `purchase_item_groups` (`id`, `name`, `authorized_group`, `status`) 
 -- Table structure for table `purchase_item_subgroups`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_item_subgroups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `purchase_item_subgroups` (
+  `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchase_item_subgroups`
 --
 
 INSERT INTO `purchase_item_subgroups` (`id`, `group_id`, `name`, `status`) VALUES
-(8, 15, 'Load cell for oil Seale', 0),
-(9, 15, 'Pin Socket', 0),
-(10, 16, '2 Pin Socket (Ceramics)', 0);
+(12, 15, 'Electrical', 0),
+(14, 16, 'Electrical', 0),
+(16, 17, 'Electronics', 0),
+(17, 17, 'Vehicle', 0),
+(18, 18, 'Food Item', 0),
+(19, 17, 'General', 0);
 
 -- --------------------------------------------------------
 
@@ -558,12 +737,11 @@ INSERT INTO `purchase_item_subgroups` (`id`, `group_id`, `name`, `status`) VALUE
 -- Table structure for table `purchase_item_units`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_item_units` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `purchase_item_units` (
+  `id` int(11) NOT NULL,
   `unit` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchase_item_units`
@@ -571,7 +749,9 @@ CREATE TABLE IF NOT EXISTS `purchase_item_units` (
 
 INSERT INTO `purchase_item_units` (`id`, `unit`, `status`) VALUES
 (1, 'KG', 0),
-(2, 'Pcs', 0);
+(2, 'Pcs', 0),
+(3, 'Job', 0),
+(4, 'litre', 0);
 
 -- --------------------------------------------------------
 
@@ -579,11 +759,10 @@ INSERT INTO `purchase_item_units` (`id`, `unit`, `status`) VALUES
 -- Table structure for table `purchase_pack_sizes`
 --
 
-CREATE TABLE IF NOT EXISTS `purchase_pack_sizes` (
+CREATE TABLE `purchase_pack_sizes` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -599,13 +778,12 @@ INSERT INTO `purchase_pack_sizes` (`id`, `name`, `status`) VALUES
 -- Table structure for table `regions`
 --
 
-CREATE TABLE IF NOT EXISTS `regions` (
+CREATE TABLE `regions` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `zoneid` int(11) DEFAULT NULL,
   `status` tinyint(1) DEFAULT 0,
-  `userid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `userid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -643,47 +821,42 @@ INSERT INTO `regions` (`id`, `name`, `zoneid`, `status`, `userid`) VALUES
 -- Table structure for table `requisitions`
 --
 
-CREATE TABLE IF NOT EXISTS `requisitions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `postingDate` date NOT NULL,
+CREATE TABLE `requisitions` (
+  `id` int(11) NOT NULL,
+  `requisition_no` varchar(40) NOT NULL,
+  `postingDate` date DEFAULT NULL,
   `requiredDate` date NOT NULL,
-  `branch_id` varchar(191) DEFAULT NULL,
+  `branch_id` int(11) NOT NULL,
   `memo_no` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `item_group` int(11) DEFAULT NULL,
   `priority` varchar(191) DEFAULT NULL,
   `procuerementType` varchar(191) DEFAULT NULL,
-  `item_name` varchar(11) DEFAULT NULL,
-  `unit` int(11) DEFAULT NULL,
-  `required_quantity` int(11) DEFAULT NULL,
-  `status` tinytext DEFAULT '0',
+  `status` tinyint(11) NOT NULL DEFAULT 0 COMMENT '0=Pending,1=Approved,2=Confirm,3=Order Confirm,',
   `created_by` varchar(191) NOT NULL,
   `updated_by` varchar(191) DEFAULT NULL,
-  `approved_by` varchar(171) DEFAULT NULL,
-  `OrderConfirm_by` varchar(191) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `approved_by` varchar(191) DEFAULT NULL,
+  `Confirm_by` varchar(191) DEFAULT NULL,
+  `OrderConfirm_by` varchar(191) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `requisitions`
 --
 
-INSERT INTO `requisitions` (`id`, `postingDate`, `requiredDate`, `branch_id`, `memo_no`, `description`, `item_group`, `priority`, `procuerementType`, `item_name`, `unit`, `required_quantity`, `status`, `created_by`, `updated_by`, `approved_by`, `OrderConfirm_by`) VALUES
-(1, '2021-07-18', '2021-07-18', NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, NULL, '5', NULL, NULL, NULL),
-(2, '2021-07-18', '2021-07-18', NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 0, NULL, '5', NULL, NULL, NULL),
-(3, '2021-07-18', '2021-07-18', NULL, NULL, NULL, 16, 'Regular', 'By Workorder', '0', 0, 0, NULL, '5', NULL, NULL, NULL),
-(4, '2021-07-18', '2021-07-18', '1', 3, NULL, 16, 'Occational', 'By Workorder', '15', 0, 0, NULL, '5', NULL, NULL, NULL),
-(5, '2021-07-18', '2021-07-18', '1', 3, NULL, 16, 'Occational', 'By Workorder', '15', 0, 0, NULL, '5', NULL, NULL, NULL),
-(6, '2021-07-18', '2021-07-18', '1', 4, 'zdfdsg', 16, 'Occational', 'By Workorder', '0', 0, 0, NULL, '5', NULL, NULL, NULL),
-(7, '2021-07-18', '2021-07-18', '1', 5, 'fsdfdsd', 16, 'Emergency', 'By Workorder', '0', 0, 0, NULL, '5', NULL, NULL, NULL),
-(8, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Regular', 'By Workorder', '0', 0, 0, NULL, '5', NULL, NULL, NULL),
-(9, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
-(10, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
-(11, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
-(12, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
-(13, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
-(14, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL),
-(15, '2021-07-18', '2021-07-18', '1', 4, NULL, 15, 'Occational', 'By Workorder', NULL, NULL, NULL, NULL, '5', NULL, NULL, NULL);
+INSERT INTO `requisitions` (`id`, `requisition_no`, `postingDate`, `requiredDate`, `branch_id`, `memo_no`, `description`, `item_group`, `priority`, `procuerementType`, `status`, `created_by`, `updated_by`, `approved_by`, `Confirm_by`, `OrderConfirm_by`) VALUES
+(18, 'PR#21080018', '2021-08-03', '2021-08-03', 1, NULL, 'For Head Office', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(19, 'PR#21080019', '2021-08-03', '2021-08-03', 1, NULL, 'For Marketing Purpose', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(20, 'PR#21080020', '2021-08-03', '2021-08-03', 1, 10, 'For Factory Purpose', 18, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(21, 'PR#21080021', '2021-08-04', '2021-08-04', 1, NULL, 'test', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(22, 'PR#21080022', '2021-08-04', '2021-08-04', 1, NULL, 'cxbxcb', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(23, 'PR#21080023', '2021-08-10', '2021-08-10', 1, NULL, 'Test', 18, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(24, 'PR#21080024', '2021-08-10', '2021-08-10', 1, NULL, 'Test Test', 15, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(25, 'PR#21080025', '2021-08-10', '2021-08-10', 1, NULL, 'For Marketing Purpose', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(26, 'PR#21080026', '2021-08-10', '2021-08-10', 1, NULL, 'For Printer servicing', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(27, 'PR#21080027', '2021-08-22', '2021-08-22', 1, NULL, 'test', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(28, 'PR#21080028', '2021-08-25', '2021-08-25', 1, 9, 'For Factory Purpose', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(29, 'PR#21080029', '2021-08-29', '2021-08-29', 1, NULL, 'Test', 18, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9');
 
 -- --------------------------------------------------------
 
@@ -691,13 +864,35 @@ INSERT INTO `requisitions` (`id`, `postingDate`, `requiredDate`, `branch_id`, `m
 -- Table structure for table `requisition_items`
 --
 
-CREATE TABLE IF NOT EXISTS `requisition_items` (
+CREATE TABLE `requisition_items` (
   `id` int(11) NOT NULL,
   `requisition_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `requisition_items`
+--
+
+INSERT INTO `requisition_items` (`id`, `requisition_id`, `item_id`, `quantity`) VALUES
+(34, 18, 19, 2),
+(35, 19, 21, 4),
+(36, 19, 20, 3),
+(37, 20, 22, 50000),
+(38, 21, 21, 12),
+(39, 22, 19, 6),
+(40, 23, 22, 50000),
+(41, 24, 22, 40000),
+(42, 24, 21, 1),
+(43, 24, 19, 9),
+(44, 24, 17, 56),
+(45, 25, 20, 6),
+(46, 26, 19, 7),
+(47, 27, 21, 8),
+(48, 28, 22, 70000),
+(49, 28, 24, 400),
+(50, 29, 22, 455);
 
 -- --------------------------------------------------------
 
@@ -705,16 +900,24 @@ CREATE TABLE IF NOT EXISTS `requisition_items` (
 -- Table structure for table `suppliers`
 --
 
-CREATE TABLE IF NOT EXISTS `suppliers` (
+CREATE TABLE `suppliers` (
   `id` int(11) NOT NULL,
   `company_name` varchar(255) DEFAULT NULL,
   `contact_person` varchar(255) DEFAULT NULL,
   `contact_no` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `city_id` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `company_name`, `contact_person`, `contact_no`, `address`, `city_id`, `status`) VALUES
+(5, 'Quality Feeds Limited', 'Tarek', '01713377756', 'Dhaka', 5, 0),
+(6, 'aver', 'mitu', '01732234216', 'bugura', 3, 0),
+(7, 'Al noor Computer', 'misu', '01912297107', 'Raj Lakshmi', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -722,14 +925,15 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` enum('Admin','User','Factory') COLLATE utf8mb4_unicode_ci DEFAULT 'User',
+  `type` enum('Admin','User','Factory','Management','DHead','OHead') COLLATE utf8mb4_unicode_ci DEFAULT 'User',
+  `user_group` enum('QAL','QIL','QFL','ABL','QBL') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'QAL',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -738,12 +942,18 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'Md. Masud Rana (User)', 'md.masud@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'zNk4Xq9r9tSAN9EV1t9fQLoUJgwRs3H2xobEUbO3p7j8wF91AMYYDNrP2FqR', 'User', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(2, 'Md. Rubel Rana Chowdhury', 'qalrubel@gmail.com', NULL, '$2y$10$xXIWwHYXqLjoqPGqvhphlOE6ra1c6VTjgAV9FQ7wg5NekvCTfeUpS', 'bxPUsdVJRYsr9xU8eRYM60vZXfC8IwixueUjXfXsaPq6DbKhDMNRf7uSUXye', 'User', '2021-03-22 01:13:58', '2021-03-08 01:13:58'),
-(4, 'QAL Factory', 'factory@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'x2mN2XVNIJ7LNM0SU5VYlt2gekyRK9fMXxw2unmxxrZc6YIYtv7Ob9lU6ebN', 'Factory', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(5, 'Md. Masud Rana (Admin)', 'admin@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'bFl4dKT0yRpW6ZC8FXzyMcCaRJNQanol0R4BZFrTxVYddmwaYSKgCUudGr9H', 'Admin', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(6, '', '', NULL, '', NULL, 'User', NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `type`, `user_group`, `created_at`, `updated_at`) VALUES
+(1, 'Md. Masud Rana (User)', 'md.masud@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'P9NcfDPYS1UlKXAFInL0xoCtFUcFwVmYTYI0VRhxK7uFoQsKo8YdSmgVws2n', 'User', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(2, 'Md. Rubel Rana Chowdhury', 'qalrubel@gmail.com', NULL, '$2y$10$xXIWwHYXqLjoqPGqvhphlOE6ra1c6VTjgAV9FQ7wg5NekvCTfeUpS', 'bxPUsdVJRYsr9xU8eRYM60vZXfC8IwixueUjXfXsaPq6DbKhDMNRf7uSUXye', 'User', 'QAL', '2021-03-22 01:13:58', '2021-03-08 01:13:58'),
+(4, 'QAL Factory', 'factory@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'x2mN2XVNIJ7LNM0SU5VYlt2gekyRK9fMXxw2unmxxrZc6YIYtv7Ob9lU6ebN', 'Factory', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(5, 'Md. Masud Rana (Admin)', 'admin@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', '2zZZyg1W8xWrohdPnu4d8J6EZdjdVPJoGdhkquus9XxVxlkzOFjHza677MEP', 'Admin', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(6, '', '', NULL, '', NULL, 'User', 'QAL', NULL, NULL),
+(7, 'Head of Deptment', 'dhead@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', '60ZQEOSh5I1BV3WoALfQwVO90zlptSsfZkKeY7730CRLUr54lZaQdA4LfcDc', 'DHead', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(8, 'Operation of Head ', 'ohead@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'xfZeT2Diu5Xs80SqFRgvYnMHjSJ439QTykiLqieWaMbesh9M6GQ91j7RlzCx', 'OHead', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(9, 'Shahryar Hussain', 'vcsir@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'K4xxarm0msWHo6ujWuPOuJUFaKQvfH3bApkPEiux2aLMNuPBA3iebojV4Hem', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(10, 'I.B. Shahjahan', 'mdsir@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'UTq7rISXQrGfmRlfOPd1BmH1St5EayQWw4HCCNJw5pUgCGOXIYMIMOOTELgR', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(11, 'Chairman ', 'chairman@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'EKxDG9SVlfhVU5V8ZDrKFzFFjYbfkA6FVFjNeayc1Eas4kS6QFEa23ig7dnt', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(12, 'Md. Masud Rana (QIL User)', 'md.masud@qil.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'sjQAZuE9CKbAyyne2nRTP32uJukbQa24RsA7jk9XpSAg5ySE49o890IFDspQ', 'User', 'QIL', '2021-08-24 04:11:50', '2021-08-24 04:11:50');
 
 -- --------------------------------------------------------
 
@@ -751,12 +961,11 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Table structure for table `zones`
 --
 
-CREATE TABLE IF NOT EXISTS `zones` (
+CREATE TABLE `zones` (
   `id` int(11) NOT NULL,
   `code` varchar(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -773,6 +982,296 @@ INSERT INTO `zones` (`id`, `code`, `name`, `status`) VALUES
 (7, 'Z07', 'Padma', 0),
 (8, 'Z08', 'Tista', 0),
 (9, 'Z09', 'Rupsha', 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `banks`
+--
+ALTER TABLE `banks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `branchs`
+--
+ALTER TABLE `branchs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `branch_types`
+--
+ALTER TABLE `branch_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `challans`
+--
+ALTER TABLE `challans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `city_names`
+--
+ALTER TABLE `city_names`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `delivery_orders`
+--
+ALTER TABLE `delivery_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gate_pass`
+--
+ALTER TABLE `gate_pass`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `money_receipts`
+--
+ALTER TABLE `money_receipts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_query_history`
+--
+ALTER TABLE `order_query_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_summary`
+--
+ALTER TABLE `order_summary`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`(191));
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `project_budgets`
+--
+ALTER TABLE `project_budgets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_general_items`
+--
+ALTER TABLE `purchase_general_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_items`
+--
+ALTER TABLE `purchase_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_item_categories`
+--
+ALTER TABLE `purchase_item_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_item_groups`
+--
+ALTER TABLE `purchase_item_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_item_subgroups`
+--
+ALTER TABLE `purchase_item_subgroups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_item_units`
+--
+ALTER TABLE `purchase_item_units`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_pack_sizes`
+--
+ALTER TABLE `purchase_pack_sizes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `regions`
+--
+ALTER TABLE `regions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `requisitions`
+--
+ALTER TABLE `requisitions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `requisition_items`
+--
+ALTER TABLE `requisition_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `zones`
+--
+ALTER TABLE `zones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `city_names`
+--
+ALTER TABLE `city_names`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `order_query_history`
+--
+ALTER TABLE `order_query_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `order_summary`
+--
+ALTER TABLE `order_summary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `project_budgets`
+--
+ALTER TABLE `project_budgets`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `purchase_general_items`
+--
+ALTER TABLE `purchase_general_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `purchase_items`
+--
+ALTER TABLE `purchase_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `purchase_item_categories`
+--
+ALTER TABLE `purchase_item_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `purchase_item_groups`
+--
+ALTER TABLE `purchase_item_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `purchase_item_subgroups`
+--
+ALTER TABLE `purchase_item_subgroups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `purchase_item_units`
+--
+ALTER TABLE `purchase_item_units`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `requisitions`
+--
+ALTER TABLE `requisitions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `requisition_items`
+--
+ALTER TABLE `requisition_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
