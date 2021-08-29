@@ -56,11 +56,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @php $sl=0;@endphp
+                      @php $sl=0; $rowTotal=1; $date='';@endphp
                       @foreach($results as $results)
                       @php
                       $totalLead = $results->total_new + $results->total_queries + $results->total_old;
                       $totalConversion = $results->total_new + $results->total_old;
+                      
                       $sl++;
                       @endphp
                       <tr>
@@ -74,6 +75,7 @@
                         <td class="text-center">{{ $totalLead }}</td>                      
                         <td class="text-center">{{ round(($totalConversion / $totalLead)*100) }}%</td>
                       </tr>
+                     
                       @endforeach
                     </tbody>
                   </table>

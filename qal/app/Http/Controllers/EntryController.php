@@ -139,7 +139,7 @@ class EntryController extends Controller
         return view('entry/history');
     }
     
-     public function order_statement(Request $request)
+    public function order_statement(Request $request)
     {
         $fromDate = date('Y-m-d', strtotime($request->get('fromDate')));
         $toDate   = date('Y-m-d', strtotime($request->get('toDate')));

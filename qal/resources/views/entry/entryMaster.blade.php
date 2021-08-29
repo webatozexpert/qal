@@ -61,7 +61,7 @@
             <div class="form-group row">
               <label for="zoneCode" class="col-sm-3 col-form-label">Customer ID</label>
               <div class="col-sm-9" style="padding-left: 0;">
-                <input type="number" class="form-control" id="customerID" name="customerID" placeholder="Customer ID" autocomplete="off" required="" onkeypress="hover(this.id)">
+                <input type="text" class="form-control" id="customerID" name="customerID" placeholder="Customer ID (A-001)" autocomplete="off" required="" onkeypress="hover(this.id)">
               </div>
             </div>
             <div class="form-group row">

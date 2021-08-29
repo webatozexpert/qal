@@ -36,7 +36,7 @@ class DashboardController extends Controller
     	$totalZones     = $allZones;
     	$totalCustomers = $allCustomer;
 
-        if((Auth::user()->type=='User' || Auth::user()->type=='Factory' || Auth::user()->type=='Management' || Auth::user()->type=='DHead' || Auth::user()->type=='OHead' && Auth::user()->user_group=='QAL') || (Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
+        if((Auth::user()->type=='User' && Auth::user()->user_group=='QAL' || Auth::user()->type=='Factory' && Auth::user()->user_group=='QAL' || Auth::user()->type=='Management' && Auth::user()->user_group=='QAL' || Auth::user()->type=='DHead' && Auth::user()->user_group=='QAL' || Auth::user()->type=='OHead' && Auth::user()->user_group=='QAL' || Auth::user()->type=='Admin' && Auth::user()->user_group=='QAL'))
         {
             return view('middleDashboard', compact('totalZones','totalCustomers','allOrder','allGetPass','allChallan','allInvoice'));
         }
