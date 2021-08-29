@@ -39,7 +39,7 @@
 
       <div class="row">
         <div class="col-12 table-responsive">
-           <form action="{{ URL('/purchase-order-submit') }}" method="POST" class="forms-sample">
+           <form action="{{ URL('/order-submit') }}" method="POST" class="forms-sample">
                 {{ csrf_field() }}    <!-- token -->
 
                 <div class="form-group row">

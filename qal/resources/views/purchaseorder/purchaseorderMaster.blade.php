@@ -42,7 +42,7 @@
                       <th style="width:15%;" >P.O No</th>
                       <th style="width:10%;" >P.O Date</th>
                       <th style="width:20%;" >Supplier Name</th>
-                      {{-- <th style="width:15%;" >Lc Number</th> --}}
+                      <th style="width:15%;" >Total Amount</th>
                       <th style="width:10%;" >Prepared By</th>
                      
                        <th style="width:10%;" >Status</th>
@@ -58,6 +58,7 @@
                       </td>
                       <td>{{ $results->postingDate}}</td>
                       <td>{{ $results->supplier_name}}</td>
+                      <td>Total Amount</td>
                       <td>{{ $results->created_by }}</td>
                      
                   

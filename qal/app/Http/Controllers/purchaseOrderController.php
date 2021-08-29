@@ -189,7 +189,7 @@ public function orderPendingList(){
               ->update(['status' => 1, 'approved_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('purchase-order-awaiting-approval')->with('success','Data Approved successfull');
+       return Redirect::to('order-awaiting-approval')->with('success','Data Approved successfull');
     }
 
  public function approvedList(){
@@ -238,7 +238,7 @@ public function orderPendingList(){
               ->update(['status' => 2, 'Confirm_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('purchase-order-awaiting-confirm')->with('success','Data Confirm successfull');
+       return Redirect::to('order-awaiting-confirm')->with('success','Data Confirm successfull');
     }
 
 public function confirmList(){
@@ -284,7 +284,7 @@ public function confirmList(){
               ->update(['status' => 3, 'OrderConfirm_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('purchase-order-awaiting-orderconfirm')->with('success','Data Confirm successfull');
+       return Redirect::to('order-awaiting-orderconfirm')->with('success','Data Confirm successfull');
     }
 
     public function prochaseorderConfirmList(){

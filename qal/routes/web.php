@@ -170,7 +170,7 @@ Route::get('/requisition-wise-intemname', 'purchaseOrderController@requisition_w
 Route::get('/intemname-wise-quantity', 'purchaseOrderController@intemname_wise_quantity');
 
 Route::post('order-submit', 'purchaseOrderController@purchase_order_submit');
-Route::get('/delete/{id}', 'purchaseOrderController@delete');
+Route::get('/purchase-delete/{id}', 'purchaseOrderController@delete');
 Route::get('/purchaseOrder-print/{id}', 'purchaseOrderController@purchaseOrderPrint');
 
 
