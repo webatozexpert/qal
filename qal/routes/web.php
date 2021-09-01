@@ -132,32 +132,33 @@ Route::get('/supplier-delete/{id}', 'SupplierController@delete');
 
 
 //Requisition part Start
-Route::get('/requisition', 'requisitionController@requisition');
+Route::get('/requisition', 'RequisitionController@requisition');
 Route::get('/creact-requisition', 'RequisitionController@creact_requisition');
 Route::get('/group-wise-intemname', 'RequisitionController@group_wise_intemname');
 Route::get('/intemname-wise-unit', 'RequisitionController@intemname_wise_unit');
-Route::post('/requisition-submit', 'requisitionController@requisition_submit');
-Route::get('/requisition-view/{id}', 'requisitionController@view');
-Route::get('/requisition-edit/{id}', 'requisitionController@edit');
-Route::post('/requisition-update', 'requisitionController@update');
-Route::get('/requisition-delete/{id}', 'requisitionController@delete');
-Route::get('/requisition-print/{id}', 'requisitionController@requisitionPrint');
+Route::post('/requisition-submit', 'RequisitionController@requisition_submit');
+Route::get('/requisition-view/{id}', 'RequisitionController@view');
+Route::get('/requisition-edit/{id}', 'RequisitionController@edit');
+Route::post('/requisition-update', 'RequisitionController@update');
+Route::get('/requisition-delete/{id}', 'RequisitionController@delete');
+Route::get('/requisition-print/{id}', 'RequisitionController@requisitionPrint');
 
 //Requisition Approoved part
-Route::get('/requisition-awaiting-approval/', 'requisitionController@requiPendingList');
-Route::get('/approved1','requisitionController@approved1');
-Route::get('/requisition-approved/', 'requisitionController@approvedList');
+Route::get('/requisition-awaiting-approval/', 'RequisitionController@requiPendingList');
+Route::get('/approved1','RequisitionController@approved1');
+Route::get('/requisition-approved/', 'RequisitionController@approvedList');
 
 
 //Requisition Confirm part
-Route::get('/requisition-awaiting-confirm/', 'requisitionController@awaitingConfirmList');
-Route::get('/confirm1','requisitionController@confirm');
-Route::get('/requisition-confirm', 'requisitionController@confirmList');
+Route::get('/requisition-awaiting-confirm/', 'RequisitionController@awaitingConfirmList');
+
+Route::get('/confirm1','RequisitionController@confirm');
+Route::get('/requisition-confirm', 'RequisitionController@confirmList');
 
 //Requisition OrderConfirm part
-Route::get('/requisition-awaiting-orderconfirm/', 'requisitionController@awaitingorderConfirmList');
-Route::get('/orderConfirm','requisitionController@orderConfirm');
-Route::get('/requisition-orderconfirm', 'requisitionController@orderConfirmList');
+Route::get('/requisition-awaiting-orderconfirm/', 'RequisitionController@awaitingorderConfirmList');
+Route::get('/requisitionConfirm','RequisitionController@requisitionConfirm');
+Route::get('/requisition-orderconfirm', 'RequisitionController@orderConfirmList');
 
 //Purchase Requisition part End
 

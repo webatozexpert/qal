@@ -242,12 +242,12 @@
                                         <span class="hide-menu"> Order Approved List</span>
                                     </a>
                                 </li>
-                                 <li class="sidebar-item">
+                                 {{-- <li class="sidebar-item">
                                     <a href="{{ URL('/confirm2') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Confirm List</span>
                                     </a>
-                                </li>  
+                                </li>   --}}
                             </ul>
                         </li>
                     </ul>

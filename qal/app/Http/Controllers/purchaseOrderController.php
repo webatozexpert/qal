@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use TNkemdilim\MoneyToWords\Converter;
+use TNkemdilim\MoneyToWords\Languages as Language;
 
 use DB;
 use Auth;
 use PDF;
+use Session;
 
 class purchaseOrderController extends Controller
 {
@@ -156,6 +158,8 @@ class purchaseOrderController extends Controller
         //dd($data);
 
         $converter = new Converter("Taka", "Poisha");
+        // $converter = $converter->setLanguage(Language::BENGALI);
+        // $frenchConverter = new Converter("yen", "sen", Language::FRENCH);
         $pdf = PDF::loadView('purchaseorder.purchaseOrderPrint', compact('purchases','poid','converter'));
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('document.pdf');
@@ -190,7 +194,8 @@ public function orderPendingList(){
               ->update(['status' => 1, 'approved_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('order-awaiting-approval')->with('success','Data Approved successfull');
+       Session::flash('success', 'Data Approved successfull');
+       return 0;
     }
 
  public function approvedList(){
@@ -239,7 +244,8 @@ public function orderPendingList(){
               ->update(['status' => 2, 'Confirm_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('order-awaiting-confirm')->with('success','Data Confirm successfull');
+       Session::flash('success', 'Data Confirm successfull');
+       return 0;
     }
 
 public function confirmList(){
@@ -285,7 +291,8 @@ public function confirmList(){
               ->update(['status' => 3, 'OrderConfirm_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('order-awaiting-orderconfirm')->with('success','Data Confirm successfull');
+       Session::flash('success', 'Data Confirm successfull');
+       return 0;
     }
 
     public function prochaseorderConfirmList(){

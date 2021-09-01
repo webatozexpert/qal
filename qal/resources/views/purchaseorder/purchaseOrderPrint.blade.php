@@ -9,23 +9,6 @@
 
     <style type="text/css">
 
-      @font-face {
-  font-family: SourceSansPro;
-  src: url(SourceSansPro-Regular.ttf);
-  front-color: #000000;
-}
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/*a {
-  color: #0087C3;
-  text-decoration: none;
-}*/
-
 body {
   position: relative;
   width: 21cm;  
@@ -34,8 +17,8 @@ body {
   color: #000000;
   background: #FFFFFF; 
   font-family: Arial, sans-serif; 
-  font-size: 14px; 
-  font-family: SourceSansPro;
+  font-size: 12px !important;
+  font-family: Arial !important;
 }
 
 header {
@@ -44,58 +27,16 @@ header {
   text-align: center;
 }
 
-/*#logo {
-  float: left;
-  margin-top: 8px;
-}*/
-
-/*#logo img {
-  height: 70px;
-}*/
-
-/*#company {
-  text-align: center;
-  
-}*/
-
-
-/*#details {
-  margin-bottom: 50px;
-}*/
-
-/*#client {
-  padding-left: 6px;
-  border-left: 6px solid #0087C3;
-  float: left;
-}*/
 
 #client .to {
   color: #ffffff;
 }
 
 h2.name {
-  font-size: 1.4em;
+  font-size: 12px;
   font-weight: normal;
   margin: 0;
 }
-
-/*#invoice {
-  float: right;
-  text-align: right;
-}*/
-
-/*#invoice h1 {
-  color: #0087C3;
-  font-size: 2.4em;
-  line-height: 1em;
-  font-weight: normal;
-  margin: 0  0 10px 0;
-}*/
-
-/*#invoice .date {
-  font-size: 1.1em;
-  color: #777777;
-}*/
 
 table {
   width: 100%;
@@ -115,7 +56,7 @@ table td {
 table th {
   white-space: nowrap;        
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: 12px !important;
 }
 
 table td {
@@ -124,14 +65,14 @@ table td {
 
 table td h3{
   color: #000000;
-  font-size: 1.2em;
+  font-size: 12px;
   font-weight: normal;
   margin: 0 0 0.2em 0;
 }
 
 table .no {
   color: #000000;
-  font-size: 1em;
+  font-size: 12px;
  
 }
 
@@ -151,7 +92,7 @@ table .qty {
 table td.unit,
 table td.qty,
 table td.total {
-  font-size: 1.2em;
+  font-size: 12px;
 }
 
 /*table tbody tr:last-child td {
@@ -162,7 +103,7 @@ table tfoot td {
   padding: 10px 20px;
   background: #FFFFFF;
   border-bottom: none;
-  font-size: 1.2em;
+  font-size: 12px;
   white-space: nowrap; 
   /*border-top: 1px solid #AAAAAA; */
 }
@@ -215,10 +156,20 @@ footer {
       <div id="logo">
         
       </div>
-      <div id="company">
+
+      @if($purchases->status=='3')
+      
+        <div id="company">
         <h2 class="name">Purchase Order</h2>
-        {{-- <div>Branch Name :{{ $requisitions->bname }} </div> --}}
+        
       </div>
+      
+      @else
+        <div id="company">
+        <h2 class="name">Purchase Order Preview</h2>
+        
+      </div>
+      @endif
       </div>
     </header>
    <main>
@@ -315,9 +266,9 @@ footer {
                       <td class='text-center'>{{ $serialNo }}</td>
                       <td> {{ $results->name}}</td>
                       <td> {{ $results->item_name}}</td>
-                      <td> {{ $results->quantity}}</td>
-                      <td> {{ $results->rate}}</td>
-                      <td> {{ $results->amount}}</td>
+                      <td style="text-align:center;"> {{ $results->quantity}}</td>
+                      <td style="text-align:right;"> {{ $results->rate}}</td>
+                      <td style="text-align:right;"> {{ number_format($results->amount)}}</td>
                     </tr>                    
                   </tbody>
 
@@ -329,8 +280,8 @@ footer {
 
                   <tr>
                     <td colspan="3"></td>
-                    <td colspan="2">TOTAL AMOUNT : </td>
-                    <td> {{ $totalAmount }} </td>
+                    <td colspan="2" style="font-weight: bold;">TOTAL AMOUNT : </td>
+                    <td style="text-align:right; font-weight: bold;"> {{ number_format($totalAmount) }} </td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
@@ -425,11 +376,11 @@ footer {
 
                   		<td>
                         {{ $Aname1 }}
-                  		  <hr> Checked By 
+                  		  <hr> Checked By <br>&nbsp;
                   		</td>
-                  		<td>
+                  		<td >
                         {{ $Aname2 }}
-                  		  <hr> Authorized By
+                  		  <hr> Authorized By <br>&nbsp;
                   		</td>
                   	</tr>
 

@@ -110,7 +110,7 @@
                     {
                         $.ajax({
                             method: "GET",
-                            url: '{{url("/confirm2")}}',
+                            url: '{{url("/confirm1")}}',
                             data: {data: data}
                         })
 

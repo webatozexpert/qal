@@ -8,6 +8,8 @@ use Requisition;
 use DB;
 use Auth;
 use PDF;
+use Session;
+
 class RequisitionController extends Controller
 {
     public function __construct()
@@ -249,7 +251,8 @@ function requisitionPrint($id) {
               ->update(['status' => 1, 'approved_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('purchase-requisition-awaiting-approval')->with('success','Data Approved successfull');
+       Session::flash('success', 'Data Approved successfull');
+       return 0;
     }
 
 //All Requisition Approved List
@@ -285,7 +288,7 @@ function requisitionPrint($id) {
 
        //dd($result);
          
-        return view('requisition.awaitingConfirmList',compact('result'));
+        return view('requisition/awaitingConfirmList',compact('result'));
 
     }
 //All Requisition Confirm 
@@ -301,7 +304,8 @@ public function confirm(Request $request){
               ->update(['status' => 2, 'Confirm_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('purchase-requisition-awaiting-confirm')->with('success','Data Confirm successfull');
+       Session::flash('success', 'Data Approved successfull');
+       return 0;
     }
 
 //All Requisition Confirm List
@@ -339,13 +343,15 @@ public function confirm(Request $request){
        //dd($result);
          
        
-        return view('requisition.awaitingorderConfirmList',compact('result'));
+        return view('requisition/awaitingorderConfirmList',compact('result'));
 
     }
-//All Requisition OrderConfirm 
-    public function orderConfirm(Request $request){
+//All Requisition requisitionConfirm 
+    public function requisitionConfirm(Request $request){
 
        $val = $request->get('data');
+
+       //dd($request->all());
        foreach($val as $reqid)
        {
           DB::table('requisitions')
@@ -353,7 +359,8 @@ public function confirm(Request $request){
               ->update(['status' => 3, 'OrderConfirm_by' => Auth::user()->id]);
        }
 
-       return Redirect::to('requisition-awaiting-orderconfirm')->with('success','Data Confirm successfull');
+       Session::flash('success', 'Data Approved successfull');
+       return 0;
     }
 
  //All Requisition OrderConfirm List  
