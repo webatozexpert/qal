@@ -19,21 +19,22 @@ body {
   font-family: Arial, sans-serif; 
   font-size: 12px !important;
   font-family: Arial !important;
+  font-weight: bold;
 }
 
 header {
+ 
   padding: 10px 0;
   margin-bottom: 20px;
   text-align: center;
 }
-
 
 #client .to {
   color: #ffffff;
 }
 
 h2.name {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: normal;
   margin: 0;
 }
@@ -48,9 +49,8 @@ table {
 table th,
 table td {
   padding: 10px;
-  
   text-align: center;
-  /*border: 5px solid #FFFFFF;*/
+
 }
 
 table th {
@@ -76,18 +76,10 @@ table .no {
  
 }
 
-/*table .desc {
-  text-align: left;
-}
-*/
+
 table .unit {
   background: #ffffff;
 }
-
-table .qty {
-}
-
-
 
 table td.unit,
 table td.qty,
@@ -95,78 +87,30 @@ table td.total {
   font-size: 12px;
 }
 
-/*table tbody tr:last-child td {
-  border: none;
-}*/
-
 table tfoot td {
   padding: 10px 20px;
   background: #FFFFFF;
   border-bottom: none;
   font-size: 12px;
   white-space: nowrap; 
-  /*border-top: 1px solid #AAAAAA; */
+  
 }
 
-/*table tfoot tr:first-child td {
-  border-top: none; 
-}*/
-
-/*table tfoot tr:last-child td {
-  color: #57B223;
-  font-size: 1.4em;
-  border-top: 1px solid #57B223; 
-
-}*/
-
-/*table tfoot tr td:first-child {
-  border: none;
-}*/
-
-/*#thanks{
-  font-size: 2em;
-  margin-bottom: 50px;
-}*/
-
-/*#notices{
-  padding-left: 6px;
-  border-left: 6px solid #0087C3;  
-}*/
-
-/*#notices .notice {
-  font-size: 1.2em;
-}
-*/
-footer {
-  color: #000000;
-  width: 100%;
-  height: 30px;
-  position: absolute;
-  bottom: 0;
-  /*border-top: 1px solid #AAAAAA;*/
-  /*padding: 8px 0;*/
-  text-align: center;
-}
-
-
-    </style>
+</style>
   </head>
   <body>
     <header class="clearfix">
-      <div id="logo">
-        
-      </div>
-
+      
       @if($purchases->status=='3')
       
         <div id="company">
-        <h2 class="name">Purchase Order</h2>
+        <h1 class="name" style="font-weight: bold; font-size: 20px;">Purchase Order</h1>
         
       </div>
       
       @else
         <div id="company">
-        <h2 class="name">Purchase Order Preview</h2>
+        <h1 class="name" style="font-weight: bold; font-size: 20px; ">Purchase Order Preview</h1>
         
       </div>
       @endif
@@ -188,8 +132,8 @@ footer {
                     <td>
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
                         <tr>
-                          <td style='width: 150px'>P.O Number</td>
-                          <td style='width: 150px'>: {{ $purchases->order_no }}</td>
+                          <td >P.O Number</td>
+                          <td >: {{ $purchases->order_no }}</td>
                         </tr>
                        
                         <tr>
@@ -198,7 +142,7 @@ footer {
                         </tr>
                         <tr>
                           <td>Address</td>
-                          <td style='width: 270px;'>:  {{ $purchases->address }}</td>
+                          <td >:  {{ $purchases->address }}</td>
                         </tr>
                         <tr>
                           <td>Budget Name</td>
@@ -206,12 +150,12 @@ footer {
                         </tr>
                       </table>
                     </td>
-                    <td style='width: 30px;'>&nbsp;</td>
+                    <td >&nbsp;</td>
                     <td>
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
                         <tr>
-                          <td style='width: 150px'>Date</td>
-                          <td style='width: 150px'>: {{ $purchases->postingDate }} </td>
+                          <td >Date</td>
+                          <td >: {{ $purchases->postingDate }} </td>
                         </tr>
                         
                         <tr>
@@ -220,17 +164,17 @@ footer {
                           <td style=''>:{{ $purchases->requisition_no }} </td>
                         </tr>
                        <tr>
-                          <td style='width: 150px'>Required Date</td>
-                          <td style='width: 150px'>:{{ $purchases->requiredDate }} </td>
+                          <td >Required Date</td>
+                          <td >:{{ $purchases->requiredDate }} </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
                 </table>
 
-                  @php
-                  $serialNo=1;
-                  @endphp
+            @php
+            $serialNo=1;
+            @endphp
 
            
           @php
@@ -279,8 +223,8 @@ footer {
                   @endforeach
 
                   <tr>
-                    <td colspan="3"></td>
-                    <td colspan="2" style="font-weight: bold;">TOTAL AMOUNT : </td>
+                    
+                    <td colspan="5" style="font-weight: bold;">Total   </td>
                     <td style="text-align:right; font-weight: bold;"> {{ number_format($totalAmount) }} </td>
                   </tr>
                   <tr>
@@ -370,16 +314,19 @@ footer {
                   <table>
 
                   	<tr>
-                  		<td>{{ $purchases->created_by }}
+                  		<td >
+                        <p style="font-size:14px;">{{ $purchases->created_by }}</p>
                   		  <hr>Prepared By <br>Signature Seal  
                   		</td>
 
                   		<td>
-                        {{ $Aname1 }}
+                        <p style="font-size:14px;">{{ $Aname1 }}</p>
+                        
                   		  <hr> Checked By <br>&nbsp;
                   		</td>
                   		<td >
-                        {{ $Aname2 }}
+                        <p style="font-size:14px;">{{ $Aname2 }}</p>
+                        
                   		  <hr> Authorized By <br>&nbsp;
                   		</td>
                   	</tr>
@@ -395,9 +342,6 @@ footer {
     </div>
   </div>
 </main>
-{{-- <footer>
-  Printed From QAL
-</footer> --}}
-  </body>
+ </body>
 
 </html>
