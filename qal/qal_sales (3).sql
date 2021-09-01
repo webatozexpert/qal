@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2021 at 03:09 PM
+-- Generation Time: Sep 01, 2021 at 05:59 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -413,40 +413,13 @@ CREATE TABLE `order_query_history` (
 --
 
 INSERT INTO `order_query_history` (`id`, `type`, `customer_id`, `customer_name`, `customer_mobile`, `customer_address`, `customer_comment`, `lead`, `customer_type`, `added_date`, `created_at`) VALUES
-(1, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:32:00'),
-(2, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:32:13'),
-(3, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:36:47'),
-(4, 'Order', '1234', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:37:48'),
-(5, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:38:31'),
-(6, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:41:44'),
-(7, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:43:26'),
-(8, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:46:21'),
-(9, 'Order', '12345', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:46:59'),
-(10, 'Order', '111', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:47:13'),
-(11, 'Order', '111', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:47:21'),
-(12, 'Order', '111', NULL, NULL, NULL, NULL, 'Message', 'Old', '2021-08-25', '2021-08-25 06:47:39'),
-(13, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 06:55:44'),
-(14, 'Order', '112233', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-08-25', '2021-08-25 06:57:06'),
-(15, 'Order', '12345', NULL, NULL, NULL, NULL, 'Facebook', 'Old', '2021-08-25', '2021-08-25 06:57:12'),
-(16, 'Order', '7654321', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-25', '2021-08-25 06:57:18'),
-(17, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:35:45'),
-(18, 'Order', '123', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:36:05'),
-(19, 'Order', '123', NULL, NULL, NULL, NULL, 'Message', 'Old', '2021-08-25', '2021-08-25 09:37:35'),
-(20, 'Order', '123', NULL, NULL, NULL, NULL, 'Facebook', 'Old', '2021-08-25', '2021-08-25 09:38:28'),
-(21, 'Order', '123', NULL, NULL, NULL, NULL, 'Facebook', 'Old', '2021-08-25', '2021-08-25 09:39:10'),
-(22, 'Query', NULL, 'sagor', 1913848150, 'bogura', 'food', 'Facebook', 'Old', '2021-08-25', '2021-08-25 09:41:36'),
-(23, 'Query', NULL, 'Masud', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:48:20'),
-(24, 'Query', NULL, 'Test', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:51:26'),
-(25, 'Query', NULL, 'Test2', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:52:18'),
-(26, 'Query', NULL, 'Test5', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:53:17'),
-(27, 'Query', NULL, 'Test5', NULL, NULL, NULL, 'Phone', 'Old', '2021-08-25', '2021-08-25 09:53:43'),
-(28, 'Query', NULL, 'ertfghj', NULL, NULL, NULL, 'Message', 'Old', '2021-08-25', '2021-08-25 09:56:51'),
-(29, 'Order', '555', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-08-26', '2021-08-26 07:26:26'),
-(30, 'Query', NULL, 'Test', NULL, NULL, NULL, 'Message', 'Old', '2021-08-26', '2021-08-26 07:26:39'),
-(31, 'Order', 'A-100', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-08-29', '2021-08-29 07:14:27'),
-(32, 'Order', 'A-100', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-08-29', '2021-08-29 07:14:51'),
-(33, 'Order', 'C-21', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-08-29', '2021-08-29 09:24:56'),
-(34, 'Query', NULL, 'C-21', NULL, NULL, 'Boneless', 'Message', 'Old', '2021-08-29', '2021-08-29 09:27:14');
+(1, 'Order', 'A-100', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-09-01', '2021-09-01 05:39:09'),
+(2, 'Order', 'A-101', NULL, NULL, NULL, NULL, 'Phone', 'New', '2021-09-01', '2021-09-01 05:39:15'),
+(3, 'Order', 'A-101', NULL, NULL, NULL, NULL, 'Message', 'Old', '2021-09-01', '2021-09-01 05:39:19'),
+(4, 'Order', 'A-100', NULL, NULL, NULL, NULL, 'Phone', 'Old', '2021-09-01', '2021-09-01 05:39:24'),
+(5, 'Order', 'A-112', NULL, NULL, NULL, NULL, 'Facebook', 'New', '2021-09-01', '2021-09-01 05:39:30'),
+(6, 'Query', NULL, 'Masud', NULL, NULL, NULL, 'Facebook', 'Old', '2021-09-01', '2021-09-01 05:39:40'),
+(7, 'Query', NULL, 'Lutfor', NULL, NULL, 'Test', 'Facebook', 'Old', '2021-09-01', '2021-09-01 05:39:51');
 
 -- --------------------------------------------------------
 
@@ -468,14 +441,9 @@ CREATE TABLE `order_summary` (
 --
 
 INSERT INTO `order_summary` (`id`, `lead`, `total_new`, `total_old`, `total_queries`, `date`) VALUES
-(1, 'Phone', 5, 10, 5, '2021-08-25'),
-(2, 'Message', 0, 2, 1, '2021-08-25'),
-(3, 'Facebook', 1, 3, 0, '2021-08-25'),
-(4, 'Facebook', 1, 0, 0, '2021-08-26'),
-(5, 'Message', 0, 0, 1, '2021-08-26'),
-(6, 'Phone', 1, 1, 0, '2021-08-29'),
-(7, 'Facebook', 1, 0, 0, '2021-08-29'),
-(8, 'Message', 0, 0, 1, '2021-08-29');
+(1, 'Phone', 2, 1, 0, '2021-09-01'),
+(2, 'Message', 0, 1, 0, '2021-09-01'),
+(3, 'Facebook', 1, 0, 2, '2021-09-01');
 
 -- --------------------------------------------------------
 
@@ -579,12 +547,14 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `order_no`, `postingDate`, `supplier_name`, `procuerement_type`, `note`, `currency`, `requisition_no`, `delivery_to`, `payment_term`, `sample`, `acceptance`, `delivery_within`, `support_and_warranty`, `date_fo_validity`, `special_instructions`, `status`, `created_by`, `updated_by`, `approved_by`, `confirm_by`, `orderConfirm_by`, `created_at`) VALUES
-(3, 'PO#21080001', '2021-08-25', '5', 'By Workorder', 'Test', 'BDT', 28, 'Spot delivery', 'By Cash', NULL, NULL, NULL, NULL, '2021-08-25', 'Advance', 3, '5', NULL, '11', '5', '9', '2021-08-25 04:58:18'),
 (4, 'PO#21080004', '2021-08-27', '5', 'By Workorder', 'Test', 'BDT', 19, 'Spot Delivery', 'By Cash', NULL, NULL, NULL, NULL, '2021-08-27', 'Payment Advance 100%', 3, '5', NULL, '11', '5', '9', '2021-08-27 16:03:53'),
 (5, 'PO#21080005', '2021-08-28', '6', 'By Workorder', 'tttttt', 'BDT', 20, 'xcxv', 'xcvxc', NULL, NULL, NULL, NULL, '2021-08-28', 'pppp', 3, '5', NULL, '5', '5', '9', '2021-08-28 13:24:56'),
 (6, 'PO#21080006', '2021-08-29', '5', 'By Workorder', 'Test', 'BDT', 22, 'gfgf', 'dfgfd', NULL, NULL, NULL, NULL, '2021-08-29', 'dfg', 3, '5', NULL, '7', '8', '9', '2021-08-29 05:08:22'),
 (7, 'PO#21080007', '2021-08-29', '7', 'By Workorder', 'tttttt', 'BDT', 21, 'fffff', 'fffff', NULL, NULL, NULL, NULL, '2021-08-29', 'ffffffffffffff', 3, '5', NULL, '7', '8', '9', '2021-08-29 06:09:43'),
-(8, 'PO#21080008', '2021-08-29', '6', 'By Workorder', 'gggg', 'BDT', 18, 'fbfcggb', 'fdgfdg', NULL, NULL, NULL, NULL, '2021-08-29', 'dfgfdg', 3, '5', NULL, '7', '8', '9', '2021-08-29 06:35:47');
+(8, 'PO#21080008', '2021-08-29', '6', 'By Workorder', 'gggg', 'BDT', 18, 'fbfcggb', 'fdgfdg', NULL, NULL, NULL, NULL, '2021-08-29', 'dfgfdg', 3, '5', NULL, '7', '8', '9', '2021-08-29 06:35:47'),
+(9, 'PO#21080009', '2021-08-29', '5', 'By Workorder', 'vbcvb', 'BDT', 19, 'vcx', 'xcv', NULL, NULL, NULL, NULL, '2021-08-29', 'xcv', 3, '5', NULL, '7', '8', '9', '2021-08-29 15:20:17'),
+(10, 'PO#21090010', '2021-09-01', '5', 'By Workorder', 'test', 'BDT', 38, 'ffff', 'fffff', NULL, NULL, NULL, NULL, '2021-09-01', 'fffff', 3, '5', NULL, '7', '8', '9', '2021-09-01 10:06:17'),
+(11, 'PO#21090011', '2021-09-01', '7', 'By Workorder', 'test', 'BDT', 39, 'vsg', 'xcvv', NULL, NULL, NULL, NULL, '2021-09-01', 'cfdbfb', 3, '5', NULL, '7', '8', '9', '2021-09-01 13:55:24');
 
 -- --------------------------------------------------------
 
@@ -646,14 +616,15 @@ INSERT INTO `purchase_items` (`id`, `purchase_id`, `item_id`, `quantity`, `rate`
 (1, 1, 35, 4, 150000, 600000, 1),
 (2, 1, 36, 3, 500000, 1500000, 1),
 (3, 2, 24, 6, 500, 3000, 1),
-(4, 3, 22, 70000, 150, 10500000, 1),
-(5, 3, 24, 400, 250, 100000, 1),
 (6, 4, 21, 4, 666, 2664, 1),
 (7, 4, 20, 3, 888, 2664, 1),
 (8, 5, 22, 50000, 555, 27750000, 1),
 (9, 6, 19, 6, 555, 3330, 1),
 (10, 7, 21, 12, 44, 528, 1),
-(11, 8, 19, 2, 555, 1110, 1);
+(11, 8, 19, 2, 555, 1110, 1),
+(12, 9, 21, 4, 555, 2220, 1),
+(13, 10, 21, 7, 50000, 350000, 1),
+(14, 11, 22, 9000, 123, 1107000, 1);
 
 -- --------------------------------------------------------
 
@@ -856,7 +827,15 @@ INSERT INTO `requisitions` (`id`, `requisition_no`, `postingDate`, `requiredDate
 (26, 'PR#21080026', '2021-08-10', '2021-08-10', 1, NULL, 'For Printer servicing', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
 (27, 'PR#21080027', '2021-08-22', '2021-08-22', 1, NULL, 'test', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
 (28, 'PR#21080028', '2021-08-25', '2021-08-25', 1, 9, 'For Factory Purpose', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
-(29, 'PR#21080029', '2021-08-29', '2021-08-29', 1, NULL, 'Test', 18, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9');
+(31, 'PR#21090029', '2021-09-01', '2021-09-01', 1, 7, 'Test', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(32, 'PR#21090032', '2021-09-01', '2021-09-01', 1, 9, 'test', 15, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(33, 'PR#21090033', '2021-09-01', '2021-09-01', 1, NULL, 'test', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(34, 'PR#21090034', '2021-09-01', '2021-09-01', 1, NULL, 'test', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(35, 'PR#21090035', '2021-09-01', '2021-09-01', 1, NULL, 'tttt', 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(36, 'PR#21090036', '2021-09-01', '2021-09-01', 1, NULL, 'tttt', 16, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(37, 'PR#21090037', '2021-09-01', '2021-09-01', 1, NULL, 'for factory', 18, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(38, 'PR#21090038', '2021-09-01', '2021-09-01', 1, NULL, NULL, 17, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9'),
+(39, 'PR#21090039', '2021-09-01', '2021-09-01', 1, 10, 'test', 18, 'Regular', 'By Workorder', 3, '5', NULL, '7', '8', '9');
 
 -- --------------------------------------------------------
 
@@ -892,7 +871,15 @@ INSERT INTO `requisition_items` (`id`, `requisition_id`, `item_id`, `quantity`) 
 (47, 27, 21, 8),
 (48, 28, 22, 70000),
 (49, 28, 24, 400),
-(50, 29, 22, 455);
+(52, 31, 19, 2),
+(53, 32, 17, 5),
+(54, 33, 19, 2),
+(55, 34, 19, 3),
+(56, 35, 24, 550),
+(57, 36, 19, 6),
+(58, 37, 22, 128888),
+(59, 38, 21, 7),
+(60, 39, 22, 9000);
 
 -- --------------------------------------------------------
 
@@ -943,16 +930,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `type`, `user_group`, `created_at`, `updated_at`) VALUES
-(1, 'Md. Masud Rana (User)', 'md.masud@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'P9NcfDPYS1UlKXAFInL0xoCtFUcFwVmYTYI0VRhxK7uFoQsKo8YdSmgVws2n', 'User', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(1, 'Md. Masud Rana (User)', 'md.masud@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'pvf9MukXEGhN6wvh9TOjEWonEWNHgejkSiacMxPmHIMboRDf8FcAGIgHEuhn', 'User', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
 (2, 'Md. Rubel Rana Chowdhury', 'qalrubel@gmail.com', NULL, '$2y$10$xXIWwHYXqLjoqPGqvhphlOE6ra1c6VTjgAV9FQ7wg5NekvCTfeUpS', 'bxPUsdVJRYsr9xU8eRYM60vZXfC8IwixueUjXfXsaPq6DbKhDMNRf7uSUXye', 'User', 'QAL', '2021-03-22 01:13:58', '2021-03-08 01:13:58'),
 (4, 'QAL Factory', 'factory@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'x2mN2XVNIJ7LNM0SU5VYlt2gekyRK9fMXxw2unmxxrZc6YIYtv7Ob9lU6ebN', 'Factory', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(5, 'Md. Masud Rana (Admin)', 'admin@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', '2zZZyg1W8xWrohdPnu4d8J6EZdjdVPJoGdhkquus9XxVxlkzOFjHza677MEP', 'Admin', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(5, 'Md. Masud Rana (Admin)', 'admin@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'xueqEQSkY8O4ouWMYLuDbUCIxKWHWkbWW4PaoaFjyOklJP5NECcIDkKdqvLR', 'Admin', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
 (6, '', '', NULL, '', NULL, 'User', 'QAL', NULL, NULL),
-(7, 'Head of Deptment', 'dhead@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', '60ZQEOSh5I1BV3WoALfQwVO90zlptSsfZkKeY7730CRLUr54lZaQdA4LfcDc', 'DHead', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(8, 'Operation of Head ', 'ohead@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'xfZeT2Diu5Xs80SqFRgvYnMHjSJ439QTykiLqieWaMbesh9M6GQ91j7RlzCx', 'OHead', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(9, 'Shahryar Hussain', 'vcsir@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'K4xxarm0msWHo6ujWuPOuJUFaKQvfH3bApkPEiux2aLMNuPBA3iebojV4Hem', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(10, 'I.B. Shahjahan', 'mdsir@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'UTq7rISXQrGfmRlfOPd1BmH1St5EayQWw4HCCNJw5pUgCGOXIYMIMOOTELgR', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
-(11, 'Chairman ', 'chairman@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'EKxDG9SVlfhVU5V8ZDrKFzFFjYbfkA6FVFjNeayc1Eas4kS6QFEa23ig7dnt', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(7, 'Head of Deptment', 'dhead@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'UWkPFJl3zobTcMLehGZIgnfNNJGNTq7UtL3yiap1xg59GaX11U7NDi9dWWRH', 'DHead', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(8, 'Operation of Head ', 'ohead@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'qN3FoHjXgXyGiSqLv6khF88Sbw8TFFnvs1XQzoOFgr3hJbSd3NxJZ9xLeuox', 'OHead', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(9, 'Shahryar Hussain', 'vcsir@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'laF0hyO3xcte3WMFfJlkvL4VQmUJz4tNCWdHyPwWRTP6UST524Lu2rjRCSzc', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(10, 'I.B. Shahjahan', 'mdsir@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'Bm789EcamY8ChhYTfzq4bfps1L6urNqQX92WEqNkGx42ovuUc9jBXfSLqI2C', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
+(11, 'Chairman ', 'chairman@qfl.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'XVbwpxZ8elKr1ig2kI9zDiLAb6lq5YaUnqhuYVtWEYFRX2ekLZvT7KAes8Xj', 'Management', 'QAL', '2021-02-22 08:11:50', '2021-02-22 08:11:50'),
 (12, 'Md. Masud Rana (QIL User)', 'md.masud@qil.com.bd', NULL, '$2y$10$ADRBFsEBUTlIHvviPJTgnOtXGJ4Ezl8VK76DCazzBW.qesnCPBn.W', 'sjQAZuE9CKbAyyne2nRTP32uJukbQa24RsA7jk9XpSAg5ySE49o890IFDspQ', 'User', 'QIL', '2021-08-24 04:11:50', '2021-08-24 04:11:50');
 
 -- --------------------------------------------------------
@@ -1187,13 +1174,13 @@ ALTER TABLE `city_names`
 -- AUTO_INCREMENT for table `order_query_history`
 --
 ALTER TABLE `order_query_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_summary`
 --
 ALTER TABLE `order_summary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `projects`
@@ -1211,7 +1198,7 @@ ALTER TABLE `project_budgets`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `purchase_general_items`
@@ -1223,7 +1210,7 @@ ALTER TABLE `purchase_general_items`
 -- AUTO_INCREMENT for table `purchase_items`
 --
 ALTER TABLE `purchase_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `purchase_item_categories`
@@ -1253,13 +1240,13 @@ ALTER TABLE `purchase_item_units`
 -- AUTO_INCREMENT for table `requisitions`
 --
 ALTER TABLE `requisitions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `requisition_items`
 --
 ALTER TABLE `requisition_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
