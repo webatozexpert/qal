@@ -47,22 +47,22 @@
                                         <span class="hide-menu">All Requisition </span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item">
+                                {{-- <li class="sidebar-item">
                                     <a href="{{ URL('/requisition-awaiting-approval') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Requisition Pending List</span>
                                     </a>
-                                </li>
-                                <li class="sidebar-item">
+                                </li> --}}
+                                {{-- <li class="sidebar-item">
                                     <a href="{{ URL('/requisition-approved') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Requisition Approved List</span>
                                     </a>
-                                </li> 
+                                </li>  --}}
                                  <li class="sidebar-item">
                                     <a href="{{ URL('/requisition-orderconfirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Requisition Approved List</span>
+                                        <span class="hide-menu"> Requisition Orderconfirm List</span>
                                     </a>
                                 </li> 
                             </ul>
@@ -79,16 +79,16 @@
                                         <span class="hide-menu">All Purchase Order </span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item">
+                                {{-- <li class="sidebar-item">
                                     <a href="{{ URL('/order-awaiting-approval') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Awaiting Approval</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="sidebar-item">
                                     <a href="{{ URL('/order-orderconfirm') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Order Approved List</span>
+                                        <span class="hide-menu"> Order Orderconfirm List</span>
                                     </a>
                                 </li> 
                                 
@@ -242,12 +242,12 @@
                                         <span class="hide-menu"> Order Approved List</span>
                                     </a>
                                 </li>
-                                {{--  <li class="sidebar-item">
+                                 <li class="sidebar-item">
                                     <a href="{{ URL('/confirm2') }}" class="sidebar-link">
                                         <i class="mdi mdi-adjust"></i>
                                         <span class="hide-menu"> Order Confirm List</span>
                                     </a>
-                                </li>   --}}
+                                </li>  
                             </ul>
                         </li>
                     </ul>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
+use TNkemdilim\MoneyToWords\Converter;
 
 use DB;
 use Auth;
@@ -137,8 +137,8 @@ class purchaseOrderController extends Controller
     }
     
 
-//Purchase Order Print
-function purchaseOrderPrint($id) {
+    //Purchase Order Print
+    function purchaseOrderPrint($id) {
 
         $purchases  = DB::table('purchases')
         ->select('purchases.*','users.name as created_by','suppliers.company_name','suppliers.address','requisitions.requisition_no','requisitions.requiredDate','project_budgets.memo_no')
@@ -146,19 +146,20 @@ function purchaseOrderPrint($id) {
         ->leftjoin('users','users.id','=','purchases.created_by')
         ->leftjoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftjoin('requisitions','requisitions.id','=','purchases.requisition_no')
-       
+
         ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
 
         ->where('purchases.id',$id)
         ->first(); 
-        
-       $poid= $id;      
-     //dd($data);
-  
-    $pdf = PDF::loadView('purchaseorder.purchaseOrderPrint', compact('purchases','poid'));
-    $pdf->SetProtection(['copy', 'print'], '', 'pass');
-    return $pdf->stream('document.pdf');
-}
+
+        $poid= $id;      
+        //dd($data);
+
+        $converter = new Converter("Taka", "Poisha");
+        $pdf = PDF::loadView('purchaseorder.purchaseOrderPrint', compact('purchases','poid','converter'));
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
+    }
 
 
 public function orderPendingList(){

@@ -4,7 +4,8 @@
   <head>
     <meta charset="utf-8">
     <title>Purchase Order print copy</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <style type="text/css">
 
@@ -108,7 +109,7 @@ table td {
   padding: 10px;
   
   text-align: center;
-  border: 5px solid #FFFFFF;
+  /*border: 5px solid #FFFFFF;*/
 }
 
 table th {
@@ -163,7 +164,7 @@ table tfoot td {
   border-bottom: none;
   font-size: 1.2em;
   white-space: nowrap; 
-  border-top: 1px solid #AAAAAA; 
+  /*border-top: 1px solid #AAAAAA; */
 }
 
 /*table tfoot tr:first-child td {
@@ -201,8 +202,8 @@ footer {
   height: 30px;
   position: absolute;
   bottom: 0;
-  border-top: 1px solid #AAAAAA;
-  padding: 8px 0;
+  /*border-top: 1px solid #AAAAAA;*/
+  /*padding: 8px 0;*/
   text-align: center;
 }
 
@@ -221,11 +222,11 @@ footer {
       </div>
     </header>
    <main>
- <div class='card' id="section-to-print">
+ <div class='' id="section-to-print">
  
-      <div ]lass='row'>
+      <div class='row'>
         <div class='col-12 table-responsive'>
-          <div class='card'>
+          <div class=''>
             <div class='card-body' style='padding: 0px;'>
 
               <div class='table-responsive'>
@@ -306,9 +307,9 @@ footer {
                        <td class='text-center' style='vertical-align: middle;'>Total Amount BDT</td>
                     </tr>
                   </thead>
-
-                   @foreach($result as $results)
-
+                  @php $totalAmount =0; @endphp
+                  @foreach($result as $results)
+                  @php $totalAmount +=$results->amount; @endphp
                   <tbody>
                     <tr class="card" style="text-align: center;">
                       <td class='text-center'>{{ $serialNo }}</td>
@@ -317,8 +318,7 @@ footer {
                       <td> {{ $results->quantity}}</td>
                       <td> {{ $results->rate}}</td>
                       <td> {{ $results->amount}}</td>
-                    </tr>
-                    
+                    </tr>                    
                   </tbody>
 
                   @php
@@ -326,6 +326,18 @@ footer {
                   @endphp
 
                   @endforeach
+
+                  <tr>
+                    <td colspan="3"></td>
+                    <td colspan="2">TOTAL AMOUNT : </td>
+                    <td> {{ $totalAmount }} </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td colspan="6"><b> In Word : </b>{{ ucwords($converter->convert($totalAmount)) }}</td>
+                  </tr>
                 </table>
                <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
                  <table class='table' style='border-bottom: 0px;'>
@@ -432,9 +444,9 @@ footer {
     </div>
   </div>
 </main>
-<footer>
-  Printed From QAL                      Page 1 of 1
-</footer>
+{{-- <footer>
+  Printed From QAL
+</footer> --}}
   </body>
 
 </html>
