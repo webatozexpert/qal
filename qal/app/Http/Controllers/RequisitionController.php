@@ -159,6 +159,8 @@ function requisitionPrint($id) {
         ->where('requisitions.id',$id)
         ->first();
 
+    //DD($result);
+        
         $rid= $id;
 
         $itemsEdit = DB::table('requisition_items')

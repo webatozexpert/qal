@@ -80,7 +80,7 @@
                      <td><a href="{{ URL('/purchaseOrder-print/'.$results->id) }}"  target="_blank" title="print" class="btn btn-primary btn-sm"> <i class="fa fa-print" ></i>Preview</a>
                      &nbsp;
                    
-                      <a href="{{ URL('/requisition-edit/'.$results->id) }}" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+                      <a href="{{ URL('/po-edit/'.$results->id) }}" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
                      
                       <a href="{{ URL('/purchase-delete/'.$results->id) }}" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                       </td>

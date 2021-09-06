@@ -687,7 +687,7 @@ $('#select-all').click(function(event) {
             <td><input style="width: 105px;"  type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
              <td><input style="width: 108px;"  type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\
             <td><input style="width: 150px;"  type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" class="form-control"/></td>\
-             <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer;" tile="Delete"></td>\
+             <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\
             ';

@@ -322,4 +322,51 @@ public function confirmList(){
          return Redirect::to('purchase_order')->with('success','Data Delete successfull');
     }
 
+
+   
+    //Purchase Order Edit
+  public function poedit($id)
+    {
+         //dd('Ok');
+        $supplier = DB::table('suppliers')->where('status',0)->get();
+        
+        $branch = DB::table('branchs')->get();
+
+        $requisition = DB::table('requisitions')->get();
+        $purchase_general_item = DB::table('purchase_general_items')->where('status',0)->get();
+
+       $purchases  = DB::table('purchases')
+        ->select('purchases.*','users.name as created_by','suppliers.company_name as supplier_name ','suppliers.address','requisitions.requisition_no','requisitions.requiredDate','project_budgets.memo_no as budgetsMemo_no',)
+
+        ->leftjoin('users','users.id','=','purchases.created_by')
+        ->leftjoin('suppliers','suppliers.id','=','purchases.supplier_name')
+        ->leftjoin('requisitions','requisitions.id','=','purchases.requisition_no')
+
+        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+
+        ->where('purchases.id',$id)
+        ->first(); 
+
+       //DD($purchases);
+
+        $poid= $id;      
+
+        $poitemsEdit = DB::table('purchase_items')
+        ->select('purchase_items.*','purchase_general_items.item_name','purchase_item_units.unit')
+
+        ->leftjoin('purchase_general_items','purchase_general_items.id','=','purchase_items.item_id')
+
+        ->leftjoin('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
+
+        ->where('purchase_items.purchase_id',$id)->get();
+
+        
+  return view('purchaseorder/purchaseorderEdit', compact('purchases','poid','supplier','branch','requisition','purchase_general_item','poitemsEdit'));
+
+        
+
+  }
+
+
+
 }

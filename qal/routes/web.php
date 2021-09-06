@@ -173,7 +173,8 @@ Route::get('/intemname-wise-quantity', 'purchaseOrderController@intemname_wise_q
 Route::post('order-submit', 'purchaseOrderController@purchase_order_submit');
 Route::get('/purchase-delete/{id}', 'purchaseOrderController@delete');
 Route::get('/purchaseOrder-print/{id}', 'purchaseOrderController@purchaseOrderPrint');
-
+Route::get('/po-edit/{id}', 'purchaseOrderController@poedit');
+Route::post('/po-update', 'purchaseOrderController@poupdate');
 
 //prochase Approoved part
 Route::get('/order-awaiting-approval/', 'purchaseOrderController@orderPendingList');
