@@ -141,83 +141,82 @@ function requisitionPrint($id) {
     }
 
 //Requisition Edit
- public function edit($id)
+  public function edit($id)
     {
-        $edit = DB::table('requisition_items')->where('id',$id)->first();
-
-         $branch = DB::table('branchs')->where('status',0)->get();
-        
+        $branch = DB::table('branchs')->where('status',0)->get();        
         $project_budget = DB::table('project_budgets')->where('status',0)->get();
-
-        $item_group = DB::table('purchase_item_groups')->where('status',0)->get();
-        
+        $item_group = DB::table('purchase_item_groups')->where('status',0)->get();        
         $purchase_general_item = DB::table('purchase_general_items')->where('status',0)->get();
-       
-        $result = DB::table('requisitions')->orderBy('id', 'DESC')->get();
-       
-        $result = DB::table('requisition_items')
-        ->select('requisition_items.*','purchase_general_items.id','purchase_general_items.item_name as iname','purchase_general_items.id','purchase_general_items.item_unit_id','purchase_item_units.unit')
 
-        ->leftJoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
 
-        ->leftJoin('purchase_item_units','purchase_general_items.item_unit_id','=','purchase_item_units.id')
-        ->where('requisition_items.requisition_id',$id)
-        ->orderBy('requisition_items.id','DESC')->get();
+        $result  = DB::table('requisitions')
+        ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no as budgetsMemo_no','purchase_item_groups.name','users.name as created_by')
 
-        //dd($result);
+        ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
+        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+        ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+        ->leftjoin('users','users.id','=','requisitions.created_by')
+        ->where('requisitions.id',$id)
+        ->first();
 
-         return view('requisition/requisitionEdit', compact('result','branch','project_budget','item_group','purchase_general_item'));
-       
-    }
+        $rid= $id;
+
+        $itemsEdit = DB::table('requisition_items')
+        ->select('requisition_items.*','purchase_general_items.item_name','purchase_item_units.unit')
+
+        ->leftjoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
+
+        ->leftjoin('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
+
+        ->where('requisition_items.requisition_id',$id)->get();
+
+        return view('requisition/requisitionEdit', compact('result','rid','branch','project_budget','item_group','purchase_general_item','itemsEdit'));
+
+  }
+
 
     //Requisition Update
 
    
-    public function update(Request $request){
-      
-            //dd($request->all());
+    public function update(Request $request)
+    {
+         
+        // Requisitions Main data update
+        $req_last_id = DB::table('requisitions')->where('id',$request->get('id'))
+        ->update([
+            //'requisition_no'    => $requisition_no,
+            'postingDate'       => date('Y-m-d', strtotime($request->get('postingDate'))),
+            'requiredDate'      => date('Y-m-d', strtotime($request->get('requiredDate'))),
+            'branch_id'         => $request->get('branch_id'),
+            'memo_no'           => $request->get('memo_no'),
+            'description'       => $request->get('description'),
+            'item_group'        => $request->get('item_group'),
+            'priority'          => $request->get('priority'),
+            'procuerementType'  => $request->get('procuerementType'),
+            //'status'            => $request->get('status',0),
+            'updated_by'        => Auth::user()->id
+            
+        ]);
 
-            $exiting = DB::table('requisitions')->orderBy('id','DESC')->first();
-            if(!empty($exiting))
+
+        /////////////////// Multiple ///////////////////
+
+        DB::table('requisition_items')->where('requisition_id',$request->get('id'))
+        ->delete();
+
+        $reqItem=count($request->get('required_quantity1'));
+
+        for($i=0;$i<$reqItem;$i++)
+        {
+            if(($request->get('required_quantity1')[$i]!='' && $request->get('required_quantity1')[$i]>0))
             {
-                $requisition_no = "PR#".date('ym').str_pad($exiting->id+1, 4, "0", STR_PAD_LEFT);
+                DB::table('requisition_items')->insert([
+                    'requisition_id'    => $request->get('id'),
+                    'item_id'           => $request->get('item_id1')[$i],
+                    'quantity'          => $request->get('required_quantity1')[$i]
+                ]);                        
             }
-            else
-            {
-                $requisition_no = "PR#".date('ym').str_pad(1, 4, "0", STR_PAD_LEFT);;
-            }
-    
-            // Requisitions Main data update
-            $req_last_id = DB::table('requisitions')->update([
-                'requisition_no'    => $requisition_no,
-                'postingDate'       => date('Y-m-d', strtotime($request->get('postingDate'))),
-                'requiredDate'      => date('Y-m-d', strtotime($request->get('requiredDate'))),
-                'branch_id'         => $request->get('branch_id'),
-                'memo_no'           => $request->get('memo_no'),
-                'description'       => $request->get('description'),
-                'item_group'        => $request->get('item_group'),
-                'priority'          => $request->get('priority'),
-                'procuerementType'  => $request->get('procuerementType'),
-                'status'            => $request->get('status',0),
-                'created_by'        => Auth::user()->id
-            ]);
-
-
-            /////////////////// Multiple ///////////////////
-
-            $reqItem=count($request->get('required_quantity1'));
-
-            for($i=0;$i<$reqItem;$i++)
-            {
-                if(($request->get('required_quantity1')[$i]!='' && $request->get('required_quantity1')[$i]>0))
-                {
-                    DB::table('requisition_items')->insert([
-                        'requisition_id'    => $req_last_id,
-                        'item_id'           => $request->get('item_name1')[$i],
-                        'quantity'          => $request->get('required_quantity1')[$i]
-                    ]);                        
-                }
-            }
+        }
     
         return Redirect::to('requisition')->with('success','Data Updated successfull');
     }

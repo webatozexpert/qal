@@ -160,11 +160,12 @@
                       <td id="prof_1"></td>
                     </tr>
                 </table>
-                <div class="form-group row text-right">
-              <div class="col-sm-12">
-                <button type="submit" class="btn btn-success mr-2">Save</button>
-              </div>
-            </div>
+
+                <div class="form-group row text-right" style="padding-top:15px;">
+                  <div class="col-sm-12">
+                    <button type="submit" class="btn btn-success mr-2">Save Requisition</button>
+                  </div>
+                </div>
                 
               </form>
         </div>
