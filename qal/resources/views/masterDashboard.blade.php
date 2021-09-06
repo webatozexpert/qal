@@ -615,7 +615,7 @@
             <td><input style="width: 610px;" type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'"/></td>\
             <td><input style="width: 200px;" type="text" id="unit' + newField + '" name="unit1[]" maxlength="10" value="'+unit+'" readonly="" class="form-control"/></td>\
             <td><input style="width:200px;" type="text" id="required_quantity' + newField + '" name="required_quantity1[]" maxlength="10" value="'+required_quantity+'" readonly="" class="form-control"/></td>\
-            <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer;" tile="Delete"></td>\
+            <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\
             ';
@@ -716,16 +716,6 @@ $('#select-all').click(function(event) {
         $("#amount").val(totalAmount);
     }
     
-    //   function total(){
-        
-    //     var total=0;
-    //     $('.amount').each(function(i,e){
-    //         var amount=$(this).val()-0;
-    //         total +=amount;
-    //     });
-    //    $('.total').html(total);
-    // }
-
 
 
     </script>
