@@ -115,6 +115,7 @@
                   <th style="padding: 10px 10px 0 10px;">Quantity</th>
                   <th style="padding: 10px 10px 0 10px;">Rate</th>
                   <th style="padding: 10px 10px 0 10px;">Amount</th>
+                  <th style="padding: 10px 10px 0 10px;">Branch</th>
                   <th style="padding: 10px 10px 0 10px;">Action</th>
                   <td></td>
                 </tr>
@@ -126,16 +127,16 @@
                       <option value="">Item Description</option>
                     </select>
                   </td>
-                  <td style="width: 15%;">
+                  <td style="width: 10%;">
                     <input type="text" class="form-control" id="quantity" name="quantity" autocomplete="off" readonly="">
                   </td>
-                  <td style="width: 15%;">
+                  <td style="width: 10%;">
                     <input type="text" class="form-control" id="rate" name="rate" autocomplete="off" onkeyup="makeAmount()">
                   </td>
-                  <td style="width: 15%;">
+                  <td style="width: 10%;">
                     <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" readonly="">
                   </td>
-                  {{-- <td style="width: 16%;">
+                  <td style="width: 16%;">
 
                     <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseGroup(this.value)">
                       @foreach($branch as $rows)
@@ -143,7 +144,7 @@
                       @endforeach
 
                     </select>
-                  </td> --}}
+                  </td>
                   <td>
                     <button type="button" id="addRow" class="btn btn-success" style="padding: 01px 10px 01px 10px !important;" onclick="addMore2()" value="Add" > ADD</button>
                   </td>
@@ -161,13 +162,13 @@
 
                 <td><input style="width: 525px;"  type="text" id="item_name{{$pos}}" name="item_name1[]" maxlength="10" value="{{$items->item_name}}" readonly="" class="form-control"/><input type="hidden" id="item_id{{$pos}}" name="item_id1[]" value="{{$items->item_id}}" readonly="" /></td>
 
-                <td><input style="width: 155px;"  type="text" id="quantity{{$pos}}" name="quantity1[]" maxlength="10" value="{{$items->quantity}}" readonly="" class="form-control"/></td>
+                <td><input style="width: 104px;"  type="text" id="quantity{{$pos}}" name="quantity1[]" maxlength="10" value="{{$items->quantity}}" readonly="" class="form-control"/></td>
 
-                <td><input style="width: 155px;"  type="text" id="rate{{$pos}}" name="rate1[]" maxlength="10" value="{{$items->rate}}" readonly="" class="form-control"/></td>
+                <td><input style="width: 99px;"  type="text" id="rate{{$pos}}" name="rate1[]" maxlength="10" value="{{$items->rate}}" readonly="" class="form-control"/></td>
 
-                <td><input style="width: 160px;"  type="text" id="amount{{$pos}}" name="amount1[]" maxlength="10" value="{{$items->amount}}" readonly="" class="form-control"/></td>
+                <td><input style="width: 105px;"  type="text" id="amount{{$pos}}" name="amount1[]" maxlength="10" value="{{$items->amount}}" readonly="" class="form-control"/></td>
 
-               {{--  <td><input style="width: 150px;"  type="text" id="branch{{$pos}}" name="branch1[]" maxlength="10" value="{{$items->branch}}" readonly="" class="form-control"/></td> --}}
+                <td><input style="width: 150px;"  type="text" id="branch{{$pos}}" name="branch1[]" maxlength="10" value="{{$items->branch}}" readonly="" class="form-control"/></td>
 
                 <td><input type="button" value="Remove" onClick="del({{$pos}})" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>
               </tr>

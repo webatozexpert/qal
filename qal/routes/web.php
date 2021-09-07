@@ -167,8 +167,8 @@ Route::get('/purchase_order', 'purchaseOrderController@purchaseorder');
 Route::get('/purchase_order/create', 'purchaseOrderController@purchaseorder_create');
 
 Route::get('/requisition-wise-intemname', 'purchaseOrderController@requisition_wise_intemname');
-
 Route::get('/intemname-wise-quantity', 'purchaseOrderController@intemname_wise_quantity');
+Route::get('/requisition-wise-branch', 'purchaseOrderController@requisition_wise_branch');
 
 Route::post('order-submit', 'purchaseOrderController@purchase_order_submit');
 Route::get('/purchase-delete/{id}', 'purchaseOrderController@delete');

@@ -5,16 +5,19 @@
     @foreach($itemName as $rows)
     <option value="{{ $rows->item_name.'_'.$rows->id.'_'.$rows->item_id }}">{{ $rows->item_name.' | '.$rows->item_code }}</option>
     @endforeach
-  </select>
+</select>
 
 @elseif($type==2)
 {{ $quantity->quantity }}
-<!-- <select name="unit" id="unit" class="select2 form-control custom-select" style="width: 100%;" required="">
-    <option value="">Select</option>
-    @foreach($unit as $rows)
-    <option value="{{ $rows->id }}">{{ $rows->item_unit_id }}</option>
-    @endforeach
-  </select>
 
-   -->
+@elseif($type==3)
+
+<select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="requisitionWiseBranch(this.value)">
+    @foreach($branch as $rows)
+    <option value="{{ $rows->id }}" @if($rows->id==$branchReq->branch_id) selected="" @endif>
+        {{ $rows->name }}
+    </option>
+    @endforeach
+</select>
+
 @endif

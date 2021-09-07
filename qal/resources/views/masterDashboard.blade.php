@@ -502,7 +502,23 @@
             .done(function (response)
             {
                 // alert(response);
-                $("#item_name").html(response);                
+                $("#item_name").html(response);
+                requisitionWiseBranch(id);                
+            });
+        }
+        function requisitionWiseBranch(id)
+        {
+            //alert(id);
+
+            $.ajax({
+                method: "GET",
+                url: '{{url("/requisition-wise-branch")}}',
+                data: {'id': id}
+            })
+            .done(function (response)
+            {
+                //alert(response);
+                $("#branch").html(response);                
             });
         }
 
@@ -521,6 +537,8 @@
                 $("#quantity").val(response);                
             });
         }
+
+         
 
         function printDiv() {
             var DivID = document.getElementById("section-to-print").innerHTML;
@@ -671,7 +689,7 @@ $('#select-all').click(function(event) {
                 var quantity          = $('#quantity').val();
                 var rate = $('#rate').val();
                 var amount = $('#amount').val();
-                // var branch = $('#branch').val();
+                var branch = $('#branch').val();
                 var x = item_name.split('_');
                 //alert(x[1]);
 
@@ -689,9 +707,10 @@ $('#select-all').click(function(event) {
                 strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
                 <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
             <td><input style="width: 525px;"  type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[2]+'" readonly="" /></td>\
-            <td><input style="width: 155px;"  type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" class="form-control"/></td>\
-            <td><input style="width: 155px;"  type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
-             <td><input style="width: 160px;"  type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\
+            <td><input style="width: 104px;"  type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" class="form-control"/></td>\
+            <td><input style="width: 99px;"  type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
+             <td><input style="width: 105px;"  type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\
+             <td><input style="width: 150px;"  type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" class="form-control"/></td>\
              <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\
@@ -716,7 +735,7 @@ $('#select-all').click(function(event) {
     $('#quantity'+id).val('');
     $('#rate'+id).val('');
     $('#amount'+id).val('');
-    // $('#branch'+id).val('');
+    $('#branch'+id).val('');
     $("#prof_" + id).hide();
 }
     function makeAmount(){

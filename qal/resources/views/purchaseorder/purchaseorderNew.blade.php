@@ -112,35 +112,34 @@
                       <th style="padding: 10px 10px 0 10px;">Quantity</th>
                       <th style="padding: 10px 10px 0 10px;">Rate</th>
                       <th style="padding: 10px 10px 0 10px;">Amount</th>
+                      <th style="padding: 10px 10px 0 10px;">Branch</th>
                       <th style="padding: 10px 10px 0 10px;">Action</th>
                       <td></td>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td style="width: 50%;">
+                      <td style="width: 52%;">
                         <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseQuantity(this.value)">
                         <option value="">Item Description</option>
                         </select>
                       </td>
-                      <td style="width: 15%;">
+                      <td style="width: 10%;">
                         <input type="text" class="form-control" id="quantity" name="quantity" autocomplete="off" readonly="">
                       </td>
-                      <td style="width: 15%;">
+                      <td style="width: 10%;">
                         <input type="text" class="form-control" id="rate" name="rate" autocomplete="off" onkeyup="makeAmount()">
                       </td>
-                      <td style="width: 15%;">
+                      <td style="width: 10%;">
                         <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" readonly="">
                       </td>
-                      {{-- <td style="width: 16%;">
+                      <td style="width: 16%;">
                        
-                         <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseGroup(this.value)">
-                           @foreach($branch as $rows)
-                            <option value="{{ $rows->id }}" @if($rows->name=='Head Office') selected="" @endif>{{ $rows->name }}</option>
-                           @endforeach
+                         <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="requisitionWiseBranch(this.value)">
+                         
                        
                         </select>
-                      </td> --}}
+                      </td>
                       <td>
                         <button type="button" id="addRow" class="btn btn-success" style="padding: 01px 12px 01px 12px !important;" onclick="addMore2()" value="Add" > ADD</button>
                       </td>

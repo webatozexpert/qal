@@ -107,7 +107,7 @@ class purchaseOrderController extends Controller
                     'quantity'        => $request->get('quantity1')[$i],
                     'rate'            => $request->get('rate1')[$i],
                     'amount'          => $request->get('amount1')[$i],
-                    // 'branch'          => $request->get('branch1')[$i]
+                    'branch'          => $request->get('branch1')[$i]
                     ]);                        
                 }
             }
@@ -145,7 +145,18 @@ class purchaseOrderController extends Controller
 
         return $quantity->quantity;
     }
-    
+    //Requisition wise Branch
+    public function requisition_wise_branch(Request $request)
+    {
+       // DD($request->get('id'));
+        $branch    = DB::table('branchs')->get();
+        $branchReq = DB::table('requisitions')->select('branch_id')
+        ->where('id',$request->get('id'))
+        ->first(); 
+        //DD($branchReq);       
+        $type     = 3;        
+        return view('purchaseorder/requisitionWiseitemName', compact('branch','branchReq','type'));
+    }
 
     //Purchase Order Print
     function purchaseOrderPrint($id) {
@@ -428,7 +439,7 @@ public function confirmList(){
                     'quantity'        => $request->get('quantity1')[$i],
                     'rate'            => $request->get('rate1')[$i],
                     'amount'          => $request->get('amount1')[$i],
-                    // 'branch'          => $request->get('branch1')[$i]
+                    'branch'          => $request->get('branch1')[$i]
                     ]);                        
                 }
             }
