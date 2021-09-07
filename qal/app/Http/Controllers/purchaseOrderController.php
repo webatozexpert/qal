@@ -94,22 +94,30 @@ class purchaseOrderController extends Controller
 
             /////////////////// Multiple ///////////////////
 
+            $totalAmount=0;
             $poItem=count($request->get('item_name1'));
-
             for($i=0;$i<$poItem;$i++)
             {
                 if($request->get('item_name1')[$i] && $request->get('quantity1')[$i]>0  && $request->get('rate1')[$i]>0)
                 {
+                    $totalAmount +=$request->get('amount1')[$i];
                     DB::table('purchase_items')->insert([
                     'purchase_id'     => $po_last_id,
                     'item_id'         => $request->get('item_id1')[$i],
                     'quantity'        => $request->get('quantity1')[$i],
                     'rate'            => $request->get('rate1')[$i],
                     'amount'          => $request->get('amount1')[$i],
-                    'branch'          => $request->get('branch1')[$i]
+                    // 'branch'          => $request->get('branch1')[$i]
                     ]);                        
                 }
             }
+
+            DB::table('purchases')->where('id',$po_last_id)
+            ->update(
+                [
+                    'total_amount' => $totalAmount
+                ]
+            );
     
         return Redirect::to('purchase_order')->with('success','Data Added Successfull');
     }
@@ -366,6 +374,74 @@ public function confirmList(){
         
 
   }
+    //Requisition Update
+
+   
+    public function poupdate(Request $request)
+    {
+         
+      //dd($request->all());
+
+           
+    
+            // Requisitions Main data insert
+            $po_last_id = DB::table('purchases')->where('id',$request->get('id'))
+             ->update([
+            // 'order_no'        => $order_no,
+            'postingDate'     => date('Y-m-d', strtotime($request->get('postingDate'))),
+
+            'supplier_name'    => $request->get('supplier_name'),
+            'procuerement_type'=> $request->get('procuerement_type'),
+            'currency'        => $request->get('currency'),
+            'requisition_no'  => $request->get('requisition_no'),
+            'note'            => $request->get('note'),
+            'delivery_to'      => $request->get('delivery_to'),
+            'payment_term'    => $request->get('payment_term'),
+            'sample'          => $request->get('sample'),
+            'acceptance'      => $request->get('acceptance'),
+            'delivery_within' => $request->get('delivery_within'),
+            'support_and_warranty'=> $request->get('support_and_warranty'),
+            'date_fo_validity'=> date('Y-m-d', strtotime($request->get('date_fo_validity'))),
+            'special_instructions'=> $request->get('special_instructions'),
+            'status'          => $request->get('status',0),
+            'updated_by'      => Auth::user()->id,
+            'created_at'      => date('Y-m-d H:i:s') // 24 hours
+
+            ]);
+
+
+            /////////////////// Multiple ///////////////////
+            $totalAmount=0;
+         DB::table('purchase_items')->where('purchase_id',$request->get('id'))
+        ->delete();
+
+            $poItem=count($request->get('item_name1'));
+
+            for($i=0;$i<$poItem;$i++)
+            {
+                if($request->get('item_name1')[$i] && $request->get('quantity1')[$i]>0  && $request->get('rate1')[$i]>0)
+                {
+                    $totalAmount +=$request->get('amount1')[$i];
+                    DB::table('purchase_items')->insert([
+                    'purchase_id'     => $po_last_id,
+                    'item_id'         => $request->get('item_id1')[$i],
+                    'quantity'        => $request->get('quantity1')[$i],
+                    'rate'            => $request->get('rate1')[$i],
+                    'amount'          => $request->get('amount1')[$i],
+                    // 'branch'          => $request->get('branch1')[$i]
+                    ]);                        
+                }
+            }
+          DB::table('purchases')->where('id',$po_last_id)
+            ->update(
+                [
+                    'total_amount' => $totalAmount
+                ]
+            );
+
+        return Redirect::to('purchase_order')->with('success','Data Updated successfull');
+    }
+
 
 
 

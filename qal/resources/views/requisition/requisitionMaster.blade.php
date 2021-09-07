@@ -38,6 +38,7 @@
                 <table id="zero_config" class="table table-hover table-striped table-bordered">
                   <thead>
                  <tr>
+                    <th style="width:5%">SL NO</th>
                     <th style="width:10%">Branch</th>
                     <th style="width:15%">Requisition No</th>
                     <th style="width:15%">Posting Date</th>
@@ -56,6 +57,7 @@
                   <tbody>
                   @foreach($result as $results)
                     <tr>
+                      <td>{{ $results->id }}</td>
                       <td>{{ $results->bname }}</td>
                       
                       <td><a href="{{ URL('/requisition-print/'.$results->id) }}" target="_blank" title="print">{{ $results->requisition_no }}</a>

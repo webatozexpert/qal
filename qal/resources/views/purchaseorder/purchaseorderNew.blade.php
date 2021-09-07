@@ -112,7 +112,7 @@
                       <th style="padding: 10px 10px 0 10px;">Quantity</th>
                       <th style="padding: 10px 10px 0 10px;">Rate</th>
                       <th style="padding: 10px 10px 0 10px;">Amount</th>
-                      <th style="padding: 10px 10px 0 10px;">Branch</th>
+                      <th style="padding: 10px 10px 0 10px;">Action</th>
                       <td></td>
                     </tr>
                   </thead>
@@ -123,16 +123,16 @@
                         <option value="">Item Description</option>
                         </select>
                       </td>
-                      <td style="width: 10%;">
+                      <td style="width: 15%;">
                         <input type="text" class="form-control" id="quantity" name="quantity" autocomplete="off" readonly="">
                       </td>
-                      <td style="width: 10%;">
+                      <td style="width: 15%;">
                         <input type="text" class="form-control" id="rate" name="rate" autocomplete="off" onkeyup="makeAmount()">
                       </td>
-                      <td style="width: 10%;">
+                      <td style="width: 15%;">
                         <input type="text" class="form-control" id="amount" name="amount" autocomplete="off" readonly="">
                       </td>
-                      <td style="width: 16%;">
+                      {{-- <td style="width: 16%;">
                        
                          <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseGroup(this.value)">
                            @foreach($branch as $rows)
@@ -140,9 +140,9 @@
                            @endforeach
                        
                         </select>
-                      </td>
+                      </td> --}}
                       <td>
-                        <button type="button" id="addRow" class="btn btn-success" style="padding: 01px 10px 01px 10px !important;" onclick="addMore2()" value="Add" > ADD</button>
+                        <button type="button" id="addRow" class="btn btn-success" style="padding: 01px 12px 01px 12px !important;" onclick="addMore2()" value="Add" > ADD</button>
                       </td>
                     </tr>
                       <input type="hidden" id="prof_count" value="1">
@@ -207,7 +207,7 @@
                 <br>
                 <div class="form-group row text-right">
               <div class="col-sm-12">
-                <button type="submit" class="btn btn-success mr-2">Save</button>
+                <button type="submit" class="btn btn-success mr-2">Save Purchase Order</button>
               </div>
             </div>
               </form>

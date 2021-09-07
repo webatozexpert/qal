@@ -58,7 +58,7 @@
                       </td>
                       <td>{{ $results->postingDate}}</td>
                       <td>{{ $results->supplier_name}}</td>
-                      <td>Total Amount</td>
+                      <td>{{ $results->total_amount}}</td>
                       <td>{{ $results->created_by }}</td>
                      
                   
