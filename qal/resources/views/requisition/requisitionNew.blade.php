@@ -116,7 +116,7 @@
 
                   <label for="zoneCode" class="col-sm-2 col-form-label">Note</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Note.." autocomplete="off">
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Note.." autocomplete="off" required=""  >
                   </div>
 
                 </div>
@@ -137,7 +137,7 @@
                   <tbody>
                     <tr>
                       <td style="width: 60%;">
-                        <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseUnit(this.value)">
+                        <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseUnit(this.value)"required="" >
                         <option value="">Enter Item Name</option>
                         </select>
                       </td>

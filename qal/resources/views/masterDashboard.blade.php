@@ -627,7 +627,13 @@
                 intFields = $(strCountField).val();
                 intFields = Number(intFields);    
                 newField = intFields + 1;
-                    
+                
+                //  if(item_name=='' || quantity=='')
+                // {
+                //     alert('Please add item with rate first.');
+                //     return false;
+                // }
+
                 strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
                 <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
             <td><input style="width: 610px;" type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'"/></td>\
