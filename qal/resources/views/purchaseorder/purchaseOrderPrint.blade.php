@@ -24,8 +24,8 @@ body {
 
 header {
  
-  padding: 10px 0;
-  margin-bottom: 20px;
+  padding: 5px 0;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -132,40 +132,37 @@ table tfoot td {
                     <td>
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
                         <tr>
-                          <td >P.O Number</td>
-                          <td >: {{ $purchases->order_no }}</td>
+                          <td >P.O Number :</td>
+                          <td > {{ $purchases->order_no }}</td>
+                           
                         </tr>
                        
                         <tr>
-                          <td>Supplier Name</td>
-                          <td style=''>: {{ $purchases->company_name }} </td>
+                          <td>Supplier Name :</td>
+                          <td >{{ $purchases->company_name }} </td>
                         </tr>
                         <tr>
-                          <td>Address</td>
-                          <td >:  {{ $purchases->address }}</td>
+                          <td>Address :</td>
+                          <td > {{ $purchases->address }}</td>
                         </tr>
                         <tr>
-                          <td>Budget Name</td>
-                          <td style=''>:{{ $purchases->memo_no }}  </td>
+                          <td>Requisition No :
+                         </td>
+                          <td >{{ $purchases->requisition_no }} </td>
+                        </tr>
+                        <tr>
+                          <td>Budget Name :</td>
+                          <td >{{ $purchases->memo_no }}  </td>
                         </tr>
                       </table>
                     </td>
                     <td >&nbsp;</td>
                     <td>
                       <table id='table' class='table-responsive' width='100%' cellspacing="0">
-                        <tr>
-                          <td >Date</td>
-                          <td >: {{ $purchases->postingDate }} </td>
-                        </tr>
-                        
-                        <tr>
-                          <td>Requisition No
-                         </td>
-                          <td style=''>:{{ $purchases->requisition_no }} </td>
-                        </tr>
-                       <tr>
-                          <td >Required Date</td>
-                          <td >:{{ $purchases->requiredDate }} </td>
+                       
+                      <tr>
+                          <td >Date :</td>
+                          <td > {{ $purchases->postingDate }} </td>
                         </tr>
                       </table>
                     </td>
@@ -267,20 +264,10 @@ table tfoot td {
 
                       //dd($data);
 
-                      $Aname = '';
+                    
                       $Aname1 = '';
                       $Aname2 = '';
-                      if($data->status=='1')
-                      {
-                          $auth = DB::table('purchases')
-                          ->select('purchases.*','users.name as username')
-                          ->leftjoin('users','users.id','=','purchases.approved_by')
-                          ->where('purchases.id',$poid)
-                          ->first(); 
-
-                          $Aname = $auth->username;
-                      }
-                      else if($data->status=='2')
+                       if($data->status=='2')
                       {
                         $auth = DB::table('purchases')
                           ->select('purchases.*','users.name as username')

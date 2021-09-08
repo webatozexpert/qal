@@ -64,11 +64,8 @@
                   
                      <td>
                                                 
-                        @if($results->status=='0')
+                        @if($results->status=='1')
                        <span >Pending</span>
-                       
-                       @elseif($results->status=='1')
-                       <span >Approved</span>
                        @elseif($results->status=='2')
                        <span >Confirm</span>
                        @elseif($results->status=='3')

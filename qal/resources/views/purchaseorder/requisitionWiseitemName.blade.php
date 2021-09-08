@@ -14,7 +14,7 @@
 
 <select name="branch" id="branch" class="select2 form-control custom-select" style="width: 100%;" onchange="requisitionWiseBranch(this.value)">
     @foreach($branch as $rows)
-    <option value="{{ $rows->id }}" @if($rows->id==$branchReq->branch_id) selected="" @endif>
+    <option value="{{ $rows->name.'_'.$rows->id }}" @if($rows->id==$branchReq->branch_id) selected="" @endif>
         {{ $rows->name }}
     </option>
     @endforeach

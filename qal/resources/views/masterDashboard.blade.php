@@ -685,13 +685,16 @@ $('#select-all').click(function(event) {
                 //alert("new row working");
                 $(document).ready(function(){
                 //alert("In");
-                var item_name         = $('#item_name').val();
-                var quantity          = $('#quantity').val();
-                var rate = $('#rate').val();
-                var amount = $('#amount').val();
-                var branch = $('#branch').val();
-                var x = item_name.split('_');
-                //alert(x[1]);
+                var item_name           = $('#item_name').val();
+                var quantity            = $('#quantity').val();
+                var rate                = $('#rate').val();
+                var amount              = $('#amount').val();
+                var branch              = $('#branch').val();
+                var requisition_id      = $('#requisition_no').val();
+
+                var x  = item_name.split('_');
+                var bx = branch.split('_');
+                //alert(bx[0]+'--'+bx[1]);
 
                 strCountField = '#prof_count';      
                 intFields = $(strCountField).val();
@@ -710,7 +713,7 @@ $('#select-all').click(function(event) {
             <td><input style="width: 104px;"  type="text" id="quantity' + newField + '" name="quantity1[]" maxlength="10" value="'+quantity+'" readonly="" class="form-control"/></td>\
             <td><input style="width: 99px;"  type="text" id="rate' + newField + '" name="rate1[]" maxlength="10" value="'+rate+'" readonly="" class="form-control"/></td>\
              <td><input style="width: 105px;"  type="text" id="amount' + newField + '" name="amount1[]" maxlength="10" value="'+amount+'" readonly="" class="form-control"/></td>\
-             <td><input style="width: 150px;"  type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+branch+'" readonly="" class="form-control"/></td>\
+             <td><input style="width: 150px;"  type="text" id="branch' + newField + '" name="branch1[]" maxlength="10" value="'+bx[0]+'" readonly="" class="form-control"/><input type="hidden" id="branchid' + newField + '" name="branchid1[]" maxlength="10" value="'+bx[1]+'" class="form-control"/><input type="hidden" id="requisition_id' + newField + '" name="requisition_id1[]" maxlength="10" value="'+requisition_id+'" class="form-control"/></td>\
              <td><input type="button" value="Remove" onClick="del('+ newField +')" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\

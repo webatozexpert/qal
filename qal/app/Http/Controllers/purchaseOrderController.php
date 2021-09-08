@@ -85,7 +85,7 @@ class purchaseOrderController extends Controller
             'support_and_warranty'=> $request->get('support_and_warranty'),
             'date_fo_validity'=> date('Y-m-d', strtotime($request->get('date_fo_validity'))),
             'special_instructions'=> $request->get('special_instructions'),
-            'status'          => $request->get('status',0),
+            'status'          => $request->get('status',1),
             'created_by'      => Auth::user()->id,
             'created_at'      => date('Y-m-d H:i:s') // 24 hours
 
@@ -107,7 +107,8 @@ class purchaseOrderController extends Controller
                     'quantity'        => $request->get('quantity1')[$i],
                     'rate'            => $request->get('rate1')[$i],
                     'amount'          => $request->get('amount1')[$i],
-                    'branch'          => $request->get('branch1')[$i]
+                    'branch'          => $request->get('branchid1')[$i],
+                    'requisition_id'  => $request->get('requisition_id1')[$i]
                     ]);                        
                 }
             }
@@ -194,7 +195,7 @@ public function orderPendingList(){
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')
         ->orderBy('purchases.id','DESC')
-        ->where('purchases.status',0)
+        ->where('purchases.status',1)
         ->get();
 
        // dd($result);
@@ -203,36 +204,7 @@ public function orderPendingList(){
 
     }
     
-    public function approved2(Request $request){
-
-       $val = $request->get('data');
-       foreach($val as $reqid)
-       {
-          DB::table('purchases')
-              ->where('id',$reqid)
-              ->update(['status' => 1, 'approved_by' => Auth::user()->id]);
-       }
-
-       Session::flash('success', 'Data Approved successfull');
-       return 0;
-    }
-
- public function approvedList(){
-        //dd('Ok');
-         $result = DB::table('purchases')
-        ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
-        
-        ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
-        ->leftJoin('users','users.id','=','purchases.created_by')
-        ->orderBy('purchases.id','DESC')
-       
-       ->where('purchases.status',1)
-      ->get();
-
-      // dd($result);
-       
-        return view('purchaseorder.orderapprovedlist',compact('result'));
-    }
+ 
 
    public function awaitingConfirmList(){
         //dd('Ok');
@@ -371,14 +343,14 @@ public function confirmList(){
         $poid= $id;      
 
         $poitemsEdit = DB::table('purchase_items')
-        ->select('purchase_items.*','purchase_general_items.item_name','purchase_item_units.unit')
+        ->select('purchase_items.*','purchase_general_items.item_name','purchase_item_units.unit','branchs.name')
 
         ->leftjoin('purchase_general_items','purchase_general_items.id','=','purchase_items.item_id')
-
+ 
         ->leftjoin('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
-
+          ->leftjoin('branchs','branchs.id','=','purchase_items.branch')
         ->where('purchase_items.purchase_id',$id)->get();
-
+       //dd($poitemsEdit);
         
   return view('purchaseorder/purchaseorderEdit', compact('purchases','poid','supplier','branch','requisition','purchase_general_item','poitemsEdit'));
 
@@ -390,65 +362,61 @@ public function confirmList(){
    
     public function poupdate(Request $request)
     {
-         
-      //dd($request->all());
+        // Requisitions Main data insert
+        $po_last_id = DB::table('purchases')->where('id',$request->get('id'))
+         ->update([
+        // 'order_no'        => $order_no,
+        'postingDate'     => date('Y-m-d', strtotime($request->get('postingDate'))),
 
-           
-    
-            // Requisitions Main data insert
-            $po_last_id = DB::table('purchases')->where('id',$request->get('id'))
-             ->update([
-            // 'order_no'        => $order_no,
-            'postingDate'     => date('Y-m-d', strtotime($request->get('postingDate'))),
+        'supplier_name'    => $request->get('supplier_name'),
+        'procuerement_type'=> $request->get('procuerement_type'),
+        'currency'        => $request->get('currency'),
+        'requisition_no'  => $request->get('requisition_no'),
+        'note'            => $request->get('note'),
+        'delivery_to'      => $request->get('delivery_to'),
+        'payment_term'    => $request->get('payment_term'),
+        'sample'          => $request->get('sample'),
+        'acceptance'      => $request->get('acceptance'),
+        'delivery_within' => $request->get('delivery_within'),
+        'support_and_warranty'=> $request->get('support_and_warranty'),
+        'date_fo_validity'=> date('Y-m-d', strtotime($request->get('date_fo_validity'))),
+        'special_instructions'=> $request->get('special_instructions'),
+        'updated_by'      => Auth::user()->id,
+        'created_at'      => date('Y-m-d H:i:s') // 24 hours
 
-            'supplier_name'    => $request->get('supplier_name'),
-            'procuerement_type'=> $request->get('procuerement_type'),
-            'currency'        => $request->get('currency'),
-            'requisition_no'  => $request->get('requisition_no'),
-            'note'            => $request->get('note'),
-            'delivery_to'      => $request->get('delivery_to'),
-            'payment_term'    => $request->get('payment_term'),
-            'sample'          => $request->get('sample'),
-            'acceptance'      => $request->get('acceptance'),
-            'delivery_within' => $request->get('delivery_within'),
-            'support_and_warranty'=> $request->get('support_and_warranty'),
-            'date_fo_validity'=> date('Y-m-d', strtotime($request->get('date_fo_validity'))),
-            'special_instructions'=> $request->get('special_instructions'),
-            'status'          => $request->get('status',0),
-            'updated_by'      => Auth::user()->id,
-            'created_at'      => date('Y-m-d H:i:s') // 24 hours
-
-            ]);
+        ]);
 
 
-            /////////////////// Multiple ///////////////////
-            $totalAmount=0;
-         DB::table('purchase_items')->where('purchase_id',$request->get('id'))
+        /////////////////// Multiple ///////////////////
+        $totalAmount=0;
+        DB::table('purchase_items')->where('purchase_id',$request->get('id'))
         ->delete();
 
-            $poItem=count($request->get('item_name1'));
+        $poItem=count($request->get('item_name1'));
 
-            for($i=0;$i<$poItem;$i++)
+        for($i=0;$i<$poItem;$i++)
+        {
+            if($request->get('item_name1')[$i] && $request->get('quantity1')[$i]>0  && $request->get('rate1')[$i]>0)
             {
-                if($request->get('item_name1')[$i] && $request->get('quantity1')[$i]>0  && $request->get('rate1')[$i]>0)
-                {
-                    $totalAmount +=$request->get('amount1')[$i];
-                    DB::table('purchase_items')->insert([
-                    'purchase_id'     => $po_last_id,
+                $totalAmount +=$request->get('amount1')[$i];
+                DB::table('purchase_items')->insert([
+                    'purchase_id'     => $request->get('id'),
                     'item_id'         => $request->get('item_id1')[$i],
                     'quantity'        => $request->get('quantity1')[$i],
                     'rate'            => $request->get('rate1')[$i],
-                    'amount'          => $request->get('amount1')[$i],
-                    'branch'          => $request->get('branch1')[$i]
-                    ]);                        
-                }
+                    'amount'          => $request->get('amount1')[$i],                 
+                    'branch'          => $request->get('branchid1')[$i],
+                    'requisition_id'  => $request->get('requisition_id1')[$i]
+                ]);                        
             }
-          DB::table('purchases')->where('id',$po_last_id)
-            ->update(
-                [
-                    'total_amount' => $totalAmount
-                ]
-            );
+        }
+
+        DB::table('purchases')->where('id',$po_last_id)
+        ->update(
+            [
+                'total_amount' => $totalAmount
+            ]
+        );
 
         return Redirect::to('purchase_order')->with('success','Data Updated successfull');
     }

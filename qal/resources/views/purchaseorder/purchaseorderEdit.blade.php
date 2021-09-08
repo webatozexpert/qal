@@ -168,7 +168,9 @@
 
                 <td><input style="width: 105px;"  type="text" id="amount{{$pos}}" name="amount1[]" maxlength="10" value="{{$items->amount}}" readonly="" class="form-control"/></td>
 
-                <td><input style="width: 150px;"  type="text" id="branch{{$pos}}" name="branch1[]" maxlength="10" value="{{$items->branch}}" readonly="" class="form-control"/></td>
+                <td><input style="width: 150px;"  type="text" id="branch{{$pos}}" name="branch1[]" maxlength="10" value="{{$items->name}}" readonly="" class="form-control"/>
+                <input type="hidden" id="branchid{{$pos}}" name="branchid1[]" maxlength="10" value="{{$items->branch}}" class="form-control"/><input type="hidden" id="requisition_id{{$pos}}" name="requisition_id1[]" maxlength="10" value="{{$items->requisition_id}}" class="form-control"/>
+                </td>
 
                 <td><input type="button" value="Remove" onClick="del({{$pos}})" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>
               </tr>
