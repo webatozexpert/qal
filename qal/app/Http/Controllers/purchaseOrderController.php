@@ -363,7 +363,7 @@ public function confirmList(){
     public function poupdate(Request $request)
     {
         // Requisitions Main data insert
-        $po_last_id = DB::table('purchases')->where('id',$request->get('id'))
+        DB::table('purchases')->where('id',$request->get('id'))
          ->update([
         // 'order_no'        => $order_no,
         'postingDate'     => date('Y-m-d', strtotime($request->get('postingDate'))),
@@ -411,7 +411,7 @@ public function confirmList(){
             }
         }
 
-        DB::table('purchases')->where('id',$po_last_id)
+        DB::table('purchases')->where('id',$request->get('id'))
         ->update(
             [
                 'total_amount' => $totalAmount
