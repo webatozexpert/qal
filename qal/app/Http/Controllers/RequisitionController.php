@@ -20,12 +20,13 @@ class RequisitionController extends Controller
     {
        
      $result = DB::table('requisitions')
-    ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-     ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-    ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-     ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-     ->leftJoin('users','users.id','=','requisitions.created_by')
-     ->orderBy('requisitions.id','DESC')->get();
+         ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+         ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+         ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+         ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+         ->leftJoin('users','users.id','=','requisitions.created_by')
+         ->orderBy('requisitions.id','DESC')
+         ->get();
 
         //dd($result);
 
@@ -36,14 +37,14 @@ class RequisitionController extends Controller
 //Requisition Print
 function requisitionPrint($id) {  
         $requisitions  = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+            ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
 
-        ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftjoin('users','users.id','=','requisitions.created_by')
-        ->where('requisitions.id',$id)
-        ->first(); 
+            ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
+            ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+            ->leftjoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+            ->leftjoin('users','users.id','=','requisitions.created_by')
+            ->where('requisitions.id',$id)
+            ->first(); 
 
        $rid= $id; 
 
@@ -78,11 +79,11 @@ function requisitionPrint($id) {
 
     public function creact_requisition()
     {
-        $branch = DB::table('branchs')->where('status',0)->get();
+        $branch         = DB::table('branchs')->where('status',0)->get();
         
         $project_budget = DB::table('project_budgets')->where('status',0)->get();
 
-        $item_group = DB::table('purchase_item_groups')->where('status',0)->get();
+        $item_group     = DB::table('purchase_item_groups')->where('status',0)->get();
         
         $purchase_general_item = DB::table('purchase_general_items')->where('status',0)->get();
 
@@ -143,14 +144,14 @@ function requisitionPrint($id) {
 //Requisition Edit
   public function edit($id)
     {
-        $branch = DB::table('branchs')->where('status',0)->get();        
+        $branch         = DB::table('branchs')->where('status',0)->get();        
         $project_budget = DB::table('project_budgets')->where('status',0)->get();
-        $item_group = DB::table('purchase_item_groups')->where('status',0)->get();        
+        $item_group     = DB::table('purchase_item_groups')->where('status',0)->get();        
         $purchase_general_item = DB::table('purchase_general_items')->where('status',0)->get();
 
 
         $result  = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id','branchs.name as bname','project_budgets.memo_no as budgetsMemo_no','purchase_item_groups.name','users.name as created_by')
+        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no as budgetsMemo_no','purchase_item_groups.name','users.name as created_by')
 
         ->leftjoin('branchs','branchs.id','=','requisitions.branch_id')
         ->leftjoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
@@ -164,13 +165,14 @@ function requisitionPrint($id) {
         $rid= $id;
 
         $itemsEdit = DB::table('requisition_items')
-        ->select('requisition_items.*','purchase_general_items.item_name','purchase_item_units.unit')
+            ->select('requisition_items.*','purchase_general_items.item_name','purchase_item_units.unit')
 
-        ->leftjoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
+            ->leftjoin('purchase_general_items','purchase_general_items.id','=','requisition_items.item_id')
 
-        ->leftjoin('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
+            ->leftjoin('purchase_item_units','purchase_item_units.id','=','purchase_general_items.item_unit_id')
 
-        ->where('requisition_items.requisition_id',$id)->get();
+            ->where('requisition_items.requisition_id',$id)
+            ->get();
 
         return view('requisition/requisitionEdit', compact('result','rid','branch','project_budget','item_group','purchase_general_item','itemsEdit'));
 
@@ -186,7 +188,7 @@ function requisitionPrint($id) {
         // Requisitions Main data update
         $req_last_id = DB::table('requisitions')->where('id',$request->get('id'))
         ->update([
-            //'requisition_no'    => $requisition_no,
+            
             'postingDate'       => date('Y-m-d', strtotime($request->get('postingDate'))),
             'requiredDate'      => date('Y-m-d', strtotime($request->get('requiredDate'))),
             'branch_id'         => $request->get('branch_id'),
@@ -195,7 +197,6 @@ function requisitionPrint($id) {
             'item_group'        => $request->get('item_group'),
             'priority'          => $request->get('priority'),
             'procuerementType'  => $request->get('procuerementType'),
-            //'status'            => $request->get('status',0),
             'updated_by'        => Auth::user()->id
             
         ]);
@@ -260,14 +261,14 @@ function requisitionPrint($id) {
     public function approvedList(){
         //dd('Ok');
          $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')
-       ->where('requisitions.status',1)
-      ->get();
+            ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+            ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+            ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+            ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+            ->leftJoin('users','users.id','=','requisitions.created_by')
+            ->orderBy('requisitions.id','DESC')
+            ->where('requisitions.status',1)
+            ->get();
 
       // dd($result);
          
@@ -278,14 +279,14 @@ function requisitionPrint($id) {
     public function awaitingConfirmList(){
         //dd('Ok');
          $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')
-       ->where('requisitions.status',1)
-      ->get();
+            ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+            ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+            ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+            ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+            ->leftJoin('users','users.id','=','requisitions.created_by')
+            ->orderBy('requisitions.id','DESC')
+            ->where('requisitions.status',1)
+            ->get();
 
        //dd($result);
          
@@ -314,14 +315,14 @@ public function confirm(Request $request){
  public function confirmList(){
         //dd('Ok');
          $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')
-        ->where('requisitions.status',2)
-        ->get();
+            ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+            ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+            ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+            ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+            ->leftJoin('users','users.id','=','requisitions.created_by')
+            ->orderBy('requisitions.id','DESC')
+            ->where('requisitions.status',2)
+            ->get();
 
         //dd($result);
        
@@ -332,14 +333,14 @@ public function confirm(Request $request){
  public function awaitingorderConfirmList(){
         //dd('Ok');
          $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')
-       ->where('requisitions.status',2)
-      ->get();
+            ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+            ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+            ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+            ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+            ->leftJoin('users','users.id','=','requisitions.created_by')
+            ->orderBy('requisitions.id','DESC')
+            ->where('requisitions.status',2)
+            ->get();
 
        //dd($result);
          
@@ -368,14 +369,14 @@ public function confirm(Request $request){
 public function orderConfirmList(){
         //dd('Ok');
          $result = DB::table('requisitions')
-        ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
-        ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
-        ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
-        ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
-        ->leftJoin('users','users.id','=','requisitions.created_by')
-        ->orderBy('requisitions.id','DESC')
-        ->where('requisitions.status',3)
-        ->get();
+            ->select('requisitions.*','branchs.id as bid','branchs.name as bname','project_budgets.memo_no','purchase_item_groups.name as item_group','users.name as created_by')
+            ->leftJoin('branchs','branchs.id','=','requisitions.branch_id')
+            ->leftJoin('project_budgets','project_budgets.id','=','requisitions.memo_no')
+            ->leftJoin('purchase_item_groups','purchase_item_groups.id','=','requisitions.item_group')
+            ->leftJoin('users','users.id','=','requisitions.created_by')
+            ->orderBy('requisitions.id','DESC')
+            ->where('requisitions.status',3)
+            ->get();
 
         //dd($result);
          
@@ -388,8 +389,12 @@ public function orderConfirmList(){
 //Requisition Delete
 
      public function delete($id){
-        DB::table('requisition_items')->where('requisition_id',$id)->delete();
-        DB::table('requisitions')->where('id',$id)->delete();
+        DB::table('requisition_items')
+            ->where('requisition_id',$id)
+            ->delete();
+        DB::table('requisitions')
+            ->where('id',$id)
+            ->delete();
         
           //return redirect()->route('requisition')->with('success','Data Delete successfull');
          return Redirect::to('requisition')->with('success','Data Delete successfull');
@@ -398,7 +403,10 @@ public function orderConfirmList(){
     //Group wise intemname
     public function group_wise_intemname(Request $request)
     {
-        $itemName = DB::table('purchase_general_items')->where('itemgroup_id',$request->get('id'))->get();
+        $itemName = DB::table('purchase_general_items')
+            ->where('itemgroup_id',$request->get('id'))
+            ->get();
+
         $type     = 1;        
 
         return view('requisition/requisitionItemName', compact('itemName','type'));
@@ -407,23 +415,33 @@ public function orderConfirmList(){
     public function intemname_wise_unit(Request $request)
     {
         $id = explode('_',$request->get('id'));
-        $unitId = DB::table('purchase_general_items')->where('id',$id[1])->first();
+        $unitId = DB::table('purchase_general_items')
+        ->where('id',$id[1])
+        ->first();
         $type     = 2; 
-        $unit = DB::table('purchase_item_units')->where('id',$unitId->item_unit_id)->first();
+        $unit = DB::table('purchase_item_units')
+        ->where('id',$unitId->item_unit_id)
+        ->first();
         return $unit->unit;
     }
     
    //Group wise intemname
     public function itemName()
     {
-        $result = DB::table('purchase_general_items')->where('status',0)->orderBy('id', 'DESC')->get();
+        $result = DB::table('purchase_general_items')
+        ->where('status',0)
+        ->orderBy('id', 'DESC')
+        ->get();
         return $result;
     }
 
     //intemname wise unit
     public function unit()
     {
-        $result = DB::table('purchase_general_items')->where('status',0)->orderBy('id', 'DESC')->get();
+        $result = DB::table('purchase_general_items')
+        ->where('status',0)
+        ->orderBy('id', 'DESC')
+        ->get();
         return $result;
     }
 

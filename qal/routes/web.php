@@ -5,6 +5,7 @@ Auth::routes();
 Route::get('/', 'LoginController@index');
 Route::post('/login', 'LoginController@login')->name('login');
 
+
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/zone-setup', 'ZoneController@index');
@@ -194,6 +195,46 @@ Route::get('/order-orderconfirm', 'purchaseOrderController@prochaseorderConfirmL
 
 
 //Purchase Order part End
+
+
+
+
+//User Management 
+Route::get('/all-user', 'UserController@all_user')->name('all_user');
+Route::get('/user/create', 'UserController@create')->name('/user/create');
+
+
+//User Role.
+Route::get('/user-role', 'UserroleController@userrole');
+Route::post('/user-role-create', 'UserroleController@rolename_create');
+Route::get('/userrole-delete/{id}', 'UserroleController@delete');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////// QIL SECTION ////////////////////////
 

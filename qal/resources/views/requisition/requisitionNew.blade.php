@@ -104,7 +104,7 @@
                 <div class="form-group row">
                    <label for="zoneCode" class="col-sm-2 col-form-label">Item Group</label>
                   <div class="col-sm-4" style="padding-left: 0;">
-                    <select name="item_group" id="item_group" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="groupWiseItemName(this.value)">
+                    <select name="item_group" id="item_group" class="select2 form-control custom-select" style="width: 100%;" required="" onchange="groupWiseItemName(this.value)" >
                       {{-- <option value="">Select</option> --}}
                       @foreach($item_group as $rows)
                         <option value="{{ $rows->id }}" @if($rows->name=='ASSETS') selected="" @endif>{{ $rows->name }}</option>
@@ -137,7 +137,7 @@
                   <tbody>
                     <tr>
                       <td style="width: 60%;">
-                        <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseUnit(this.value)"required="" >
+                        <select name="item_name" id="item_name" class="select2 form-control custom-select" style="width: 100%;" onchange="ItemNameWiseUnit(this.value)"  >
                         <option value="">Enter Item Name</option>
                         </select>
                       </td>
@@ -176,64 +176,4 @@
 </div>
 
 
-   {{--  <script type="text/javascript">
-        $(function () {
-            //Build an array containing Customer records.
-            var requisitions = new Array();
-           
-            //Add the data rows.
-            // for (var i = 0; i < requisitions.length; i++) {
-            //     AddRow(requisitions[i][0], requisitions[i][1],requisitions[i][2]);
-            // }
-        });
-
-        // function Add() {
-        //     AddRow($("#item_name").val(), $("#unit").val(),$("#required_quantity").val());
-        //     $("#item_name").val("");
-        //      $("#unit").val("");
-        //     $("#required_quantity").val("");
-        // };
-
-        function AddRow(item_name, unit,required_quantity) {
-            //Get the reference of the Table's TBODY element.
-            var tBody = $("#tblRequisition> TBODY")[0];
-
-            //Add Row.
-            row = tBody.insertRow(-1);
-
-            //Add item_name cell.
-            var cell = $(row.insertCell(-1));
-            cell.html(item_name);
-
-            //Add unit cell.
-            var cell = $(row.insertCell(-1));
-            cell.html(unit);
-
-            //Add required_quantity cell.
-            cell = $(row.insertCell(-1));
-            cell.html(required_quantity);
-
-            //Add Button cell.
-            cell = $(row.insertCell(-1));
-            var btnRemove = $("<input />");
-            btnRemove.attr("type", "button");
-            btnRemove.attr("onclick", "Remove(this);");
-            btnRemove.val("Remove");
-            cell.append(btnRemove);
-        };
-
-        function Remove(button) {
-            //Determine the reference of the Row using the Button.
-            var row = $(button).closest("TR");
-            var name = $("TD", row).eq(0).html();
-            if (confirm("Do you want to delete: " + name)) {
-
-                //Get the reference of the Table.
-                var table = $("#tblRequisition")[0];
-
-                //Delete the Table row using it's Index.
-                table.deleteRow(row[0].rowIndex);
-            }
-        };
-    </script> --}}
 @endsection

@@ -636,9 +636,9 @@
 
                 strNewField = '<tr class="prof blueBox" id="prof_' + newField + '">\
                 <input type="hidden" id="id' + newField + '" name="id' + newField + '" value="-1" />\
-            <td><input style="width: 610px;" type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'"/></td>\
-            <td><input style="width: 200px;" type="text" id="unit' + newField + '" name="unit1[]" maxlength="10" value="'+unit+'" readonly="" class="form-control"/></td>\
-            <td><input style="width:200px;" type="text" id="required_quantity' + newField + '" name="required_quantity1[]" maxlength="10" value="'+required_quantity+'" readonly="" class="form-control"/></td>\
+            <td><input style="width: 525px;" type="text" id="item_name' + newField + '" name="item_name1[]" maxlength="10" value="'+x[0]+'" readonly="" class="form-control"/><input type="hidden" id="item_id' + newField + '" name="item_id1[]" value="'+x[1]+'"/></td>\
+            <td><input style="width: 169px;" type="text" id="unit' + newField + '" name="unit1[]" maxlength="10" value="'+unit+'" readonly="" class="form-control"/></td>\
+            <td><input style="width:178px;" type="text" id="required_quantity' + newField + '" name="required_quantity1[]" maxlength="10" value="'+required_quantity+'" readonly="" class="form-control"/></td>\
             <td><input type="button" value="Remove" onClick="delRequisition('+ newField +')" style="cursor: pointer; color: #fff; background: red;" tile="Delete"></td>\
             </tr>\
             <div class="nopass"><!-- clears floats --></div>\

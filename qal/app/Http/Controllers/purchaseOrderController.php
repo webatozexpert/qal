@@ -24,7 +24,6 @@ class purchaseOrderController extends Controller
 
         $result = DB::table('purchases')
         ->select('purchases.*','suppliers.company_name as supplier_name','users.name as created_by')
-        
        
         ->leftJoin('suppliers','suppliers.id','=','purchases.supplier_name')
         ->leftJoin('users','users.id','=','purchases.created_by')

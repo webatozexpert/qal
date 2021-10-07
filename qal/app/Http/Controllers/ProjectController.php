@@ -15,16 +15,20 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $result = DB::table('projects')->orderBy('id')->get();
+        $result = DB::table('projects')
+        ->orderBy('id')
+        ->get();
         return view('projectInfo/projectMaster', compact('result'));
     }
     public function project_submit(Request $request)
     {
         //dd($request->all());
-        DB::table('projects')->insert([
+        DB::table('projects')->insert(
+            [
             'name' => $request->get('projectName'),
             'status' => $request->get('projectStatus')
-        ]);
+            ]
+    );
 
         return redirect::to('project-setup')->with('success', 'Successfully Added.');
     }
