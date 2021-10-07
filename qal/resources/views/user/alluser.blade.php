@@ -55,7 +55,7 @@
 	                      <td>{{ $alluser->email}}</td>
 	                      <td>{{ $alluser->type}}</td>
 	                      
-	                     <td>{{ $alluser->user_role}}</td>
+	                     <td>{{ $alluser->role_name}}</td>
 	                  
 	                     <td>
 	                                                
@@ -71,9 +71,9 @@
 
 	                     &nbsp;
 	                   
-	                      <a href="{{ URL('/po-edit/'.$alluser->id) }}" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+	                      <a href="{{ URL('/user-edit/'.$alluser->id) }}" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 	                     
-	                      <a href="{{ URL('/purchase-delete/'.$alluser->id) }}" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+	                      <a href="{{ URL('/user-delete/'.$alluser->id) }}" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
 	                      </td>
 	                     
 	                    </tr>

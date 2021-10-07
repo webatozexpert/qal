@@ -53,6 +53,7 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
+        $edit = DB::table('suppliers')->where('id',$id)->first();
         
         $result = DB::table('suppliers')
         ->select('suppliers.*','city_names.city_name as city_id')
@@ -63,7 +64,7 @@ class SupplierController extends Controller
         $cityName = DB::table('city_names')
         ->where('status',0)->orderBy('id')
         ->get();
-        $edit = DB::table('suppliers')->where('id',$id)->first();
+        
 
         return view('supplier/supplierEdit', compact('result','cityName','edit'));
     }

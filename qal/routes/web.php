@@ -202,7 +202,10 @@ Route::get('/order-orderconfirm', 'purchaseOrderController@prochaseorderConfirmL
 //User Management 
 Route::get('/all-user', 'UserController@all_user')->name('all_user');
 Route::get('/user/create', 'UserController@create')->name('/user/create');
-
+Route::post('/user/store', 'UserController@store')->name('/user/store');
+Route::get('/user-delete/{id}', 'UserController@delete')->name('/user/delete');
+Route::get('/user-edit/{id}', 'UserController@edit')->name('/user/edit');
+Route::post('/user-update/', 'UserController@update')->name('/user/update');
 
 //User Role.
 Route::get('/user-role', 'UserroleController@userrole');
