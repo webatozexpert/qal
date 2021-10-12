@@ -18,6 +18,7 @@ class UserController extends Controller
         $allusers = DB::table('users')
                   ->select('users.*','userroles.id as uid','userroles.role_name')
                   ->leftJoin('userroles','userroles.id','=','users.user_role')
+                  ->orderBy('id','desc')
                   ->get();
 
         //dd($userrole);
@@ -51,27 +52,31 @@ class UserController extends Controller
             'status'    => $request->get('status'),
             'user_group'=> $request->get('user_group'),
             'password'  => Hash::make($request->get('password')),
-        ]);       
+        ]);      
 
-       
-       $totalBranch = count($request->get('branch_id'));
-      // dd($totalBranch);
-
-
-       for ($i=1; $i <= $totalBranch; $i++) 
-       { 
+        foreach($request->get('branch_id') as $branchid)
+        {
             DB::table('branch_permissions')->insert([
                 'user_id'       => $user_last_id,
-                'branch_id'     => $request->get('branch_id')[$i],
-                'branch_default'=> $request->get('branch_default')[$i]
+                'branch_id'     => $branchid
             ]);
-       }
+        } 
+
+       
+       // $totalBranch = count($request->get('branch_id'));
+       // for ($i=0; $i <= $totalBranch; $i++) 
+       // { 
+       //      DB::table('branch_permissions')->insert([
+       //          'user_id'       => $user_last_id,
+       //          'branch_id'     => $request->get('branch_id')[$i]
+       //          // 'branch_default'=> $request->get('branch_default')[$i]
+       //      ]);
+       // }
 
        return redirect::to('all-user')->with('success', 'Successfully Added.');
     }
 
     public function edit($id)
-
     {
         $edit = DB::table('users')->where('id',$id)->first();
 
@@ -86,9 +91,8 @@ class UserController extends Controller
 
         $request->validate([
             'name'      => 'required',
-            'email'     => 'required|unique:users',
-            'password'  => 'required|confirmed|min:6',
-            'user_role'      => 'required',
+            'email'     => 'required',
+            'user_role' => 'required',
         ]);
 
         DB::table('users')->where('id',$request->get('id'))->update([
@@ -107,22 +111,27 @@ class UserController extends Controller
             ]);
         }
 
-          DB::table('branch_permissions')->where('user_id',$request->get('id'))
+        DB::table('branch_permissions')->where('user_id',$request->get('id'))
         ->delete();
-       $totalBranch = count($request->get('branch_id'));
-      // dd($totalBranch);
 
-
-       for ($i=1; $i <= $totalBranch; $i++) 
-       { 
-            DB::table('branch_permissions')->where('id',$request->get('id'))->update([
-                'user_id'       => $user_last_id,
-                'branch_id'     => $request->get('branch_id')[$i],
-                'branch_default'=> $request->get('branch_default')[$i]
+        foreach($request->get('branch_id') as $branchid)
+        {
+            DB::table('branch_permissions')->insert([
+                'user_id'       => $request->get('id'),
+                'branch_id'     => $branchid
             ]);
-       }
+        } 
 
-        return redirect::to('all-user')->with('success', 'Successfully Added.');
+        // $totalBranch = count($request->get('branch_id'));
+        // for ($i=1; $i <= $totalBranch; $i++) 
+        // { 
+        //     DB::table('branch_permissions')->where('id',$request->get('id'))->insert([
+        //         'user_id'       => $request->get('id'),
+        //         'branch_id'     => $request->get('branch_id')[$i]
+        //     ]);
+        // }
+
+        return redirect::to('all-user')->with('success', 'Successfully Updated.');
     }
 
      public function delete($id){

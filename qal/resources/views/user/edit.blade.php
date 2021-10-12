@@ -108,22 +108,29 @@
                             <tr>
                               <th>Branch</th>
                               <th>Mark</th>
-                              <th>Default</th>
+                              {{-- <th>Default</th> --}}
                             </tr>
                           </thead>
                           <tbody>
                             @php $sr=1; @endphp
                             @foreach($branch as $results)
+                            @php 
+                              $editBranch = DB::table('branch_permissions')
+                                ->where('user_id',$edit->id)
+                                ->where('branch_id',$results->id)
+                                ->first();
+
+                            @endphp
                             <tr>
                              {{--  <td>{{ $results->last_id }}</td> --}}
                              <td>{{ $results->name }}</td>
                               <td>
-                                <input type="checkbox" name="branch_id[{{ $sr }}]" id="branch_id{{ $sr }}" value="{{ $results->id }}"></a>
+                                <input type="checkbox" name="branch_id[]" id="branch_id{{ $sr }}" value="{{ $results->id }}" @if($editBranch!=null) @if($results->id==$editBranch->branch_id) checked="" @endif @endif></a>
 
                               </td>
-                              <td>
+                              {{-- <td>
                                 <input type="radio" name="branch_default[]" id="branch_default{{ $sr }}" value="Yes"></a>
-                              </td>
+                              </td> --}}
                             </tr>
                              @php $sr++; @endphp
                             @endforeach
@@ -137,7 +144,7 @@
 
 <div class="form-group row text-right">
   <div class="col-sm-12">
-    <button type="submit" class="btn btn-success mr-2">Submit</button>
+    <button type="update" class="btn btn-success mr-2">Update</button>
   </div>
 </div>
 </form>

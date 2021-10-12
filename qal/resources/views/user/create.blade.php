@@ -118,22 +118,22 @@
                             <tr>
                               <th>Branch</th>
                               <th>Mark</th>
-                              <th>Default</th>
+                             {{--  <th>Default</th> --}}
                             </tr>
                           </thead>
                           <tbody>
-                            @php $sr=1; @endphp
+                            @php $sr=0; @endphp
                             @foreach($branch as $results)
                             <tr>
                              {{--  <td>{{ $results->last_id }}</td> --}}
                              <td>{{ $results->name }}</td>
                               <td>
-                                <input type="checkbox" name="branch_id[{{ $sr }}]" id="branch_id{{ $sr }}" value="{{ $results->id }}"></a>
+                                <input type="checkbox" name="branch_id[]" id="branch_id{{ $sr }}" value="{{ $results->id }}"></a>
 
                               </td>
-                              <td>
+                             {{--  <td>
                                 <input type="radio" name="branch_default[]" id="branch_default{{ $sr }}" value="Yes"></a>
-                              </td>
+                              </td> --}}
                             </tr>
                              @php $sr++; @endphp
                             @endforeach

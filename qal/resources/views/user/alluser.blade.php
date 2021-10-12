@@ -35,7 +35,7 @@
           <div class="card">
             <div class="card-body" style="padding: 0px;">
               <div class="table-responsive">
-                <table id="zero_config" class="table table-hover table-striped table-bordered">
+                <table  class="table table-hover table-striped table-bordered">
 	                  <thead>
 	                    <tr>
 		                      <th style="width:15%;" >SL No</th>
