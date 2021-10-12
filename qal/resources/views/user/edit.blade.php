@@ -5,6 +5,7 @@
     <div class="card-body">
 
       <div class="row">
+        
         <div class="col-7 table-responsive">
           <h3 class="card-title text-center">User Registration</h3>
           <form action="{{ URL('user-update') }}" method="POST" class="forms-sample">
@@ -98,37 +99,42 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div class="row">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body" style="padding: 0px;">
-        <div class="table-responsive">
-          <table class="table ">
-            <thead>
-              <tr>
-                <th>User Location</th>
-                <th>Mark</th>
-                <th>Default</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($branch as $results)
-              <tr>
-                <td>{{ $results->name }}</td>
-                <td>
-                  <input type="checkbox" name="approved_id[]" id="approved_id" value="{{ $results->id }}"></a> 
-                </td>
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body" style="padding: 0px;">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Branch</th>
+                              <th>Mark</th>
+                              <th>Default</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @php $sr=1; @endphp
+                            @foreach($branch as $results)
+                            <tr>
+                             {{--  <td>{{ $results->last_id }}</td> --}}
+                             <td>{{ $results->name }}</td>
+                              <td>
+                                <input type="checkbox" name="branch_id[{{ $sr }}]" id="branch_id{{ $sr }}" value="{{ $results->id }}"></a>
 
-                <td><input type="radio" name="approved_id[]" id="approved_id" value="{{ $results->id }}"></a>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+                              </td>
+                              <td>
+                                <input type="radio" name="branch_default[]" id="branch_default{{ $sr }}" value="Yes"></a>
+                              </td>
+                            </tr>
+                             @php $sr++; @endphp
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
 <div class="form-group row text-right">
   <div class="col-sm-12">
     <button type="submit" class="btn btn-success mr-2">Submit</button>

@@ -16,9 +16,9 @@ class UserController extends Controller
         //dd('Ok');
        
         $allusers = DB::table('users')
-                ->select('users.*','userroles.id as uid','userroles.role_name')
-                ->leftJoin('userroles','userroles.id','=','users.user_role')
-                ->get();
+                  ->select('users.*','userroles.id as uid','userroles.role_name')
+                  ->leftJoin('userroles','userroles.id','=','users.user_role')
+                  ->get();
 
         //dd($userrole);
         return view('user/alluser',compact('allusers'));
@@ -39,10 +39,11 @@ class UserController extends Controller
         $request->validate([
             'name'      => 'required',
             'email'     => 'required|unique:users',
-            'password'  => 'required|confirmed|min:6'
+            'password'  => 'required|confirmed|min:6',
+            'user_role' => 'required',
         ]);
 
-        DB::table('users')->insert([
+      $user_last_id =  DB::table('users')->insertGetId([
             'name'      => $request->get('name'),
             'email'     => $request->get('email'),
             'type'      => $request->get('type'),
@@ -50,7 +51,21 @@ class UserController extends Controller
             'status'    => $request->get('status'),
             'user_group'=> $request->get('user_group'),
             'password'  => Hash::make($request->get('password')),
-        ]);
+        ]);       
+
+       
+       $totalBranch = count($request->get('branch_id'));
+      // dd($totalBranch);
+
+
+       for ($i=1; $i <= $totalBranch; $i++) 
+       { 
+            DB::table('branch_permissions')->insert([
+                'user_id'       => $user_last_id,
+                'branch_id'     => $request->get('branch_id')[$i],
+                'branch_default'=> $request->get('branch_default')[$i]
+            ]);
+       }
 
        return redirect::to('all-user')->with('success', 'Successfully Added.');
     }
@@ -71,8 +86,9 @@ class UserController extends Controller
 
         $request->validate([
             'name'      => 'required',
-            'email'     => 'required',
-            'password'  => 'required|min:6'
+            'email'     => 'required|unique:users',
+            'password'  => 'required|confirmed|min:6',
+            'user_role'      => 'required',
         ]);
 
         DB::table('users')->where('id',$request->get('id'))->update([
@@ -90,6 +106,21 @@ class UserController extends Controller
                 'password'  => Hash::make($request->get('password'))
             ]);
         }
+
+          DB::table('branch_permissions')->where('user_id',$request->get('id'))
+        ->delete();
+       $totalBranch = count($request->get('branch_id'));
+      // dd($totalBranch);
+
+
+       for ($i=1; $i <= $totalBranch; $i++) 
+       { 
+            DB::table('branch_permissions')->where('id',$request->get('id'))->update([
+                'user_id'       => $user_last_id,
+                'branch_id'     => $request->get('branch_id')[$i],
+                'branch_default'=> $request->get('branch_default')[$i]
+            ]);
+       }
 
         return redirect::to('all-user')->with('success', 'Successfully Added.');
     }
